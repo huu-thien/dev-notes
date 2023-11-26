@@ -160,6 +160,7 @@
   - `em`: phụ thuộc vào thẻ gần nhất chứa nó có thuộc tính font-size
   - `vw` - (viewport-width): 1vw = 1% chiều ngang trình duyệt
   - `vh` - (viewport-height): 1vh = 1% chiều dọc trình duyệt
+
 - Các thuộc tính CSS có tính kế thừa là những thuộc tính mà giá trị được áp dụng cho một phần tử con sẽ được "kế thừa" từ phần tử cha nếu phần tử con không có giá trị riêng cho thuộc tính đó : `font-family`, `font-size`,`font-weight`, `font-style`, `color`, `line-height`,...
 
 ### 2. Thuộc tính `position` trong css:
@@ -365,6 +366,7 @@ top | right | bottom | left | z-index
   align-self: auto | flex-start | flex-end | center | baseline | stretch;
 }
 ```
+<<<<<<< HEAD
 
 ### 4. Grid Layout
 
@@ -614,4 +616,3 @@ input[type="radio"]:checked {
 - Thứ tự xuất hiện:
   - `::before`: thêm nội dung vào phần trước nội dung thực tế của phần tử. Dùng để chèn nội dung vào trước nội dung thực tế, thường theo chiều ngang.
   - `::after`: thêm nội dung vào phần sau nội dung thực tế của phần tử. Dùng để chèn nội dung vào sau nội dung thực tế, thường theo chiều ngang.
-
