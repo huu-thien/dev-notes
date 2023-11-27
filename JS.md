@@ -659,3 +659,71 @@ console.log(document.cookie);
 - Là phiên trên server, không phải trên client
 - Server sẽ tự động quyết đinh khi nào kết thúc phiên để đưa ra quyết định với client
 - Dung lượng lưu trữ không giới hạn
+
+# 29. Phân biệt var, let, const
+
+- Giống nhau : đều là những từ khóa dùng để khai báo
+- Khác nhau:
+
+1. Về tính gán lại và khai báo lại
+
+- `var`: có thể gán lại và có thể khai báo lại
+- `let`: có thể gán lại, không thể khai báo lại
+- `const`: không thể gán lại và không thể khai báo lại
+
+2. Hoisting:
+
+- `var` có cơ chế `hoisting` còn let và const thì không
+- `Hoisting` là cơ chế đưa
+
+3. Phạm vi truy cập
+
+- `let`, `const` có phạm vi truy cập là `code block`
+- Nếu khai báo ở ngoài function thì phạm vi của `var` là `global`
+
+# 30. IFFE
+
+- IFFE là 1 expression function được gọi ngay lập tức
+- Sử dụng với những đoạn mã mong muốn chạy ngay lập tức, không có tính sử dụng lại
+
+```javascript
+(function () {
+  // Một hàm được định nghĩa bên trong IIFE
+  var message = "Hello from IIFE";
+
+  // Code bên trong IIFE có thể truy cập biến message mà không tạo ra biến toàn cục
+  console.log(message);
+})();
+// Biến message không thể truy cập ở đây
+```
+
+# 31. Closure
+
+- Closure là 1 hàm có thể truy cập các biến thuộc scope chưa nó, ngay cả khi scope chứa nó đã thực thi xong
+- Closure được tạo ra khi 1 hàm được khai báo bên trong 1 hàm khác. Hàm bên trong có thể truy cập tất cả các biến được khai báo ở hàm bên ngoài, ngay cả khi hàm bên ngoài đã hoàn thành việc thực thi
+
+```javascript
+function outerFunction(outerValue) {
+  // Hàm innerFunction được khai báo bên trong outerFunction
+  function innerFunction(innerValue) {
+    // Closure xảy ra ở đây, vì innerFunction có thể truy cập outerValue
+    console.log(outerValue + innerValue);
+  }
+
+  // Trả về hàm innerFunction từ outerFunction
+  return innerFunction;
+}
+
+// Tạo một closure bằng cách gọi outerFunction với outerValue là 10
+const closureExample = outerFunction(10);
+
+// Gọi closure với innerValue là 5
+closureExample(5); // Kết quả là 15
+```
+
+- `outerFunction` nhận một tham số `outerValue`.
+- Bên trong `outerFunction`, có một hàm bên trong gọi là `innerFunction`, nhận một tham số `innerValue`.
+- `innerFunction` có thể truy cập outerValue của `outerFunction` (biến nằm ở phạm vi bên ngoài của nó). Điều này là một ví dụ về closure.
+- `outerFunction` trả về `innerFunction`.
+- Khi gọi `outerFunction(10)`, nó trả về một hàm mới (`innerFunction`) và lưu giữ giá trị 10 của `outerValue`. Biến `closureExample` bây giờ là một closure với giá trị 10 của `outerValue`.
+- Khi gọi `closureExample(5)`, nó sẽ thực hiện console.log(10 + 5), và kết quả là 15.

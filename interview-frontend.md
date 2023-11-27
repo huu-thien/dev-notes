@@ -155,6 +155,7 @@
 - Đơn vị tuyệt đối: absolute
   - `px`: kích thước cố định, không thay đổi
 - Đơn vị tương đối:
+
   - `%`: kích thước phụ thuộc vào thẻ chứa nó, có thể thay đổi
   - `rem`: phụ thuộc vào thẻ `<html>` chứa thuộc tính font-size, giá trị mặc định nếu thẻ `<html>` không có thuộc tính font-size là `1 rem = 16px`
   - `em`: phụ thuộc vào thẻ gần nhất chứa nó có thuộc tính font-size
@@ -366,6 +367,7 @@ top | right | bottom | left | z-index
   align-self: auto | flex-start | flex-end | center | baseline | stretch;
 }
 ```
+
 <<<<<<< HEAD
 
 ### 4. Grid Layout
@@ -616,3 +618,438 @@ input[type="radio"]:checked {
 - Thứ tự xuất hiện:
   - `::before`: thêm nội dung vào phần trước nội dung thực tế của phần tử. Dùng để chèn nội dung vào trước nội dung thực tế, thường theo chiều ngang.
   - `::after`: thêm nội dung vào phần sau nội dung thực tế của phần tử. Dùng để chèn nội dung vào sau nội dung thực tế, thường theo chiều ngang.
+
+### 14. `Float` trong css
+
+- Trong CSS, thuộc tính float được sử dụng để định vị một phần tử theo hướng của float (trôi lơ lửng). Điều này thường được sử dụng để định vị các phần tử theo chiều ngang của trang hoặc container.
+
+```css
+.selector {
+  float: value;
+}
+```
+
+- Trong đó, `value` có thể là một trong những giá trị sau:
+
+  - `left`: Phần tử sẽ được đặt về phía trái và nội dung khác sẽ chảy quanh phải của nó.
+  - `right`: Phần tử sẽ được đặt về phía phải và nội dung khác sẽ chảy quanh trái của nó.
+  - `none` (giá trị mặc định): Phần tử sẽ không trôi lơ lửng và sẽ xuất hiện theo thứ tự bình thường trong văn bản.
+
+### 15. Responsive
+
+- `Responsive web design` là một phương pháp thiết kế web nhằm tối ưu hóa trải nghiệm người dùng trên nhiều thiết bị và kích thước màn hình khác nhau. Trong CSS, có nhiều kỹ thuật được sử dụng để làm cho trang web đáp ứng một cách linh hoạt
+
+###### Media query
+
+[Link tài liệu](https://viblo.asia/p/tim-hieu-ve-media-query-3ZabG9oRzY6E)
+
+- Media queries là một cơ chế trong CSS giúp điều chỉnh giao diện của trang web dựa trên các đặc tính của thiết bị hiển thị, chẳng hạn như kích thước màn hình, loại thiết bị, độ phân giải, hoặc các tính chất khác. Chúng cho phép bạn áp dụng các quy tắc CSS chỉ trong trường hợp nào đó, tùy thuộc vào điều kiện bạn đặt ra.
+- Cú pháp cơ bản của một media query như sau:
+
+```css
+@media only screen and (max-width: 600px) {
+  /* Styles applied only when the screen width is 600 pixels or less */
+  body {
+    background-color: lightblue;
+  }
+}
+```
+
+- Trong ví dụ trên:
+
+  - `@media`: Bắt đầu một media query.
+  - `only screen`: Xác định rằng media query chỉ nên áp dụng cho các thiết bị màn hình.
+  - `(max-width: 600px)`: Điều kiện cho media query, trong trường hợp này, là khi kích thước màn hình không lớn hơn 600 pixels.
+  - Trong phần nằm trong ngoặc nhọn {}, bạn có thể đặt các quy tắc CSS mà bạn muốn áp dụng khi điều kiện media query được đáp ứng.
+
+- Dưới đây là một số điều bạn có thể điều chỉnh bằng media queries:
+- Kích thước và hình dạng màn hình:
+
+```css
+@media only screen and (orientation: landscape) {
+  /* Styles for landscape orientation */
+}
+```
+
+- Độ phân giải:
+
+```css
+@media only screen and (min-resolution: 300dpi) {
+  /* Styles for high-resolution displays */
+}
+```
+
+- Loại thiết bị:
+
+```css
+@media only screen and (device-type: handheld) {
+  /* Styles for handheld devices */
+}
+```
+
+### 16. Responsive `mobile first` khác gì `desktop first` ?
+
+- Responsive web design có thể được thiết kế theo hai phương pháp chính: "Mobile-First" và "Desktop-First." Cả hai phương pháp đều có mục tiêu là tối ưu hóa trải nghiệm người dùng trên nhiều thiết bị và kích thước màn hình khác nhau, nhưng chúng khác nhau về tiếp cận ban đầu.
+
+###### Mobile first:
+
+- Đặc điểm:
+  - Bắt đầu với việc thiết kế cho các thiết bị di động nhỏ trước (ví dụ: điện thoại di động).
+  - Sử dụng các media queries để điều chỉnh và cải thiện trải nghiệm người dùng khi màn hình lớn hơn được detect.
+  - Ưu tiên việc tối giản hóa và chú trọng vào nội dung quan trọng cho các thiết bị di động.
+- Ưu điểm:
+  - Giảm bớt đầu tư ban đầu vào mã nguồn và tài nguyên, tập trung vào yếu tố quan trọng nhất trước.
+  - Tăng cường trải nghiệm người dùng trên thiết bị di động, nơi có nhiều người dùng truy cập.
+- Cú pháp media query:
+
+```css
+/* Base styles for all screens */
+body {
+  font-size: 16px;
+}
+
+/* Styles for screens 600px and larger */
+@media only screen and (min-width: 600px) {
+  body {
+    font-size: 18px;
+  }
+}
+```
+
+###### Desktop first:
+
+- Đặc điểm:
+  - Bắt đầu với việc thiết kế cho các màn hình lớn (ví dụ: máy tính).
+    Sử dụng media queries để điều chỉnh và tối ưu hóa trải nghiệm cho các thiết bị di động khi chúng được detect.
+  - Thường dành cho các dự án truyền thống đã được phát triển cho máy tính trước.
+- Ưu điểm:
+  - Dễ hiểu và triển khai đối với các dự án lớn đã có sẵn cho môi trường máy tính.
+- Cú pháp media query:
+
+```css
+/* Base styles for desktop screens */
+body {
+  font-size: 18px;
+}
+
+/* Styles for screens smaller than 600px */
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 16px;
+  }
+}
+```
+
+###### Lựa chọn giữa Mobile-First và Desktop-First ?
+
+- Quyết định dựa trên người dùng:
+  - Nếu hầu hết người dùng của bạn truy cập từ thiết bị di động, Mobile-First có thể là sự lựa chọn tốt.
+  - Nếu trang web của bạn chủ yếu được truy cập từ máy tính, Desktop-First có thể là lựa chọn phù hợp.
+- Quy mô dự án:
+  - Dự án lớn có thể chọn Desktop-First để sử dụng lại nhiều mã nguồn đã có cho máy tính.
+  - Dự án mới hoặc nhỏ có thể chọn Mobile-First để bắt đầu với một cơ sở dữ liệu nhỏ và tăng cường dần dần.
+
+### 17. `vendor prefix` là gì, cách sử dụng ?
+
+- `Vendor prefix` là một tiền tố (prefix) được thêm vào trước các thuộc tính CSS để hỗ trợ các trình duyệt web trong quá trình triển khai các tính năng CSS mới mà chưa được chuẩn hóa hoặc đưa vào sử dụng rộng rãi. Điều này giúp đảm bảo tính tương thích trên nhiều trình duyệt khác nhau trong giai đoạn thử nghiệm và phát triển của các tính năng mới.
+- Một số vendor prefixes phổ biến bao gồm:
+  - -webkit- (Google Chrome, Safari, Opera)
+  - -moz- (Firefox)
+  - -o- (Opera)
+  - -ms- (Internet Explorer/Edge)
+- Ví dụ, nếu bạn muốn sử dụng một tính năng CSS3 như border-radius, bạn có thể viết như sau với các vendor prefixes:
+
+```css
+.element {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+```
+
+- Ở đây, -webkit- là vendor prefix cho trình duyệt WebKit-based (chẳng hạn như Chrome và Safari), -moz- là cho Firefox, và không có tiền tố nào cho các trình duyệt khác vì chúng hỗ trợ tính năng này mà không cần tiền tố.
+
+- Tuy nhiên, hãy lưu ý rằng việc sử dụng vendor prefixes không phải lúc nào cũng là cách tốt nhất. Khi một tính năng đã được chuẩn hóa và được hỗ trợ rộng rãi, việc giữ lại các vendor prefixes có thể trở nên lạc quan. Thông thường, bạn có thể kiểm tra trang web như `Can I Use` để xem tính năng đó đã được hỗ trợ trong các trình duyệt nào và từ phiên bản nào.
+
+### 19. SCSS
+
+- SCSS (Sassy CSS) là một mở rộng của CSS với cú pháp mở rộng và các tính năng bổ sung. Dưới đây là một số tính năng quan trọng của SCSS:
+
+1. `Variables`:
+
+```scss
+$primary-color: #3498db;
+body {
+  background-color: $primary-color;
+}
+```
+
+2. `Nesting`:
+
+```scss
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+```
+
+3. `Partials`: Được sử dụng để chia nhỏ mã nguồn SCSS thành các phần nhỏ để quản lý dễ dàng hơn.
+
+```scss
+// _variables.scss
+$primary-color: #3498db;
+
+// main.scss
+@import "variables";
+
+body {
+  background-color: $primary-color;
+}
+```
+
+4. Mixins: Cho phép tái sử dụng các đoạn mã CSS.
+
+```scss
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}
+
+.box {
+  @include border-radius(10px);
+}
+```
+
+5. Functions: Cung cấp khả năng tạo các hàm tái sử dụng trong mã SCSS.
+
+```scss
+@function calculate-width($width, $padding) {
+  @return $width + $padding * 2;
+}
+
+.container {
+  width: calculate-width(200px, 20px);
+}
+```
+
+6. Extends: Cho phép kế thừa các thuộc tính từ một lớp khác.
+
+```scss
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  @extend %message-shared;
+  border-color: green;
+}
+
+.error {
+  @extend %message-shared;
+  border-color: red;
+}
+```
+
+7. Operators: Hỗ trợ các toán tử trong quá trình tính toán giá trị.
+
+```scss
+.container {
+  width: 100% - 20px;
+}
+```
+
+8. Control Directives: @if, @else if, @else, @for, @each, @while
+
+- SCSS giúp tăng cường khả năng quản lý, tái sử dụng, và hiệu suất trong quá trình phát triển CSS. Nó được biên dịch thành CSS thông thường để triển khai trên trình duyệt web.
+
+### 20. Breakpoint
+- Mobile: 320px, 480px, 
+- Tablet: 786px, 1024px,
+- Laptop: 1280, 1366, 1440, 1600, 1920px
+
+# JAVASCRIPT
+
+### 1. Các cách thêm sự kiện cho 1 element trong html
+
+- Sử dụng Thuộc tính Sự kiện (Event Attributes): Thêm bằng cách trực tiếp trong HTML:
+
+```html
+<button onclick="myFunction()">Click me</button> // Ưu điểm : Dễ hiểu và thực
+hiện nhanh chóng // Nhược điểm: Khả năng tái sử dụng kém: Nếu bạn muốn sử dụng
+cùng một hàm xử lý sự kiện cho nhiều phần tử, bạn phải sao chép mã HTML hoặc tạo
+ra nhiều hàm gọi cùng một tác vụ.
+```
+
+- Thêm bằng cách sử dụng thuộc tính trong JavaScript:
+
+```html
+<button id="myButton">Click me</button>
+<script>
+  document.getElementById("myButton").onclick = function () {
+    myFunction();
+  };
+</script>
+```
+
+- Sử dụng AddEventListener trong JavaScript
+
+```html
+<button id="myButton">Click me</button>
+<script>
+  document.getElementById("myButton").addEventListener("click", function () {
+    myFunction();
+  });
+  // Ưu Điểm:
+  //   Tái sử dụng tốt hơn: Bạn có thể sử dụng cùng một hàm xử lý sự kiện cho nhiều phần tử mà không cần phải sao chép mã.
+  // Dễ duy trì: Mã JavaScript và HTML được tách biệt, giúp dễ dàng theo dõi và duy trì khi dự án phát triển.
+  // Linhhọat hơn: Bạn có thể thêm và xóa sự kiện một cách linh hoạt, và nó giúp tránh ghi đè sự kiện.
+
+  //   Nhược Điểm:
+  // Cú pháp phức tạp hơn: Việc sử dụng addEventListener đòi hỏi viết thêm mã JavaScript, điều này có thể làm tăng độ phức tạp của mã nếu bạn chỉ muốn thêm một vài sự kiện.
+
+  // Yêu cầu kiến thức JavaScript: Bạn cần có một hiểu biết cơ bản về JavaScript để sử dụng cách này.
+
+  // Tăng kích thước file và tải nhanh hơn: Mặc dù độ chậm có thể không đáng kể, nhưng việc tải một tệp JavaScript bên ngoài có thể làm tăng thời gian tải trang so với việc sử dụng thuộc tính sự kiện trực tiếp.
+</script>
+```
+
+### 2. Phân biệt null và undefined
+
+- Giống nhau: `null` và `undefined` đều có nghĩa là `không có gì cả`, nếu so sánh bởi toán tử `==` thì kết quả là `true`
+- Khác nhau:
+  `Null`:
+- `null` là một giá trị gán ,là giá trị được gán cho 1 biến
+- type of null là `object`
+
+`undefined`
+
+- Một biến khi được khai báo nhưng không được gán giá trị thì nó được coi là có giá trị undefined
+- typeof undefined là `undefined`
+
+#### console.log(obj.prop) với obj = null thì nó báo lỗi gì?
+
+```javascript
+var obj = null;
+console.log(obj.prop); // TypeError: Cannot read property 'prop' of null
+```
+
+# REACT
+
+###### 1. Phân biệt state và props trong react
+
+##### State
+
+- State là một object chứa dữ liệu hoặc thông tin về `component`
+- state có thể thay đổi thông qua hàm cập nhật của hook (setState)
+- Thay đổi state sẽ gây ra việc re-render component
+
+##### Props
+
+- Props là một object chứa những thông tin giá trị được truyền vào 1 component con
+- props là không thay đổi (immutable) từ phía component con.
+- Thay đổi props sẽ gây ra việc re-render component
+
+###### 2. Life Circle trong react
+
+![Redux Data Flow](./life-circle.webp)
+
+###### Lifecycle là 1 vòng đời đời của 1 component, gồm 3 giai đoạn:
+
+- Mounting
+- Updating
+- Unmounting
+
+**1. Mounting**
+
+- Khi mà Component được Mounting thì React sẽ follow theo trình tự như sau :
+  - Khởi tạo class đã kế thừa từ Component
+  - Khởi tạo giá trị mặc định cho Props và State
+  - Gọi hàm `componentWillMount()`
+  - Gọi hàm `render()`
+  - Gọi hàm `componentDidMount()`: ở đây cũng là nơi thực hiện các hàm AJAX, axios request, DOM hay update state sẽ được thực thi tại đây
+
+**2. Updating**
+
+- Một component được update khi có sự thay đổi về state hay props
+- Lần lượt chạy các hàm sau:
+  - `componentWillReceiveProps()`: Chạy khi component con nhận props từ component cha. Sau khi nhận được props mới từ component cha rồi có thì component con có thể set lại state.
+  - `shouldComponentUpdate()`: Hàm này có thể nói là nó tăng hiệu năng của React lên. Nếu như return false thì các phương thực `componentWillUpdate, render, componentDidUpdate` sẽ không được chạy nữa(vì mặc định nó return về true để chạy được 3 hàm tiếp theo, nhiều trường hợp mình không cần chạy 3 hàm tiếp theo).
+  - `componentDidUpdate()`: hàm này được gọi đến sau khi đã re-render lại hay React đã cập nhật lại UI, nếu mà chúng ta muốn chạy animation thì đây chính là lúc chúng ta nên gọi trong hàm này.
+
+**3. Unmount**
+
+- componentWillUnmount() method được gọi khi một component được remove khỏi DOM
+
+### 3. Giải thích rõ về shouldComponentUpdate()
+
+- `shouldComponentUpdate` là một phương thức của class component trong React. Nó được gọi mỗi khi một component sẽ được rerender, trước khi render() được gọi. Phương thức này cho phép bạn kiểm soát liệu component có nên được rerender hay không, dựa trên sự so sánh giữa `nextProps`, `nextState`, và `nextContext` với `this.props`, `this.state`, và `this.context`.
+
+- Có ba tham số đầu vào: nextProps, nextState, và nextContext.
+  Bạn có thể so sánh chúng với this.props, this.state, và this.context để quyết định liệu component có cần rerender hay không.
+- Trả về Giá Trị Boolean: true -> render , false -> không render
+- Tối Ưu Hóa Hiệu Suất: hường được sử dụng để tối ưu hiệu suất, tránh việc rerender không cần thiết.
+
+### 4. Mutable và Immutable
+
+- Trong lập trình, khái niệm "mutable" đề cập đến tính khả năng thay đổi của một đối tượng sau khi nó đã được tạo ra. Nếu một đối tượng là mutable, điều này có nghĩa là nó có thể bị thay đổi, cập nhật, hoặc biến đổi giá trị của các trạng thái nội tại của nó sau khi nó đã được khởi tạo.
+
+- Ngược lại, nếu một đối tượng là "immutable", nó không thể thay đổi sau khi đã được tạo ra. Bất kỳ thay đổi nào đối với đối tượng immutable sẽ tạo ra một đối tượng mới, giữ nguyên giá trị của đối tượng cũ.
+- Ví dụ:
+  Mutable
+
+```javascript
+let mutableArray = [1, 2, 3];
+mutableArray.push(4);
+console.log(mutableArray); // [1, 2, 3, 4]
+```
+
+Immutable
+
+```javascript
+let immutableArray = [1, 2, 3];
+let newArray = [...immutableArray, 4];
+console.log(immutableArray); // [1, 2, 3]
+console.log(newArray); // [1, 2, 3, 4]
+```
+
+### 5. Virtual Dom là gì ? tại sao sử dụng ?
+
+- Virtual DOM (Document Object Model) là một khái niệm quan trọng trong React, được sử dụng để cải thiện hiệu suất và tối ưu hóa quá trình render của ứng dụng web.
+- Virtual DOM là một bản sao nhẹ của DOM, được React tạo và quản lý. Khi có sự thay đổi trong dữ liệu của ứng dụng, React sẽ tạo ra một cây Virtual DOM mới.
+- React so sánh cây Virtual DOM mới với cây Virtual DOM cũ (trước khi có sự thay đổi).
+- Nếu có sự khác biệt, React xác định các thay đổi cần được thực hiện để đưa cây Virtual DOM mới về trạng thái tương ứng với dữ liệu mới.
+- Thay vì cập nhật trực tiếp DOM mỗi khi có thay đổi, React chỉ cập nhật các phần của DOM cần thiết, giúp giảm thiểu việc thao tác trực tiếp với DOM.
+  **Tại sao sử dụng ?**
+- Hiệu Suất: Virtual DOM giúp giảm bớt việc cập nhật trực tiếp DOM và chỉ làm những thay đổi cần thiết.
+- Tối Ưu Hóa Rerender: React có thể rerender toàn bộ cây Virtual DOM mỗi khi có sự thay đổi, nhưng chỉ cập nhật các phần thực sự thay đổi trong DOM
+- Virtual DOM giúp đồng bộ hóa quá trình cập nhật giữa JavaScript và DOM, giảm nguy cơ xung đột và lỗi.
+- Tiện Ích Xử Lý Sự Kiện: React có thể thực hiện một loạt các tối ưu hóa như thay đổi trạng thái async, tự động gom nhóm các thay đổi, và tái sử dụng các phần tử DOM có thể
+- Dễ Dàng Thao Tác với JSX: JSX, ngôn ngữ mô tả giao diện trong React, làm cho việc tạo và quản lý Virtual DOM trở nên dễ đọc và dễ bảo trì hơn.
+
+### 6. Component cha có 1 cái state và có 1 component con không có state hay prop vậy khi component cha render lại thì component con có render lại không?
+
+- Nếu một component con không có state hoặc prop (được truyền từ component cha), và component cha render lại, thì component con sẽ cũng render lại. Tuy nhiên, quyết định render lại component con hay không còn phụ thuộc vào cách bạn triển khai logic shouldComponentUpdate hoặc sử dụng React.memo (nếu bạn đang sử dụng functional component) trong component con.
+
+### 7. PureComponent
+
+- `PureComponent` là một lớp (class) trong React được thiết kế để cung cấp một cách tự động kiểm tra sự thay đổi và quyết định xem một component có cần phải render lại hay không. Nó là một phần của bộ công cụ tối ưu hóa hiệu suất trong React.
+- Kiểm tra Sự Thay Đổi: Trước khi thực hiện render, `PureComponent` sẽ so sánh giá trị của props và state hiện tại với giá trị props và state trước đó, thông qua shallow comparison.
+- `Shallow Comparison`: Shallow comparison chỉ kiểm tra sự thay đổi ở mức độ đầu tiên của các đối tượng. Điều này có nghĩa là nó chỉ kiểm tra xem các tham chiếu trực tiếp có bằng nhau không, không so sánh nội dung bên trong các đối tượng.
+
+### 8. Eslint và Prettier
+- ESLint là một công cụ kiểm tra mã nguồn JavaScript để phát hiện và báo cáo các lỗi cú pháp, cũng như để áp dụng quy tắc lập trình (coding conventions) và chuẩn mã nguồn (code style) theo các nguyên tắc được định nghĩa trước
+- Prettier là một công cụ tự động định dạng mã nguồn (code formatting tool) dành cho nhiều ngôn ngữ lập trình, bao gồm JavaScript, TypeScript, HTML, CSS, và nhiều ngôn ngữ khác. Mục tiêu chính của Prettier là duy trì một định dạng code chính xác và nhất quán mà không cần phải quan tâm đến các quy tắc lập trình hoặc chuẩn mã nguồn cụ thể.
