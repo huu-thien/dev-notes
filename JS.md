@@ -727,3 +727,45 @@ closureExample(5); // Kết quả là 15
 - `outerFunction` trả về `innerFunction`.
 - Khi gọi `outerFunction(10)`, nó trả về một hàm mới (`innerFunction`) và lưu giữ giá trị 10 của `outerValue`. Biến `closureExample` bây giờ là một closure với giá trị 10 của `outerValue`.
 - Khi gọi `closureExample(5)`, nó sẽ thực hiện console.log(10 + 5), và kết quả là 15.
+
+### 32. Các kĩ thuật copy object
+
+- `Shallow copy` và `deep copy` là hai kỹ thuật chính để sao chép đối tượng trong JavaScript. Dưới đây là giải thích chi tiết về cả hai:
+
+**1. Shallow Copy (Sao Chép Nông):**
+
+- Định Nghĩa: Shallow copy là quá trình sao chép đối tượng chỉ ở mức độ bề mặt, không sao chép các đối tượng lồng nhau mà chỉ sao chép tham chiếu đến chúng.
+- Sử dụng spread operator ({...}) hoặc Object.assign() để sao chép các thuộc tính của đối tượng. Dùng slice() cho mảng.
+
+```javascript
+const originalObject = { key: { nestedKey: "value" } };
+
+// Shallow copy sử dụng spread operator
+const shallowCopy = { ...originalObject };
+
+// Shallow copy sử dụng spread operator Object.assign
+const shallowCopy = Object.assign({}, originalObject);
+
+// Thay đổi giá trị trong shallow copy sẽ ảnh hưởng đến originalObject
+shallowCopy.key.nestedKey = "new value";
+console.log(originalObject.key.nestedKey); // Output: 'new value'
+```
+
+**2. Deep Copy (Sao Chép Sâu):**
+
+- Định Nghĩa: Deep copy là quá trình sao chép toàn bộ cấu trúc của đối tượng, bao gồm cả các đối tượng lồng nhau, không chia sẻ tham chiếu.
+- Deep copy có thể tốn nhiều tài nguyên hơn về mặt hiệu suất so với shallow copy, đặc biệt là khi đối tượng có cấu trúc lồng nhau phức tạp.
+- Cách Thực Hiện Deep Copy:
+  - Sử dụng các thư viện bên ngoài như Lodash có hàm cloneDeep().
+  - Sử dụng JSON.stringify() và JSON.parse() (nhưng không thích hợp cho đối tượng chứa các giá trị không thể biểu diễn trong JSON như hàm).
+
+```javascript
+const originalObject = { key: { nestedKey: "value" } };
+
+// Deep copy sử dụng JSON.stringify và JSON.parse
+const deepCopy = JSON.parse(JSON.stringify(originalObject));
+
+// Thay đổi giá trị trong deep copy không ảnh hưởng đến originalObject
+deepCopy.key.nestedKey = "new value";
+console.log(originalObject.key.nestedKey); // Output: 'value'
+```

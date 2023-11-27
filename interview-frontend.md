@@ -877,7 +877,8 @@ body {
 - SCSS giúp tăng cường khả năng quản lý, tái sử dụng, và hiệu suất trong quá trình phát triển CSS. Nó được biên dịch thành CSS thông thường để triển khai trên trình duyệt web.
 
 ### 20. Breakpoint
-- Mobile: 320px, 480px, 
+
+- Mobile: 320px, 480px,
 - Tablet: 786px, 1024px,
 - Laptop: 1280, 1366, 1440, 1600, 1920px
 
@@ -1051,5 +1052,93 @@ console.log(newArray); // [1, 2, 3, 4]
 - `Shallow Comparison`: Shallow comparison chỉ kiểm tra sự thay đổi ở mức độ đầu tiên của các đối tượng. Điều này có nghĩa là nó chỉ kiểm tra xem các tham chiếu trực tiếp có bằng nhau không, không so sánh nội dung bên trong các đối tượng.
 
 ### 8. Eslint và Prettier
+
 - ESLint là một công cụ kiểm tra mã nguồn JavaScript để phát hiện và báo cáo các lỗi cú pháp, cũng như để áp dụng quy tắc lập trình (coding conventions) và chuẩn mã nguồn (code style) theo các nguyên tắc được định nghĩa trước
 - Prettier là một công cụ tự động định dạng mã nguồn (code formatting tool) dành cho nhiều ngôn ngữ lập trình, bao gồm JavaScript, TypeScript, HTML, CSS, và nhiều ngôn ngữ khác. Mục tiêu chính của Prettier là duy trì một định dạng code chính xác và nhất quán mà không cần phải quan tâm đến các quy tắc lập trình hoặc chuẩn mã nguồn cụ thể.
+
+### 9. Trong header mỗi request call API của Axios gồm có những gì
+
+- Trong mỗi yêu cầu (request) khi sử dụng Axios để gọi API, bạn có thể cấu hình và điều chỉnh các thông số khác nhau thông qua các tùy chọn (options). Dưới đây là một số tùy chọn phổ biến mà bạn có thể thấy trong header của mỗi yêu cầu Axios:
+
+1. `URL (Địa chỉ URL)`: Axios sẽ chuyển điều này trong phần URL của yêu cầu.
+2. `Method (Phương thức)`: GET, POST, PUT, DELETE, và các phương thức khác, tùy thuộc vào loại yêu cầu bạn đang thực hiện.
+3. `Headers`: Axios cung cấp các tiêu đề mặc định như `Content-Type` và `Accept`, `authorization`, nhưng bạn có thể thêm hoặc thay đổi các tiêu đề khác thông qua tùy chọn headers.
+4. `Data (Dữ liệu)`: Đối với yêu cầu POST hoặc PUT, dữ liệu sẽ được gửi đi dưới dạng payload của yêu cầu. Bạn có thể thiết lập giá trị của nó thông qua tùy chọn data.
+5. `Params (Tham số)`: Đối với yêu cầu GET, tham số sẽ được thêm vào URL. Bạn có thể thiết lập giá trị của chúng thông qua tùy chọn params.
+6. `Auth (Xác thực)`:
+7. `Timeout (Thời gian chờ)`: Tùy chọn timeout cho phép bạn xác định thời gian tối đa mà yêu cầu có thể chờ đợi trước khi bị hủy bỏ.
+8. `ResponseType (Kiểu phản hồi)`: Bạn có thể sử dụng tùy chọn responseType để xác định kiểu dữ liệu bạn muốn nhận được trong phản hồi, chẳng hạn như json, text, hoặc blob.
+
+### 10. Sự khác nhau giữa fetch và axios (Tại sao lại dùng Axios, axios có gì hơn fetch)
+
+- Cả `fetch` và `axios` đều là công cụ để thực hiện các yêu cầu HTTP trong JavaScript, nhưng chúng có những sự khác nhau quan trọng. Dưới đây là một số điểm khác biệt và lý do tại sao người ta thường ưa chuộng sử dụng axios thay vì fetch:
+  **1. API và Sử Dụng**
+
+- `fetch` là một hàm tích hợp trong JavaScript, tồn tại trong trình duyệt và Node.js.
+- `axios` là một thư viện HTTP bên ngoài, không tích hợp sẵn trong JavaScript và cần được cài đặt.
+  **2. Trình Tường Minh Về JSON:**
+
+- `axios` tự động chuyển đổi dữ liệu giữa đối tượng JavaScript và JSON khi gửi và nhận dữ liệu.
+- `fetch` không thể tự động chuyển đổi dữ liệu giữa đối tượng JavaScript và JSON, bạn cần thực hiện điều này thủ công sử dụng các phương thức như `JSON.stringify` và `json()`.
+
+**3. Hỗ Trợ Các Tính Năng Hơn:**
+
+- `axios` hỗ trợ các tính năng như hủy yêu cầu, quản lý interceptor, và xử lý dễ dàng hơn với phản hồi và lỗi.
+- `fetch` có một số thiếu sót trong việc xử lý lỗi và không hỗ trợ các tính năng như hủy yêu cầu một cách thuận tiện
+
+### 11. Luồng hoạt động của redux
+
+[Link tham khảo](https://cloud.z.com/vn/news/redux/)
+
+- Một ứng dụng quản lý state bằng redux sẽ có 3 thành phần chính: View, Action và Store.
+  - View: Là giao diện mà người dùng nhìn thấy và có thể tường tác
+  - Action: Action là những plain object javascript có 1 thuộc tính 'type' để mô tả loại hành động và có thể chứa dữ liệu khác (chẳng hạn `payload`)
+  - Store: Nơi chứa những global state và hàm `reducer()`. `Reducer()` là một hàm pure function nhận vào một state hiện tại và một action, sau đó trả về một state mới. Ngoài ra ở `store` còn có `Dispatcher`: quản lý middlewares và chuyển dữ liệu xuống reducer
+- Flow
+  - Ỏ `View`, khi người dùng thực hiện 1 tương tác như click hay onChange thì sẽ dispatch 1 action
+  - Action mà người dùng dispatch sẽ được gửi đến `Store`, tại đây thì hàm reducer sẽ dựa vào action để xử lý logic và cập nhật lại state
+  - Sau khi state được cập nhật, giao diện sẽ re-render để người dùng thấy
+
+### 12. Sự khác nhau giữa redux và redux toolkit ?
+
+- Đầu tiên, 3 vấn đề là nền tảng ra đời của Redux-toolkit
+  - Cấu hình store của redux quá phức tạp
+  - Cần phải cài đặt thêm nhiều package để làm gì đó hữu ích
+  - Redux yêu cầu quá nhiều mã soạn sẵn (boilerplate
+    code)
+
+**1. Cú Pháp Ngắn Gọn**
+
+- Trong Redux truyền thống, bạn phải tạo rất nhiều boilerplate code để định nghĩa các action types, action creators, reducers, và store.
+- Redux Toolkit cung cấp một số hàm utility như createSlice và configureStore, giúp giảm đáng kể lượng mã boilerplate. Đồng thời Có sẵn Redux DevTools, redux-thunk để thực hiện async actions
+  **2. Immer Integration:**
+- Trong Redux truyền thống, để thay đổi trạng thái, bạn phải trả về một bản sao mới của trạng thái hoặc sử dụng thư viện như Object.assign. (không thể mutateble state)
+- Redux Toolkit tích hợp Immer, giúp bạn có thể thay đổi trạng thái trực tiếp trong reducers mà không cần tạo bản sao.
+
+### 13. Redux Thunk là gì?
+
+- `Redux Thunk` là một `middleware` cho Redux, được sử dụng để xử lý các tác vụ bất đồng bộ trong Redux. Nó cho phép chúng ta viết các hành động (actions) Redux mà có thể là các hàm thay vì chỉ là các đối tượng.
+- Mặc định, Redux chỉ cho phép gửi các hành động là các đối tượng plain JavaScript có thuộc tính "type". Nhưng khi sử dụng `Redux Thunk`, bạn có thể trả về một hàm từ hành động thay vì một đối tượng. Hàm này có thể thực hiện các tác vụ bất đồng bộ, chẳng hạn như gọi API, lấy dữ liệu từ máy chủ, hoặc thực hiện các tác vụ không đồng bộ khác.
+- Khi hàm được trả về từ một hành động `Redux Thunk`, `middleware` `Redux Thunk` sẽ xử lý nó và chạy hàm đó. Trong quá trình thực thi, hàm có thể gọi các hành động khác để cập nhật trạng thái `Redux`.
+
+### Redux Saga là gì?
+
+`Redux Saga` là một middleware cho Redux, được sử dụng để xử lý các side effect trong ứng dụng Redux. Side effect là mọi thứ không thuộc về việc thay đổi trạng thái (state) một cách đồng bộ trong reducer, chẳng hạn như gọi API, xử lý thời gian, hoặc thực hiện các tác vụ không đồng bộ khác.
+
+`Redux Saga` sử dụng "Generator Functions" (hàm sinh) của JavaScript để quản lý luồng xử lý của các side effect một cách dễ đọc và kiểm soát. Nó cho phép bạn mô tả logic xử lý các side effect một cách tuần tự và rõ ràng.
+
+##### Khái Niệm Quan Trọng:
+
+1. **Saga:**
+   - Một saga là một hàm Generator (hàm sinh) JavaScript. Saga định rõ logic xử lý các side effect và có thể được gọi và theo dõi bằng middleware Redux Saga.
+
+2. **Effect:**
+   - Trong Redux Saga, các hàm Generator tạo ra các "effect" để thực hiện các công việc không đồng bộ. Ví dụ về effect có thể là gọi API (`call`), đợi một hành động cụ thể (`take`), hoặc thực hiện một hành động (`put`) để dispatch một action mới.
+
+3. **Watcher Saga:**
+   - Một watcher saga là một saga chịu trách nhiệm theo dõi các hành động (actions) và bắt đầu các worker saga tương ứng khi nhận được một hành động.
+
+4. **Worker Saga:**
+   - Một worker saga là một saga chịu trách nhiệm thực hiện các tác vụ không đồng bộ. Worker saga thường được gọi bởi watcher saga khi có điều kiện phù hợp.
+
+Redux Saga giúp tách rời logic xử lý side effect khỏi các reducers, giúp mã nguồn trở nên dễ đọc hơn và dễ quản lý hơn. Nó cũng cung cấp một cách linh hoạt để xử lý các tác vụ phức tạp như xử lý đồng bộ, theo dõi nhiều hành động, và quản lý luồng thời gian.
