@@ -1121,8 +1121,9 @@ console.log(newArray); // [1, 2, 3, 4]
 - Mặc định, Redux chỉ cho phép gửi các hành động là các đối tượng plain JavaScript có thuộc tính "type". Nhưng khi sử dụng `Redux Thunk`, bạn có thể trả về một hàm từ hành động thay vì một đối tượng. Hàm này có thể thực hiện các tác vụ bất đồng bộ, chẳng hạn như gọi API, lấy dữ liệu từ máy chủ, hoặc thực hiện các tác vụ không đồng bộ khác.
 - Khi hàm được trả về từ một hành động `Redux Thunk`, `middleware` `Redux Thunk` sẽ xử lý nó và chạy hàm đó. Trong quá trình thực thi, hàm có thể gọi các hành động khác để cập nhật trạng thái `Redux`.
 
-### Redux Saga là gì?
+### 14. Redux Saga là gì?
 
+[Link tham khảo](https://levunguyen.com/laptrinhjavascript/2021/12/15/su-dung-redux-saga-trong-reactjs/)
 `Redux Saga` là một middleware cho Redux, được sử dụng để xử lý các side effect trong ứng dụng Redux. Side effect là mọi thứ không thuộc về việc thay đổi trạng thái (state) một cách đồng bộ trong reducer, chẳng hạn như gọi API, xử lý thời gian, hoặc thực hiện các tác vụ không đồng bộ khác.
 
 `Redux Saga` sử dụng "Generator Functions" (hàm sinh) của JavaScript để quản lý luồng xử lý của các side effect một cách dễ đọc và kiểm soát. Nó cho phép bạn mô tả logic xử lý các side effect một cách tuần tự và rõ ràng.
@@ -1130,15 +1131,89 @@ console.log(newArray); // [1, 2, 3, 4]
 ##### Khái Niệm Quan Trọng:
 
 1. **Saga:**
+
    - Một saga là một hàm Generator (hàm sinh) JavaScript. Saga định rõ logic xử lý các side effect và có thể được gọi và theo dõi bằng middleware Redux Saga.
 
 2. **Effect:**
+
    - Trong Redux Saga, các hàm Generator tạo ra các "effect" để thực hiện các công việc không đồng bộ. Ví dụ về effect có thể là gọi API (`call`), đợi một hành động cụ thể (`take`), hoặc thực hiện một hành động (`put`) để dispatch một action mới.
 
 3. **Watcher Saga:**
+
    - Một watcher saga là một saga chịu trách nhiệm theo dõi các hành động (actions) và bắt đầu các worker saga tương ứng khi nhận được một hành động.
 
 4. **Worker Saga:**
    - Một worker saga là một saga chịu trách nhiệm thực hiện các tác vụ không đồng bộ. Worker saga thường được gọi bởi watcher saga khi có điều kiện phù hợp.
 
 Redux Saga giúp tách rời logic xử lý side effect khỏi các reducers, giúp mã nguồn trở nên dễ đọc hơn và dễ quản lý hơn. Nó cũng cung cấp một cách linh hoạt để xử lý các tác vụ phức tạp như xử lý đồng bộ, theo dõi nhiều hành động, và quản lý luồng thời gian.
+
+### 14. Thử viện quản lý state khác: Zustand
+
+- Là một thư viện quản lý trạng thái (state management) dành cho ứng dụng React. Nó tập trung vào việc đơn giản hóa quá trình quản lý trạng thái và cung cấp một cách linh hoạt để quản lý trạng thái của ứng dụng React một cách hiệu quả.
+- `Zustand` sử dụng hook-based API, có nghĩa là bạn có thể sử dụng hooks như `useStore` để truy cập trạng thái từ components React.
+- `Zustand` có kích thước nhẹ và không có phụ thuộc nặng nề, điều này giúp giảm tải và tăng hiệu suất của ứng dụng.
+- `Zustand` không phụ thuộc vào Redux hoặc Context API của React, điều này giúp giảm bớt sự phức tạp và giữ cho thư viện trở nên độc lập.
+- Example
+
+```jsx
+// userStore.js
+import create from "zustand";
+
+const useUserStore = create((set) => ({
+  user: {
+    id: null,
+    username: "",
+    email: "",
+  },
+  setUser: (newUser) =>
+    set((state) => ({ user: { ...state.user, ...newUser } })),
+  clearUser: () => set({ user: { id: null, username: "", email: "" } }),
+}));
+
+export default useUserStore;
+```
+
+```jsx
+// ProfileComponent.js
+import React, { useState } from "react";
+import useUserStore from "./userStore";
+
+const ProfileComponent = () => {
+  const { user, setUser, clearUser } = useUserStore();
+  const [newUsername, setNewUsername] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+
+  const handleUpdateProfile = () => {
+    setUser({ username: newUsername, email: newEmail });
+  };
+
+  const handleClearProfile = () => {
+    clearUser();
+  };
+
+  return (
+    <div>
+      <p>ID: {user.id}</p>
+      <p>Username: {user.username}</p>
+      <p>Email: {user.email}</p>
+
+      <input
+        type="text"
+        placeholder="New Username"
+        value={newUsername}
+        onChange={(e) => setNewUsername(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="New Email"
+        value={newEmail}
+        onChange={(e) => setNewEmail(e.target.value)}
+      />
+      <button onClick={handleUpdateProfile}>Update Profile</button>
+      <button onClick={handleClearProfile}>Clear Profile</button>
+    </div>
+  );
+};
+
+export default ProfileComponent;
+```
