@@ -443,8 +443,25 @@ top | right | bottom | left | z-index
 
 ###### 1. Mô tả:
 
-- Transition là sự chuyển động từ trạng thái này sang trạng thái khác của một thuộc tính CSS (ví dụ: màu sắc, kích thước, vị trí) một cách mềm dẻo.
-- Thường được sử dụng để thay đổi trạng thái của một phần tử khi có sự kiện xảy ra, chẳng hạn như khi di chuột qua một phần tử hoặc khi trạng thái của phần tử thay đổi.
+- Transition hoạt động bằng cách thay đổi giá trị thuộc tính một cách trơn tru từ giá trị này sang giá trị khác trong khoảng thời gian nhất định. Các tham số thường được sử dụng:
+
+  - transition-delay: khoảng thời gian dừng cho mỗi hiệu ứng chuyển đổi.
+  - transition-duration: khoảng thời gian chuyển đổi diễn ra.
+  - transition-property: thuộc tính cần chuyển đổi.
+  - transition-timing-function: tốc độ chuyển đổi diễn ra.
+
+```css
+div {
+  width: 100px;
+  height: 100px;
+  background: purple;
+  -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+  transition: width 2s;
+}
+div:hover {
+  width: 300px;
+}
+```
 
 ###### 1. Cách sử dụng:
 
