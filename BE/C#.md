@@ -4729,3 +4729,1015 @@ Phần tử trong hashset1 4
 hashset1 là tập chứa hashset2
 */
 ```
+
+### 15. Lớp ObservableCollection trong C# .NET
+
+- Sử dụng lớp generic `ObservableCollection` để xây dựng tập hợp có sự giám sát biến động thay đổi phần tử, ví dụ áp dụng trong WPF
+
+###### ObservableCollection
+
+- Lớp Generic `ObservableCollection<T>` là một tập hợp tương tự như `List<T>` ..., tức là nó mô tả một tập hợp dữ liệu có thể thay đổi số lượng bằng các phương thức quen thuộc như `Add(), Remove(), Clear() ...`
+- Nhưng với `ObservableCollection<T>` thì nó cung cấp thêm sự kiện thông báo số lượng phần tử thay đổi như thêm, bớt ...(nghĩa là giám sát được biến động phần tử). Các sự kiện `event` này có tên là `CollectionChanged`, trong tham số mà sự kiện gửi đến, `e.Action` có cho biết hành động thay đổi trên tập hợp là gì `(ví dụ: thêm NotifyCollectionChangedAction.Add, bớt NotifyCollectionChangedAction.Remove), clear tập hợp NotifyCollectionChangedAction.Reset ...`
+- Ví dụ:
+
+```csharp
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+namespace CS019_ObserableCollection
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Tạo tập hợp chứa các chuỗis
+            ObservableCollection obs = new ObservableCollection();
+
+            // Bắt sự kiện thi thay đổi obs
+            obs.CollectionChanged += change;
+
+            //Thay các phần tử tập hợp
+            obs.Add("ZTest1");
+            obs.Add("DTest2");
+            obs.Add("ATest3");
+            obs[2] = "AAAAA";
+
+            obs.RemoveAt(1);
+            obs.Clear();
+
+        }
+
+        // Phương thức nhận sự kiện CollectionChanged
+        private static void change(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (String s in e.NewItems)
+                        Console.WriteLine($"Thêm :  {s}");
+                    break;
+
+                case NotifyCollectionChangedAction.Reset:
+                    Console.WriteLine("Clear");
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (String s in e.OldItems)
+                        Console.WriteLine($"Remove :  {s}");
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Console.WriteLine("Repaced - " + e.NewItems[0]);
+                break;
+            }
+        }
+    }
+}
+// Chạy thử, kết quả:
+// Add :  Test1
+// Add :  Test2
+// Add :  Test3
+// Remove : Test2
+// Clear
+```
+
+- Như vậy mỗi khi tập hợp obs thay phần tử, ta có thể bắt được ngay. Ứng dụng của `ObservableCollection` trong WPF rất phổ biến khi binding với một controller như TreeView, ListView, DataGrid ... Khi đó việc thay đổi số phần tử trong tập hợp, thì hiện thị trong các controller cũng tự thêm / bớt ... theo. Khi bạn kết hợp dùng INotifyPropertyChanged để xây dựng phần tử trong tập hợp, thì thay đổi thuộc tính của phần tử cũng tự động cập nhật vào các controller
+- Khi dùng ObservableCollection làm ItemSource cho các Controller trong WPF như TreeView, DataGrid ... thì nó đã tự động bắt các sự kiện CollectionChanged, PropertyChanged
+
+### 16. Linq trong lập trình C# .NET - thực hình ví dụ Linq
+
+- Tìm hiểu về Linq, ngôn ngữ truy vấn tích hợp vào C#, linq cho phép viết truy vấn - chuyển truy vấn thành các lệnh thực thi trên đối tượng để truy cập đến các nguồn dữ liệu như collection và Db, XML
+
+###### Giới thiệu LINQ, LINQ là gì?
+
+- `LINQ (Language Integrated Query)` - ngôn ngữ truy vấn tích hợp - nó tích hợp cú pháp truy vấn (gần giống các câu lệnh SQL) vào bên trong ngôn ngữ lập trình C#, cho C# khả năng truy cập các nguồn dữ liệu khác nhau (SQL Db, XML, List ...) với cùng cú pháp.
+- Phần này trình bày `LINQ` trên dữ liệu đơn giản, mục đích để hiểu khả năng của `LINQ` trước khi sử dụng nó ở các chuyên đề chuyên sâu trong truy vấn cơ sở dữ liệu, truy vấn dữ liệu XML ...
+- `LINQ` hoạt động trên những kiểu tập hợp có khả năng duyệt qua nó (xem thêm Collection, List trong C#). Để sử dụng `LINQ` thì nạp hai thư viện `Generic` và `Linq`:
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+```
+
+- Nguồn dữ liệu phục vụ cho `LINQ`, phải là các đối tượng lớp triển khai giao diện (interface) `IEnumerable` và `IEnumerable<T>` tức là các mảng, danh sách thuộc `Collection` đã biết ở phần trước.
+- Để thực hành những vấn đề về `LINQ` trong bài viết này thông qua các ví dụ, ta tạo ra một nguồn dữ liệu đó là một danh sách (sẽ dùng lớp List) các sản phẩm (các sản phẩm sẽ sử dụng lớp `Product` tự xây dựng). Xây dựng lớp `Product` như sau:
+
+```csharp
+public class Product
+{
+    public int ID {set; get;}
+    public string Name {set; get;}         // tên
+    public double Price {set; get;}        // giá
+    public string[] Colors {set; get;}     // các màu sắc
+    public int Brand {set; get;}           // ID Nhãn hiệu, hãng
+    public Product(int id, string name, double price, string[] colors, int brand)
+    {
+        ID = id; Name = name; Price = price; Colors = colors; Brand = brand;
+    }
+    // Lấy chuỗi thông tin sản phẳm gồm ID, Name, Price
+    override public string ToString()
+       => $"{ID,3} {Name, 12} {Price, 5} {Brand, 2} {string.Join(",", Colors)}";
+
+}
+```
+
+- Xây dựng lớp `Brand` để biểu diễn nhãn hiệu hàng hóa:
+
+```csharp
+public class  Brand {
+    public string Name {set; get;}
+    public int ID {set; get;}
+}
+```
+
+- Khởi tạo ra 2 đối tượng danh sách dùng để thực hiện các truy vấn linq: danh sách sản phẩm products, danh sách nhãn hiệu brands
+
+```csharp
+var brands = new List<Brand>() {
+    new Brand{ID = 1, Name = "Công ty AAA"},
+    new Brand{ID = 2, Name = "Công ty BBB"},
+    new Brand{ID = 4, Name = "Công ty CCC"},
+};
+
+var products = new List<Product>()
+{
+    new Product(1, "Bàn trà",    400, new string[] {"Xám", "Xanh"},         2),
+    new Product(2, "Tranh treo", 400, new string[] {"Vàng", "Xanh"},        1),
+    new Product(3, "Đèn trùm",   500, new string[] {"Trắng"},               3),
+    new Product(4, "Bàn học",    200, new string[] {"Trắng", "Xanh"},       1),
+    new Product(5, "Túi da",     300, new string[] {"Đỏ", "Đen", "Vàng"},   2),
+    new Product(6, "Giường ngủ", 500, new string[] {"Trắng"},               2),
+    new Product(7, "Tủ áo",      600, new string[] {"Trắng"},               3),
+};
+```
+
+- Như vậy bạn đã có danh sách các sản phẩm mẫu và nhãn hiệu, giờ là lúc dùng cú pháp `LINQ` để truy vấn đến tập dữ liệu này.
+
+###### Viết câu truy vấn LINQ đầu tiên
+
+- Hãy thử câu lệnh LINQ: lọc ra những sản phẩm có giá bằng 400.
+
+```csharp
+public class Products
+{
+    // ...
+
+    // In ra các sản phẩm có giá 400
+    public static void ProductPrice400()
+    {
+        // Viết câu quy vấn, lưu vào ketqua
+        var ketqua = from product in products
+                     where product.Price == 400
+                     select product;
+
+        foreach (var product in ketqua)
+            Console.WriteLine(product.ToString());
+    }
+    // ...
+}
+```
+
+- Trong hàm Main chạy thử:
+
+```csharp
+Products.ProductPrice400();
+
+// Kết quả
+// ID 3 - Bàn trà, giá 400
+// ID 4 - Tranh treo, giá 400
+```
+
+- Trong câu truy vấn bạn thấy xuất hiện các từ `from`, `where`, `select` đó là những từ khóa của C# để viết mệnh đề truy vấn `LINQ`, chúng khá giống SQL.
+- **Câu truy vấn LINQ thường bắt đầu bằng mệnh đề `from` và kết thúc bằng mệnh đề `select` hoặc `group`, giữa chúng là những mệnh đề `where`, `orderby`, `join`, `let`**
+
+###### Mệnh đề `from` ...`in` ...
+
+- Mệnh đề `from` để xác định nguồn dữ liệu mà truy vấn sẽ thực hiện, nguồn dữ liệu là tập hợp những phần tử lưu trong đối tượng có kiểu lớp triển khai giao diện `IEnumerable` như mảng `Array`, `List` ...
+- Ví dụ, `products` ở trên là kiểu `List` (nó triển khai `IEnumerable`), thì một giải (một đoạn, hoặc tất cả) các phần tử trong nó (ví dụ product in products) có thể làm nguồn, vậy mở đầu truy vấn bằng mệnh đề `from` sẽ là:
+
+```csharp
+from product in produts
+```
+
+- `products` là nguồn dữ liệu
+- `product` là tên bạn tùy đặt đại diện cho phần tử trong nguồn, tên này sẽ được dùng bởi các mệnh đề theo sau.
+
+###### Mệnh đề select
+
+- Một câu truy vấn phải kết thúc bằng mệnh đề `select` hoặc `group`. Mệnh đề `select` chỉ ra các dữ liệu được lấy ra (xuất ra) của câu lệnh `LINQ`.
+
+```csharp
+var ketqua = from product in products
+select product;
+// Có nghĩa là với mỗi product trong products, dữ liệu lấy ra là các product đó (trả về collection gồm các phần tử Product).
+```
+
+- Bạn có thể chỉ lấy ra một loại dữ liệu nào đó của phần tử , ví dụ:
+
+```csharp
+var ketqua = from product in products
+select product.Name;
+foreach (var name in ketqua) Console.WriteLine(name);
+// Bàn trà
+// Túi da
+//...
+```
+
+- Câu `LINQ` trên có nghĩa là với mỗi product có trong products lấy ra tên (Name) của nó (trả về một collection gồm các phần tử chuỗi)
+- Bạn có thể trả về những đối tượng phức tạp mà dữ liệu được trích xuất ra `from ... in ...` hay những dữ liệu do tính toán ... Ví dụ trả về kiểu vô danh chứa các trường thông tin trả về với toán tử new {}
+
+```csharp
+var ketqua = from product in products
+             select new {
+                ten = product.Name.ToUpper(),
+                mausac = string.Join(',', product.Colors)
+             };
+
+foreach (var item in ketqua) Console.WriteLine(item.ten + " - " + item.mausac);
+// Bàn trà - Xám,Xanh
+// Tranh treo - Vàng,Xanh
+```
+
+- Có nghĩa là với mỗi sản phẩm lấy ra, trả về một đối tượng chứa `ten` lấy bằng tên sản phẩm chuyển hết thành in hoa, `mausac` là chuỗi nối các màu sắc của sản phẩm.
+
+###### Mệnh đề `where` lọc dữ liệu trong LINQ
+
+- Mệnh đề `where` để lọc dữ liệu, sau từ khóa `where` là `biểu thức logic xác định các phần tử lọc ra`. Ví dụ:
+
+```csharp
+where product.Price == 500
+```
+
+- Bạn có thể viết các điều kiện phức tạp
+
+```csharp
+where (product.Price >= 600 && product.Price < 700) || product.Name.StartsWith("Bàn")
+```
+
+- Thậm chí, trong một truy vấn có thể viết nhiều mệnh đề `where`
+
+```csharp
+var ketqua = from product in products
+     where product.Price >= 500
+     where product.Name.StartsWith("Giường")
+     select product;
+
+// ID 6 - Giường ngủ, giá 500
+```
+
+###### `from` kết hợp
+
+- Để lọc dữ liệu phức tạp hơn, có thể dùng From kết hợp để lọc phức tạp và chi tiết hơn. Ví dụ, mỗi tên sản phẩm nó có một mảng màu. Lọc ra những sản phẩm có chứa màu nào đó.
+
+```csharp
+var ketqua = from product in products
+             from color in product.Colors
+             where product.Price < 500
+             where color == "Vàng"
+             select product;
+
+foreach (var product in ketqua) Console.WriteLine(product.ToString());
+
+// ID 2 - Túi da, giá 300
+// ID 4 - Tranh treo, giá 400
+```
+
+###### Mệnh đề `orderby` sắp xếp kết quả trong LINQ
+
+- Để sắp xếp kết quả sử dụng `orderby` viết sau mệnh đề `where` nếu có, ví dụ sắp xếp tăng dần (từ nhỏ đến lớn) theo thuộc tính dữ liệu (hoặc thuộc tính) thuoctinh thì viết
+
+```csharp
+orderby thuoctinh
+```
+
+- Nếu muốn xếp theo thứ tự giảm dần (lớn đến bé)
+
+```csharp
+orderby thuoctinh descending
+```
+
+- Ví dụ:
+
+```csharp
+var ketqua = from product in products
+            where product.Price <= 300
+            orderby product.Price descending
+            select product;
+foreach (var product in ketqua) Console.WriteLine($"{product.Name} - {product.Price}");
+// Túi da - 300
+// Bàn học - 200
+
+```
+
+- Cũng có thể sắp xếp theo nhiều dữ liệu, viết cách nhau bởi `,`
+
+```csharp
+orderby thuoctinh1 descending, thuoctinh2, thuoctinh3 descending ...
+```
+
+###### Mệnh đề `group ... by`
+
+- Cuối truy vấn có thể sử dụng `group` thay cho `select`, nếu sử dụng `group` thì nó trả về theo từng nhóm (nhóm lại theo trường dữ liệu nào đó), mỗi phần tử của cấu truy vấn trả về là kiểu `IGrouping<TKey,TElement>`, chứa các phần tử thuộc một nhóm.
+- Ví dụ, lấy sản phẩm có giá từ 400 - 500, nhóm lại theo giá (cùng giá cho vào một nhóm)
+
+```csharp
+var ketqua = from product in products
+             where product.Price >=400 && product.Price <= 500
+             group product by product.Price;
+foreach (var group in ketqua)
+{
+    // Key là giá trị dùng để phân loại (nhóm): là giá
+    Console.WriteLine(group.Key);
+    foreach (var product in group)
+    {
+        Console.WriteLine($"    {product.Name} - {product.Price}");
+    }
+
+}
+// 400
+//     Bàn trà - 400
+//     Tranh treo - 400
+// 500
+//     Đèn trùm - 500
+//     Giường ngủ - 500
+```
+
+- Bạn có thể lưu tạm `group` trong truy vấn vào một biến bằng cách sử dụng `into`, sau đó thi hành các mệnh đề khác trên biến tạm và dùng mệnh đề `select` để trả về kết quả
+
+```csharp
+// Kết quả giống câu truy vấn trên, nhưng các nhóm xếp từ lớn xuống nhỏ
+var ketqua = from product in products
+             where product.Price >=400 && product.Price <= 500
+             group product by product.Price into gr
+             orderby gr.Key descending
+             select gr;
+
+// 500
+//     Đèn trùm - 500
+//     Giường ngủ - 500
+// 400
+//     Bàn trà - 400
+//     Tranh treo - 400
+```
+
+###### `let` - dùng biến trong truy vấn
+
+- Dùng thêm biến vào LINQ, lưu kết quả của một biểu thức tính toán nào đó, thêm vào mệnh đề bằng cách viết let tenvien = biểu_thức, ví dụ với mỗi loại giá - có bao nhiêu sản phẩm
+
+```csharp
+var ketqua = from product in products                  // các sản phẩm trong products
+             group product by product.Price into gr    // nhóm thành gr theo giá
+             let count = gr.Count()                    // số phần tử trong nhóm
+             select new {                              // trả về giá và số sản phầm có giá này
+                price = gr.Key,
+                number_product = count
+             };
+
+foreach (var item in ketqua)
+{
+    Console.WriteLine($"{item.price} - {item.number_product}");
+}
+// 200 - 1
+// 300 - 1
+// 400 - 2
+// 500 - 2
+// 600 - 1
+```
+
+###### Mệnh đề join - khớp nối nguồn truy vấn LINQ
+
+- `join` là thực hiện kết hợp hai nguyền dữ liệu lại với nhau để truy vấn thông tin, ví dụ trong mỗi sản phẩm đều có `Brand` nó là ID của nhãn - vậy mỗi sản phẩm dùng thông tin này để có được thông tin chi tiết về nhãn hàng mà nhãn hàng lại lưu ở nguồn khác.
+- Các sản phẩm ở ví dụ phía trên, sản phẩm nào có Brand là 2 thì tra cứu ở Brand.brands thì tên nhãn là "Công ty AAA"
+- Giờ muốn thực hành truy vấn kết hợp khớp nối giữa hai nguồn dữ liệu danh sách sản phẩm products và danh sách nhãn hàng brands
+
+**Inner join**
+
+- Để kết nối, dùng mệnh đề `join` để chỉ ra nguồn (nguồn bên phải join) sẽ kết nối với nguồn của `from` (nguồn bên trái join), tiếp theo chỉ ra sự ràng buộc các phần tử bằng từ khóa on
+- Ví dụ, truy vấn sản phẩm, mỗi sản phẩm căn cứ vào Brand ID của nó - lấy tên Brand tương ứng
+
+```csharp
+var ketqua = from product in products
+             join brand in brands on product.Brand equals brand.ID
+             select new {
+                 name  = product.Name,
+                 brand = brand.Name,
+                 price = product.Price
+             };
+
+foreach (var item in ketqua)
+{
+    Console.WriteLine($"{item.name,10} {item.price, 4} {item.brand,12}");
+}
+
+//     Túi da  300  Công ty BBB
+//    Bàn trà  400  Công ty BBB
+// Tranh treo  400  Công ty AAA
+// Giường ngủ  500  Công ty BBB
+```
+
+- Phân tích truy vấn trên ta thấy
+  - nguồn bên trái `join` là : `product in products`
+  - nguồn bên phải `join` là : `brand in brands`
+  - kết nối là: `on product.Brand equals brand.ID` (Brand trong product bằng ID của brand)
+- Với truy vấn `join` trên, chỉ những dữ liệu `product` mà có `brand` tương ứng mới trả về, nên nó gọi là `inner join` (tức giá trị `product.brand` hay `brand.ID` có ở cả 2 nguồn). Kết quả trả về có 4 dòng như trên. Để ý trong danh sách sản phẩm có sản phẩm "Tủ áo", sản phẩm này có brand là 3, nhưng ở danh sách brands lại không có phần tử nào ID bằng 3 nên truy vấn trên sẽ bỏ sản phẩm "Tủ áo"
+
+###### Left join
+
+- Trong truy vấn trên, sản phẩm nào không tìm được thông tin `brand` ở ngồn bên phải join thì sẽ bỏ qua. Giờ muốn, các sản phẩm kể cả không thấy brand cũng trả về - có nghĩa nguồn bên trái lấy không phụ thuộc vào bên phải thì dùng kỹ thuật `left join` như sau:
+
+```csharp
+var ketqua = from product in products
+             join brand in brands on product.Brand equals brand.ID into t
+             from brand in t.DefaultIfEmpty()
+             select new {
+                 name  = product.Name,
+                 brand = (brand == null) ? "NO-BRAND" : brand.Name,
+                 price = product.Price
+             };
+
+foreach (var item in ketqua)
+{
+    Console.WriteLine($"{item.name,10} {item.price, 4} {item.brand,12}");
+}
+
+//         Bàn học  200  Công ty AAA
+//     Túi da  300  Công ty BBB
+//    Bàn trà  400  Công ty BBB
+// Tranh treo  400  Công ty AAA
+//   Đèn trùm  500     NO-BRAND
+// Giường ngủ  500  Công ty BBB
+//      Tủ áo  600     NO-BRAND
+
+```
+
+- Khi truy vấn, các brand tương ứng với product gồm cả nhưng brand bằng null tương ứng với sản phẩm không thấy brand được lưu vào nguồn tạm đặt tên là t. Sau đó truy vấn lấy brand trên DefaultIfEmpty() nguồn tạm này, đảm bảo các sản phẩm kể cả không thấy brand (brand bằng null) cũng trả về.
+- Khi lấy tên brand, nếu `null` thì thay bằng chữ `"NO-BRAND" brand = (brand == null) ? "NO-BRAND" : brand.Name`
+
+```csharp
+/// Select
+/// SelectMany
+/// Where
+/// Min, Max, Sum, Average
+/// Join
+/// Group Join
+/// Take
+/// Skip
+/// OrderBy OrderByDescending
+/// Reverse
+/// GroupBy
+/// Distinct
+/// Single SingleOrDefault
+/// Any All
+/// Count ()
+```
+
+### 17. Lập trình bất đồng bộ asynchronou, C# với bất đồng bộ theo mô hình tác vụ
+
+- Tìm hiểu về lập trình bất đồng bộ, sử dụng lớp `Task` để chạy task, tìm hiểu từ khóa `async` và `await` - áp dụng bất đồng bộ
+
+###### Lập trình bất đồng bộ asynchronous
+
+- Từ .NET Framework 4.5 nó thêm vào thư viện có tên `Task Parallel Library (TPL)` - TPL giúp lập trình chạy song song (đa luồng) dễ dàng hơn. Trong C# đồng thời nó thêm vào hai từ khóa là `async` và `await`, đây là hai từ khóa chính để sử dụng trong lập trình bất đồng bộ.
+- `Lập trình bất đồng bộ (asynchronous)` là một cách thức mà khi gọi nó chạy ở chế độ nền (liên quan đến một tiến trình, task), trong khi đó tiến trình gọi nó không bị khóa - block. Trong `.NET` có triển khai một số mô hình lập trình bất đồng bộ như `Asynchronous pattern`, mẫu bất đồng bộ theo sự kiện và theo tác vụ (TAP - task-based asynchronous pattern)
+- Phần này sẽ nói về `TAP - task-based asynchronous pattern` - mộ hình lập trình bất đồng bộ thông dụng trên `.NET` hiện nay.
+
+###### Lập trình đồng bộ synchronous
+
+- Bình thường, khi lập trình gọi một phương thức nào đó thì phương thức đó chạy và kết thúc thì các dòng code tiếp theo sau lời gọi phương thức đó mới được thực thi, đó là chạy đồng bộ, có nghĩa là thread gọi phương thức bị khóa lại cho đến khi phương thức kết thúc.
+- Thử xem ví dụ đơn giản sau:
+
+```csharp
+//DownloadWebsite01.cs
+
+using System;
+using System.Net;
+using System.Threading;
+
+namespace CS021_ASYNCHRONOUS {
+
+    public class DownloadWebsite01 {
+
+        public static string DownloadWebpage (string url, bool showresult) {
+            using (var client = new WebClient ()) {
+                Console.Write ("Starting download ...");
+                string content = client.DownloadString (url);
+                Thread.Sleep (3000);
+                if (showresult)
+                    Console.WriteLine (content.Substring (0, 150));
+
+                return content;
+            }
+        }
+
+        public static void TestDownloadWebpage()
+        {
+            string url = "https://code.visualstudio.com/";
+            DownloadWebpage(url, true);
+            Console.WriteLine("Do somthing ...");
+        }
+    }
+}
+```
+
+- Hãy gọi `TestDownloadWebpage()` trong hàm `main` để kiểm tra.
+- Phương thức `DownloadWebpage` sử dụng lớp `WebClient` để tải về một trang web, trả về chuỗi nội dung trang.
+- Khi chạy, thì lời gọi `DownloadWebpage(url, true);`, phương thức này thi hành xong thì dòng code `Console.WriteLine("Do somthing ...");` mới được thi hành.
+- Vấn đề là khi `DownloadWebpage(url, true);` chạy, nó sẽ khóa thread gọi nó, làm cho các dòng code tiếp theo phải chờ, nếu hàm đó thi hành mất nhiều thời gian (đặc biệt là các thao tác đọc stream - đọc file, kết nối web, kết nối CSDL ...) - trong khi tài nguyên vẫn đủ để làm các việc khác - thì chương trình vẫn cứ phải chờ phương thức trên kết thúc thì mới thi hành được tác vụ khác - đặt biệt là khi gọi phương thức trong các tiến trình UI, giao diện người dùng không tương tác được.
+- Để giải quyết vấn đề này, trong khi chờ cho `DownloadWebpage(url, true)` thi hành xong, chương trình vẫn thi hành được các tác vụ khác thì cần đến kỹ thuật lập trình bất đồng bộ (trước đây gọi là lập trình đa tiến trình, đa luồng)
+
+###### Lớp Task
+
+- Lớp `Task` nó biểu thị tác vụ bất đồng bộ, từ đó ta chạy được code bất đồng bộ. Nếu tác vụ bất đồng bộ đó thi hành xong có kiểu trả về thì dùng `Task<T>` với `T` là kiểu trả về.
+
+- Cần sử dụng các namespace sau để có thư viện về Task
+
+```csharp
+using System.Threading;
+using System.Threading.Tasks;
+```
+
+- Chú ý hãy tìm hiểu về `hàm ủy quyền delegate C# `trước
+
+**Cú pháp tạo ra đối tượng Task cơ bản**
+
+- Để tạo ra một Task bạn cần tham số là một `hàm delegate (Func hoặc Action)`, ví dụ `delegate` có tên `myfunc` thì khởi tạo
+
+```csharp
+// Nếu myfunc trả về kiểu T (tức là một Func) thì khởi tạo
+Task<T> task = new  Task<T>(myfunc);
+
+// Nếu cần truyền tham số cho myfunc thì khởi tạo:
+
+// object là đối tượng tham số truyền cho myfunc
+Task<T> task = new  Task<T>(myfunc, object);
+
+// Nếu myfunc không trả về giá trị (tức là Action) thì khởi tạo:
+// object là đối tượng tham số truyền cho myfunc
+Task task = new  Task(myfunc);
+```
+
+- Để chạy `Task` gọi phương thức `Start()` của đối tượng được tạo ra. Nếu có kết quả trả về thì đọc kết quả tại thuộc tính `Result`, đề chờ cho task hoàn thành thì gọi `Wait()`
+- Ta sẽ làm một ví dụ sử dụng `Task` tạo ra các 2 tiến trình con chạy đồng thời:
+
+```csharp
+TestAsync01.cs
+
+using System;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CS021_ASYNCHRONOUS {
+    public class TestAsync01 {
+
+        // Viết ra màn hình thông báo có màu
+        public static void WriteLine (string s, ConsoleColor color) {
+            Console.ForegroundColor = color;
+            Console.WriteLine (s);
+        }
+
+        // Tạo và chạy Task, sử dụng delegate Func (có kiểu trả về)
+        public static Task<string> Async1 (string thamso1, string thamso2) {
+            // tạo biến delegate trả về kiểu string, có một tham số object
+            Func<object, string> myfunc = (object thamso) => {
+                // Đọc tham số (dùng kiểu động - xem kiểu động để biết chi tiết)
+                dynamic ts = thamso;
+                for (int i = 1; i <= 10; i++) {
+                    //  Thread.CurrentThread.ManagedThreadId  trả về ID của thread đạng chạy
+                    WriteLine ($"{i,5} {Thread.CurrentThread.ManagedThreadId,3} Tham số {ts.x} {ts.y}",
+                        ConsoleColor.Green);
+                    Thread.Sleep (500);
+                }
+                return $"Kết thúc Async1! {ts.x}";
+            };
+
+            Task<string> task = new Task<string> (myfunc, new { x = thamso1, y = thamso2 });
+            task.Start(); // chạy thread
+
+            // Làm gì đó sau khi chạy Task ở đây
+            Console.WriteLine("Async1: Làm gì đó sau khi task chạy");
+
+
+            return task;
+        }
+
+        // Tạo và chạy Task, sử dụng delegate Action (không kiểu trả về)
+        public static Task Async2 () {
+
+            Action myaction = () => {
+                for (int i = 1; i <= 10; i++) {
+                    WriteLine ($"{i,5} {Thread.CurrentThread.ManagedThreadId,3}",
+                        ConsoleColor.Yellow);
+                    Thread.Sleep (2000);
+                }
+            };
+            Task task = new Task (myaction);
+            task.Start();
+
+            // Làm gì đó sau khi chạy Task ở đây
+            Console.WriteLine("Async2: Làm gì đó sau khi task chạy");
+
+            return task;
+        }
+
+    }
+}
+```
+
+- Chạy trong hàm main
+
+```csharp
+Console.WriteLine($"{' ',5} {Thread.CurrentThread.ManagedThreadId,3} MainThread");
+Task<string> t1 = TestAsync01.Async1("A", "B");
+Task t2 = TestAsync01.Async2();
+
+Console.WriteLine("Làm gì đó ở thread chính sau khi 2 task chạy");
+
+// Chờ t1 kết thúc và đọc kết quả trả về
+t1.Wait();
+String s = t1.Result;
+TestAsync01.WriteLine(s, ConsoleColor.Red);
+
+// Ngăn không cho thread chính kết thúc
+// Nếu thread chính kết thúc mà t2 đang chạy nó sẽ bị ngắt
+Console.ReadKey();
+```
+
+- Để khởi tạo một Task bạn cần tham số là một `delegate (Func hoặc Action)` - nên cần nắm rõ về delegate Func và Action trước.
+- Lưu ý: sử dụng `Task<T>` và `Func<T,V>` : khi khởi tạo một task cần tham số là một `delegate`, khi task chạy xong thì có kết quả trả về nên dùng đến `delegate` dạng `Func<T,V>`, đầu tiên tạo `Delegate` dạng này với cú pháp như sau (trường hợp trong Async1 ở trên)
+
+```csharp
+Func<object, return_type> func = (object thamso) => {
+    // code ...
+    return ...;
+};
+```
+
+- Sau đó tạo Task với cú pháp
+
+```csharp
+Task<return_type> task = new  Task<return_type>(func, thamso);
+```
+
+- Khi đã có `Task`, gọi phương thức `Start()` của nó để bắt đầu chạy thread, một thread mới bất đồng bộ sẽ khởi chạy - nó sẽ không khóa thread gọi nó - các dòng code tiếp theo của thread chính vẫn chạy trong khi `Task` đang thi hành.
+- Khi `Task` chạy xong, kết quả `delegate` trả về lưu ở thuộc tính `Result` (task.Result)
+- Kết quả chạy code trên, hai thread con đang chạy song song, trong khi thread chính đang chờ người người dùng bấm bàn phím.
+- Cũng để ý `Async2` ở trên lại dùng `Task` chứ không phải `Task<T>`, áp dụng khi hàm bất đồng bộ không cần kết quả trả về, lúc đó lại dùng hàm `delegate` dạng `Action` chứ không dùng `Func`, cú pháp:
+
+```csharp
+Action action = () => {};
+Task task = new Task(action);
+```
+
+##### async và await
+
+- Mã trên bạn thấy, khi đối tượng `Task` khởi chạy bằng `Start` thì thread của `Task` chạy, và những dòng code sau `Start()` được xử lý mà không bị khóa lại. Như đã nói trên, thread chạy - và khi delegate hoàn thành kết quả trả về lưu ở task.Result
+- Vấn đề là khi truy cập `task.Result` để đọc kết quả trả về, thì dòng code đó sẽ chờ cho `Task` hoàn thành để đọc dẫn đến dòng code sau đó không được thực thi - do thread gọi lại bị block, ví dụ cập nhật hàm `Async1` để thấy rõ điều đó.
+
+```csharp
+public static Task<string> Async1 (string thamso1, string thamso2) {
+    // tạo biến delegate trả về kiểu string, có một tham số object
+    Func<object, string> myfunc = (object thamso) => {
+        // Đọc tham số (dùng kiểu động - xem kiểu động để biết chi tiết)
+        dynamic ts = thamso;
+        for (int i = 1; i <= 10; i++) {
+            //  Thread.CurrentThread.ManagedThreadId  trả về ID của thread đạng chạy
+            WriteLine ($"{i,5} {Thread.CurrentThread.ManagedThreadId,3} Tham số {ts.x} {ts.y}",
+                ConsoleColor.Green);
+            Thread.Sleep (500);
+        }
+        return $"Kết thúc Async1! {ts.x}";
+    };
+
+    Task<string> task = new Task<string> (myfunc, new { x = thamso1, y = thamso2 });
+    task.Start(); // chạy thread
+
+    // Làm gì đó sau khi chạy Task ở đây
+    Console.WriteLine("Async1: Làm gì đó sau khi task chạy");
+
+    string ketqua= task.Result;   // khóa (block) thread cha - chờ task hoàn thành
+    Console.WriteLine("Làm gì đó khi task đã kết thúc");
+
+
+    return task;
+}
+```
+
+[Image](https://raw.githubusercontent.com/xuanthulabnet/learn-cs-netcore/master/imgs/cs020.png)
+
+- Khi `Async1` được gọi **1** từ thread chính, nó khác trường hợp trước - thread chạy nhưng hàm không trả về ngay lập tức - dẫn đến thread bị khóa - `Async2` không được chạy cho đến khi thread trong `Async1` kết thúc.
+- Bạn thấy thread trong `Async1` kết thức **2**, thì `Async2` mới được gọi **3**, lúc đó task trong nó mới chạy **4**
+- Vậy 2 task trong `ASync1` và `Async2` không được chạy đồng thời, task này kết thúc mới chạy được task kia => Lợi ích của đa luồng, bất đồng bộ mất đi.
+- Giờ bạn mong muốn khi gọi `Async1()`, nó trả về ngay lập tức (nghĩa là không khóa thread gọi nó, mặc dù bắt đầu chạy một task) - trong khi bên trong `Async1()` vẫn đảm bảo, có những đoạn code chỉ được thi hành khi task trong nó kết thúc (đoạn code phía sau string ketqua = task.Result;)
+- Lúc này bạn cần sử dụng đến cặp từ khóa `async` và `await`. Tiến hành làm như sau:
+
+- **`Bước 1`** Thêm vào khai báo tên hàm từ khóa `async`, nó cho trình biên dịch biết đây là hàm bất đồng bộ - khi gọi nó - nó trả về ngay lập tức
+
+```csharp
+public static async Task<string> Async1 (string thamso1, string thamso2)
+```
+
+- **`Bước 2`** Trong thân của `Async1`, phải có đoạn code chờ task hoàn thành
+
+```csharp
+await task; // đây là điểm không khóa thread chính, thread chính chạy tiếp, task chạy tiếp
+```
+
+- Dòng code `await` này có ý nghĩa:
+
+  - Lời gọi hàm `Async1` chuyển hướng về chỗ gọi nó khi gặp `await` (tạm dừng thi hành mã sau `await`)
+  - Code trong `Async1` phía sau `await` chỉ được chạy khi task chạy xong
+  - Khi `await` hoàn thành thì nó chứa kết quả của Task nếu có
+  - `await` chỉ viết được trong hàm có khai báo `async`
+  - **Nhớ là await phải dùng với Task**
+
+- Với hàm `async` không cần kiểu trả về thì phải trả về `Task` tránh dùng void, xem code `Async2` phía dưới.
+- Vậy hàm `Async` sau khi chuyển nó là hàm bất đồng bộ với từ khóa `async` và `await` sẽ như sau:
+
+```csharp
+using System;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CS021_ASYNCHRONOUS {
+    public class TestAsyncAwait {
+
+        // Viết ra màn hình thông báo có màu
+        public static void WriteLine (string s, ConsoleColor color) {
+            Console.ForegroundColor = color;
+            Console.WriteLine (s);
+        }
+
+        // Tạo và chạy Task, sử dụng delegate Func (có kiểu trả về)
+        public static async Task<string> Async1 (string thamso1, string thamso2) {
+            // tạo biến delegate trả về kiểu string, có một tham số object
+            Func<object, string> myfunc = (object thamso) => {
+                // Đọc tham số (dùng kiểu động - xem kiểu động để biết chi tiết)
+                dynamic ts = thamso;
+                for (int i = 1; i <= 10; i++) {
+                    //  Thread.CurrentThread.ManagedThreadId  trả về ID của thread đạng chạy
+                    WriteLine ($"{i,5} {Thread.CurrentThread.ManagedThreadId,3} Tham số {ts.x} {ts.y}",
+                        ConsoleColor.Green);
+                    Thread.Sleep (500);
+                }
+                return $"Kết thúc Async1! {ts.x}";
+            };
+
+            Task<string> task = new Task<string> (myfunc, new { x = thamso1, y = thamso2 });
+            task.Start();  // chý ý dòng này, để đảm bảo  task được kích hoạt
+
+            await task;
+
+
+            // Từ đây là code sau await (trong Async1) sẽ chỉ thi hành khi task kết thúc
+            TestAsync01.WriteLine("Async1 - làm gì đó khi task chạy xong", ConsoleColor.Red);
+            string ketqua= task.Result;       // Đọc kết quả trả về của task - không phải lo block thread gọi Async1
+
+            Console.WriteLine(ketqua);        // In kết quả trả về của task
+            return ketqua;
+
+        }
+
+        public static async Task Async2 () {
+
+            Action myaction = () => {
+                for (int i = 1; i <= 10; i++) {
+                    WriteLine ($"{i,5} {Thread.CurrentThread.ManagedThreadId,3}", ConsoleColor.Yellow);
+                    Thread.Sleep (2000);
+                }
+            };
+            Task task = new Task (myaction);
+            task.Start();
+
+            await task;
+
+            // Làm gì đó sau khi chạy Task ở đây
+            Console.WriteLine("Async2: Làm gì đó sau khi task kết thúc");
+
+            // Không cần trả về vì gốc đồng bộ trả về void, đồng bộ sẽ trả về Task
+        }
+    }
+}
+```
+
+- Chạy thử đoạn code trong hàm main
+
+```csharp
+static async Task Main(string[] args)
+{
+    var t1 = TestAsyncAwait.Async1("x", "y");
+    var t2 = TestAsyncAwait.Async2();
+
+    // Làm gì đó khi t1, t2 đang chạy
+    Console.WriteLine("Task1, Task2 đang chạy");
+
+
+    await t1; // chờ t1 kết thúc
+    Console.WriteLine("Làm gì đó khi t1 kết thúc");
+
+    await t2; // chờ t2 kết thúc
+}
+```
+
+- Nhớ là trong hàm `main` để thi hành được tác vụ chờ `task`, gọi các phương thức bất đồng bộ, bạn cũng phải thiết lập `main` là bất đồng bộ như trên.
+- Sau khi chạy, bạn sẽ thấy 2 `task` đã cùng chạy một lúc - và đoạn code sau `await` trong phương thức `async` chỉ thi hành khi `task` trong nó kết thúc.
+  [Image](https://raw.githubusercontent.com/xuanthulabnet/learn-cs-netcore/master/imgs/cs021.png)
+
+##### Phương thức async trả về Task
+
+- Khi khai báo hàm với `async` neen tránh dùng kiểu trả về void (dù được phép, không await được) mà hãy dùng Task nếu không có kiểu trả về hoặc `Task<T>` khi có kiểu trả về T. Khi có kiểu trả về thì trong thân hàm phải có đoạn lệnh return trả về dữ liệu kiểu T.
+
+```csharp
+async Task<T> funtion_name<T>(/*tham số nếu có */)
+{
+    await ...  // phải có đoạn code await một Task nào đó
+
+    return t;  // t phải có kiểu T, mặc dù viết return t; nhưng thực tế trình biên dịch tạo ra đối tượng Task<T> để  trả về
+}
+```
+
+- Ví dụ khai báo hàm `async` trả về kiểu `Task<int>` thì phải có return một giá trị hay biến kiểu int, khai báo `async` đảm bảo trình biên dịch trả về kiểu `Task<int>` mặc dù trong thân là return biểu thức kiểu int
+
+- Nhìn lại hàm `Async1` trả về kiểu `Task<string>`
+
+```csharp
+static async Task<string> Async1(string thamso1, string thamso2)
+{
+    // ...
+    await task;
+
+    //...
+    return ketqua;  // trả về kiểu string
+}
+```
+
+- Do `Async1` một `Task`, thì nó có thể `await` ở một phương thức `async` khác thì phương thức đó cũng phải là `async` như hàm Main ở trên
+
+```csharp
+static async Task Main(string[] args)
+{
+    var t1 = TestAsyncAwait.Async1("x", "y");
+
+    //..
+
+    await t1; // chờ t1 kết thúc
+
+    //...
+}
+```
+
+- Áp dụng xây dựng chức năng tải một file từ internet về có áp dụng kỹ thuật bất đồng bộ `(async/await)`, dùng `WebClient` để tải file
+- Mặc dù WebClient có sẵn phương thức đồng bộ, nhưng ở đây ta sẽ dùng phương thức `DownloadData` để tải mảng dữ liệu (file) về, sau đó đưa toàn bộ code thành bất đồng bộ.
+- Ban đầu để tải được file, dùng code đồng bộ thì sẽ như sau:
+
+```csharp
+public static void DownloadFile (string url) {
+    using (var client = new WebClient ()) {
+        Console.Write ("Starting download ..." + url);
+        // mảng byte tải về
+        byte[] data = client.DownloadData(new Uri(url));
+
+        // Lấy tên file để lưu
+        string filename = System.IO.Path.GetFileName(url);
+        System.IO.File.WriteAllBytes(filename, data);
+    }
+}
+```
+
+- Giờ ta sẽ chuyển thành code đồng bộ, nó sẽ có dạng:
+
+```csharp
+// DownloadAsync.cs
+
+using System;
+using System.Net;
+using System.Threading.Tasks;
+namespace CS021_ASYNCHRONOUS {
+    public class DownloadAsync {
+
+        public static async Task DownloadFile (string url) {
+            Action downloadaction = () => {
+                using (var client = new WebClient ()) {
+                    Console.Write ("Starting download ..." + url);
+                    // mảng byte tải về
+                    byte[] data = client.DownloadData(new Uri(url));
+
+                    // Lấy tên file để lưu
+                    string filename = System.IO.Path.GetFileName(url);
+                    System.IO.File.WriteAllBytes(filename, data);
+                }
+            };
+
+            Task task = new Task(downloadaction);
+            task.Start();
+
+            await task;
+            Console.WriteLine("Đã hoàn thành tải file");
+        }
+  }
+}
+```
+
+- Ta thấy toàn bố code của thân hàm khi ở trạng thái đồng bộ được đưa vào một `Action (deleage)` có tên `downloadaction`, sau đó tạo `Task` từ `delegate` này. Đồng thời biến đổi `DownloadFile` thành bất đồng bộ.
+
+```csharp
+// Hàm Main gọi tải thử
+
+static async Task Main(string[] args)
+{
+    string url = "https://github.com/microsoft/vscode/archive/1.48.0.tar.gz";
+    var taskdonload = DownloadAsync.DownloadFile(url);
+    //..
+    Console.WriteLine("Làm gì đó khi file đang tải");
+    //..
+    await taskdonload;
+    Console.WriteLine("Làm gì đó khi file tải xong");
+}
+```
+
+##### Yêu cầu kết thúc Task đang thực thi với CancellationToken
+
+- Khi tạo ra các `Task`, còn có thể khởi tạo - truyền cho nó một đối tượng kiểu `CancellationToken`, đối tượng này được phát sinh bởi lớp `CancellationTokenSource`. Khi trong task có `CancellationToken` thì trong quá trình thực thi nó có thể kiểm tra `CancellationToken`.`IsCancellationRequested`, nếu là true thì có yêu cầu dừng task, lúc này code trong task chủ động kết thúc task.
+- Ví dụ: có `task1`, `task2` đang chạy, nếu nhấn phím e thì 2 task này kết thúc
+
+```csharp
+static async Task Main(string[] args)
+{
+    // Đối tượng để phát đi yêu cầu dừng Task
+    var tokenSource = new CancellationTokenSource();
+
+    // Lấy token - để sử dụng bởi task, khi task thực thi
+    // token.IsCancellationRequested là true nếu có phát yêu cầu dừng
+    // bằng cách gọi tokenSource.Cancel
+    var token = tokenSource.Token;
+
+
+    // Tạo task1 có sử dụng CancellationToken
+    Task task1 = new Task(
+        () => {
+
+            for (int i = 0; i < 10000; i++)
+            {
+                // Kiểm tra xem có yêu cầu dừng thì kết thúc task
+                if (token.IsCancellationRequested)
+                {
+                    Console.WriteLine("TASK1 STOP");
+                    token.ThrowIfCancellationRequested();
+                    return;
+                }
+
+                // Chạy tiếp
+                Console.WriteLine("TASK1 runing ... " + i);
+                Thread.Sleep(300);
+            }
+        },
+        token
+    );
+
+
+    // Tạo task1 có sử dụng CancellationToken
+    Task task2 = new Task(
+        () => {
+
+            for (int i = 0; i < 10000; i++)
+            {
+                if (token.IsCancellationRequested)
+                {
+                    Console.WriteLine("TASK1 STOP");
+                    token.ThrowIfCancellationRequested();
+                    return;
+                }
+                Console.WriteLine("TASK2 runing ... " + i);
+                Thread.Sleep(300);
+            }
+        },
+        token
+    );
+
+    // Chạy các task
+    task1.Start();
+    task2.Start();
+
+
+
+
+    while (true)
+    {
+       var c = Console.ReadKey().KeyChar;
+
+       // Nếu bấm e sẽ phát yêu cầu dừng task
+       if (c == 'e')
+       {
+           // phát yêu cầu dừng task
+           tokenSource.Cancel();
+           break;
+       }
+
+    }
+
+    Console.WriteLine("Các task đã kết thúc, bấm phím bất kỳ kết thúc chương trình");
+    Console.ReadKey();
+}
+```
