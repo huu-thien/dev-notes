@@ -3856,3 +3856,876 @@ static void ListFileDirectory(string path)
 var directory_mydoc = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments);
 ListFileDirectory(directory_mydoc);
 ```
+
+### 9. Stream trong C# - Làm việc với FileStream lập trình C Sharp
+
+- Tìm hiểu về luồng stream, sử dụng luồng FileStream để đọc ghi file, kỹ thuật đọc ghi copy file text khi sử dụng FileStream trong lập trình C#
+
+###### Khái niệm về stream
+
+- `(stream)` là một đối tượng được sử dụng để truyền dữ liệu. Khi dữ liệu truyền từ các nguồn bên ngoài vào ứng dụng ta gọi đó là `đọc stream`, và khi dữ liệu truyền từ chương trình ra nguồn bên ngoài ta gọi nó là `ghi stream`.
+- `Nguồn bên ngoài` thường là các file, tuy nhiên tổng quát thì nó có thể từ nhiều loại như đọc/ghi dữ liệu thông qua một giao thức mạng để trao đổi dữ liệu với một máy remote khác, đọc/ghi vào một nhớ ...
+- Một số `stream` chỉ cho đọc, một số chỉ cho ghi, một số lại cho phép truy cập nhẫu nhiên chứ không chỉ truy cập tuần tự (cho phép thay đổi vị trí con trỏ đọc dữ liệu trong luồng - ví dụ dịch chuyển vào giữa luồng dữ liệu để đọc dữ liệu ở khoảng nào đó)
+- Thư viện `.NET` cung cấp lớp cơ sở `System.IO.Stream` để hỗ trợ làm việc đọc ghi các byte dữ liệu với các `stream`, từ lớp cơ sở này một loạt lớp kế thừa cho những stream đặc thù như: `FileStream, BufferStream, MemoryStream ...`
+- **Lấy thông tin về stream** - khi có đối tượng lớp System.IO.Stream có một số thuộc tính để tra cứu thông tin về stream
+
+  - `CanRead`: Cho biết stream hỗ trợ việc đọc hay không
+  - `CanWrite`: Cho biết stream hỗ trợ việc ghi hay không
+  - `CanSeek`: Cho biết stream hỗ trợ dịch chuyển con trỏ hay không
+  - `CanTimeout`: Cho biết stream có đặt được time out
+  - `Length`: Cho biết kích thước (byte) của stream
+  - `Position`: Đọc hoặc thiết lập vị trí đọc (thiết lập thì stream phải hỗ trợ Seek)
+  - `ReadTimeout`: Đọc hoặc thiết lập giá trị (mili giây) danh cho tác vụ đọc stream trước khi time out phát sinh
+  - `WriteTimeout`: Đọc hoặc thiết lập giá trị (mili giây) danh cho tác vụ ghi stream trước khi time out phát sinh
+
+**Một số phương thức cho đối tượng Stream**
+
+- `ReadByte`: Đọc từng byte, trả về int (cast 1 byte) hoặc -1 nếu cuối file.
+- `Read`: Đọc một số byte, từ vị trí nào đó, kết quả đọc lưu vào mảng byte. Trả về số lượng byte đọc được, 0 nếu cuối stream.
+
+```csharp
+// Tạo một stream và lưu vào đó một số byte
+    Stream stream = new MemoryStream ();
+    for (int i = 0; i < 122; i++) {
+        stream.WriteByte ((byte) i);
+    }
+    // Thiết lập vị trí là điểm bắt đầu
+    stream.Position = 0;
+
+
+    // Đọc từng block 5 bytes
+    byte[] buffer = new byte[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; // mảng chứa 10 byte để làm bộ nhớ lưu byte đọc được
+    int offset = 0; // vị trí (index) trong buffer - nơi ghi byte đầu tiên đọc được
+    int count = 5; // đọc 5 byte
+    int numberbyte = stream.Read (buffer, 0, 2); // bắt đầu đọc
+    while (numberbyte != 0) {
+        Console.Write ($"{numberbyte} bytes: ");
+        for (int i = 1; i <= numberbyte; i++) {
+            byte b = buffer[i - 1];
+            Console.Write (string.Format ("{0, 5}", b));
+
+        }
+        numberbyte = stream.Read (buffer, offset, count); // đọc 5 byte tiếp theo
+        Console.WriteLine ();
+    }
+```
+
+- `WriteByte`: Lưu 1 byte vào stream
+- `Write`: Lưu mảng bytes vào stream
+
+```csharp
+stream.Read(buffer, offset, count);
+```
+
+- `Seek`: Thiết lập vị trí trong stream
+- `Flush:` Giải phóng các bộ đêm
+
+###### Làm việc với FileStream
+
+- Lớp `FileStream` tạo ra các đối tượng để đọc và ghi dữ liệu ra file. Do `stream` là tài nguyên không quản lý bởi GC, nên cần đưa nó vào cấu trúc using để tự động gọi giải phóng tài nguyên `(Dispose)` khi hết khối lệnh.
+
+```csharp
+string filepath = "/home/data/data.txt";
+using (var stream = new FileStream(path:filepath, mode: FileMode.Open, access: FileAccess.Read, share: FileShare.Read))
+{
+    // code sử dụng stream (System.IO.Stream)
+}
+```
+
+- Như vậy, để tạo ra một stream file, để trao đổi dữ liệu cần 4 thông tin:
+  - `path`: đường dẫn đến file
+  - `mode`: kiểu liệt kê FileMode, nó cho biết bạn muốn mở file như thế nào, như:
+
+```csharp
+// FileMode.CreateNew tạo file mới
+// FileMode.Create tạo mới, nếu file đang có bị ghi đè
+// FileMode.Open mở file đang tồn tại
+// FileMode.OpenOrCreate mở file đang tồn tại, tạo mới nếu không có
+// FileMode.Truncate mở file đang tồn tại và làm rỗng file
+// FileMode.Append mở file đang tồn tại và tới cuối file, hoặc tạo mới
+```
+
+- `access`: kiểu liệt kê FileAccess, cho biết muốn truy cập file như thế nào
+
+```csharp
+// FileAccess.Read chỉ đọc
+// FileAccess.Write chỉ ghi
+// FileAccess.ReadWrite đọc và ghi
+```
+
+- `share`: kiểu liệt kê FileShare, cho phép thiết lập chia sẻ truy cập file
+
+```csharp
+// FileShare.None không chia sẻ - tiến trình khác truy cập file sẽ lỗi cho đến khi tiến trình mở file đóng nó lại.
+// FileShare.Read cho tiến trình khác mở đọc file.
+// FileShare.Write cho tiến trình khác mở ghi file.
+// FileShare.ReadWrite cho tiến trình khác mở đọc ghi file.
+// FileShare.Delete cho tiến trình khác xóa file.
+```
+
+- Lớp `File` hỗ trợ tạo `FileStream. File.OpenRead(filename)` tạo stream để đọc, `File.OpenWrite(filename) ` tạo stream để ghi.
+
+###### Lấy thông tin về stream
+
+- Khi có đối tượng lớp `System.IO.Stream` có một số thuộc tính để tra cứu thông tin về stream
+
+```csharp
+string filepath = "/mycode/1.txt";
+using (var stream = new FileStream( path:filepath, mode: FileMode.Open, access: FileAccess.ReadWrite, share: FileShare.Read))
+{
+    Console.WriteLine(stream.Name);
+    Console.WriteLine($"Kích thước stream {stream.Length} bytes / Vị trí {stream.Position}");
+    Console.WriteLine($"Stream có thể : Đọc {stream.CanRead} -  Ghi {stream.CanWrite} - Seek {stream.CanSeek} - Timeout {stream.CanTimeout} ");
+}
+// /mycode/1.txt
+// Kích thước stream 289 bytes / Vị trí 0
+// Stream có thể : Đọc True -  Ghi True - Seek True - Timeout False
+```
+
+###### Lấy thông tin encoding của file Text
+
+- Khi đọc các file text (không phải file nhị phân), đầu tiên cần xác định encoding của nó (UTF8, Unicode, UTF32 ...). Thông tin về encoding được lưu ở vài byte đầu tiên của file nó gọi là BOM - Preamble (xem thêm BOM). Tùy thuộc vào giá trị của khoảng 5 byte đầu tiên này mà xác định được encoding.
+- Thường bạn chỉ việc 5 byte đầu tiên, để xác định encoding như sau:
+
+```csharp
+using System;
+using System.IO;
+using System.Text;
+namespace CS016_Stream_FileStream {
+  public class UtilsEncoding {
+    public static Encoding GetEncoding (Stream stream) {
+      byte[] BOMBytes = new byte[4]; // mảng chứa 4 byte để làm bộ nhớ lưu byte đọc được
+      int offset = 0; // vị trí (index) trong buffer - nơi ghi byte đầu tiên đọc được
+      int count = 4; // đọc 4 byte
+      int numberbyte = stream.Read (BOMBytes, offset, count); // bắt đầu đọc 4 đầu tiên lưu vào buffer
+
+      if (BOMBytes[0] == 0xfe && BOMBytes[1] == 0xff) {
+        stream.Seek (2, SeekOrigin.Begin); // Di chuyển về vị trí bắt đầu của dữ liệu (đã trừ BOM)
+        return Encoding.BigEndianUnicode;
+      }
+      if (BOMBytes[0] == 0xff && BOMBytes[1] == 0xfe) {
+        stream.Seek (2, SeekOrigin.Begin); // Di chuyển về vị trí bắt đầu của dữ liệu (đã trừ BOM)
+        return Encoding.Unicode;
+      }
+
+      if (BOMBytes[0] == 0xef && BOMBytes[1] == 0xbb && BOMBytes[2] == 0xbf) {
+        stream.Seek (3, SeekOrigin.Begin);
+        return Encoding.UTF8;
+      }
+      if (BOMBytes[0] == 0x2b && BOMBytes[1] == 0x2f && BOMBytes[2] == 0x76) {
+        stream.Seek (3, SeekOrigin.Begin);
+        return Encoding.UTF7;
+      }
+      if (BOMBytes[0] == 0xff && BOMBytes[1] == 0xfe && BOMBytes[2] == 0 && BOMBytes[3] == 0) {
+        stream.Seek (4, SeekOrigin.Begin);
+        return Encoding.UTF32;
+      }
+      if (BOMBytes[0] == 0 && BOMBytes[1] == 0 && BOMBytes[2] == 0xfe && BOMBytes[3] == 0xff) {
+        stream.Seek (4, SeekOrigin.Begin);
+        return Encoding.GetEncoding (12001);
+      }
+
+      stream.Seek (0, SeekOrigin.Begin);
+      return Encoding.Default;
+
+    }
+  }
+
+}
+```
+
+- Với ASCII, 7 bit biểu diễn các ký tự - nó đủ biểu diễn bảng chữ cái tiếng Anh (in hoa, thường, số ký tự đặc biệt) - ASCII 1 byte biểu diễn 1 ký tự. UTF-16 thì dùng 2 byte biểu diễn 1 ký tự. UTF-32 dùng 4 byte biểu diễn 1 ký tự. Với UTF-8 (dùng nhiều ngày nay) - nó dùng biến để xác định bao nhiêu byte cho mỗi ký tự cụ thể, Mỗi ký tự có thể từ 1 - 6 byte
+
+###### Ghi file text bằng stream
+
+- Ghi file text (tạo mới, ghi đè) - chọn file có Encoding UTF8, đầu tiên phải ghi các bytes BOM, lấy mảng bytes DOM bằng cách gọi encoding.GetPreamble(), sau đó chuyển chuỗi thành mảng bytes (đã encoding) - rồi lưu ra stream bằng `Write`
+
+```csharp
+
+string filepath = "/mycode/2.txt";
+using (var stream = new FileStream( path:filepath, mode: FileMode.Create, access: FileAccess.Write, share: FileShare.None))
+{
+    //Write BOM - UTF8
+    Encoding encoding = Encoding.UTF8;
+    byte[] bom = encoding.GetPreamble();
+    stream.Write(bom, 0, bom.Length);
+
+    string s1 = "Xuanthulab.net -  Xin chào các bạn! \n";
+    string s2 = "Ví dụ - ghi file text bằng stream";
+
+    // Encode chuỗi - lưu vào mảng bytes
+    byte[] buffer = encoding.GetBytes(s1);
+    stream.Write(buffer, 0, buffer.Length);  // lưu vào stream
+
+    buffer = encoding.GetBytes(s2);
+    stream.Write(buffer, 0, buffer.Length);  // lưu vào stream
+
+}
+```
+
+###### Đọc file text bằng stream
+
+- Đầu tiên xác định Encoding của file text, sau đó đọc từng khối byte vào buffer (mảng byte), rồi thực hiện Encoding để xác định chuỗi.
+
+```csharp
+string filepath = "/mycode/1.txt";
+int SIZEBUFFER = 256;
+using (var stream = new FileStream( path:filepath, mode: FileMode.Open, access: FileAccess.ReadWrite, share: FileShare.Read))
+{
+    Encoding encoding = GetEncoding(stream);
+    Console.WriteLine(encoding.ToString());
+    byte[] buffer = new byte[SIZEBUFFER];
+    bool endread = false;
+    do
+    {
+        int numberRead = stream.Read(buffer, 0, SIZEBUFFER);
+        if (numberRead == 0) endread = true;
+        if (numberRead < SIZEBUFFER)
+        {
+            Array.Clear(buffer, numberRead, SIZEBUFFER - numberRead);
+        }
+        string s = encoding.GetString(buffer, 0, numberRead);
+        Console.WriteLine(s);
+
+    } while (!endread);
+
+}
+```
+
+###### Copy file stream
+
+- Tạo 2 stream, một để đọc - một để lưu
+
+```csharp
+string filepath_src = "/mycode/1.txt";
+string filepath_des = "/mycode/3.txt";
+
+int SIZEBUFFER = 5;   // tăng lên đọc sẽ nhanh
+using (var streamwrite = File.OpenWrite(filepath_des))
+using (var streamread = File.OpenRead(filepath_src))
+{
+    byte[] buffer = new byte[SIZEBUFFER];
+    bool endread = false;
+    do
+    {
+        int numberRead = streamread.Read(buffer, 0, SIZEBUFFER);
+        if (numberRead == 0) endread = true;
+        else {
+            streamwrite.Write(buffer, 0, numberRead);
+        }
+
+    } while (!endread);
+
+}
+```
+
+### 10. Collection và List trong C#
+
+###### Collection trong C#
+
+- `collection` là một nhóm các đối tượng có sự liên quan đến nhau. Số đối tượng trong collect có thể thay đổi tăng giảm. Có nhiều loại collection, chúng được tập hợp vào namespace `System.Collections`. Thường thì một lớp collection có các phương thức để thêm, bớt, lấy tổng phần tử.
+- `.NET` cung cấp một số các lớp collection kiểu Generic như: `List<T>, Dictionary<TKey, TValue>, Stack<T> ...` những lớp generic này ở namespace `System.Collections.Generic`
+- Ngoài ra namespace `System.Collections` cũng có các lớp collection mà không sử dụng generic như: ArrayList, Stack, Queue ...
+- Các giao diện - interface về collect mà bạn có thể sử dụng
+  - `IEnumerable<T>`: Triển khai nó nếu muốn duyệt phần tử bằng foreach, nó định nghĩa phương thức `GetEnumerator` trả về một enumerator.
+  - `ICollection<T>`: Giao diện này được triển khai bởi các generic collection. Với nó lấy tổng phần tử bằng thuộc tính `Count`, copy các phần tử vào mảng bằng `CopyTo`, thêm bớt phần tử với `Add`, `Remove`, `Clear`
+  - `IList<T>`: Giao diện này kế thừa ICollection<T> là một danh sách các phần tử truy cập được theo vị trí của nó. Nó có indexer, phương thức để chèn phần tử xóa phần tử `Insert` `RemoveAt`.
+  - `ISet<T>`: Giao diện triển khai bởi các tập hợp
+  - `IDictionary<TKey,TValue>`: Giao diện để triển khai loại dữ liệu lưu trữ theo cặp key, value.
+  - `ILookup<TKey,TValue>`: Giao diện để triển khai loại dữ liệu lưu trữ theo cặp key, value. Nhưng cho phép một key có nhiều giá trị
+  - `IComparer<TKey,TValue>`: Giao diện để triển khai cho phép so sánh để sắp xếp Collection
+  - `IEqualityComparer<TKey,TValue>`: Giao diện để triển khai cho phép so sánh bằng
+
+###### Lớp List<T>
+
+- Lớp collection `List` là lớp triển khai các giao diện `IList`, `ICollection`, `IEnumerable` nó quản lý danh sách các đối tượng cùng kiểu. Bạn có thể thêm, bớt, truy cập, sắp xếp các phần tử trong danh sách bằng các phương thức nó cung cấp như `Add`, `AddRange`, `Insert`, `RemoveAt`, `Remove` ... các phương thức này chi tiết theo ví dụ dưới
+- Khởi tạo một danh sách `List`, mà các phần tử có kiểu element_type:
+
+```csharp
+var list = new List<element_type>();
+```
+
+- Ví dụ, xây dựng danh sách các sản phẩm, sản phẩm có kiểu `Product` tự định nghĩa như sau - lớp sản phẩm hỗ trợ so sánh với sản phẩm khác nên triển khai `IComparable`, cho phép hiện lấy một chuỗi thông tin bằng `ToString` với định dạng nào đó nên triển khai giao diện `IFormattable`
+- Mã nguồn xây dựng lớp Product trong file Product.cs như sau:
+
+```csharp
+using System;
+namespace CS017_Generic
+{
+    public class Product : IComparable<Product>, IFormattable
+    {
+        public int ID {set; get;}
+        public string Name {set; get;}        // tên
+        public double Price {set; get;}       // giá
+        public string Origin {set; get;}      // xuất xứ
+
+        public Product(int id, string name, double price, string origin) {
+            ID = id; Name = name; Price = price; Origin = origin;
+        }
+
+        //Triển khai IComparable, cho biết vị trí sắp xếp so với đối tượng khác
+        // trả về 0 - cùng vị trí; trả về > 0 đứng sau other; < 0 đứng trước trong danh sách
+        public int CompareTo(Product other)
+        {
+            // sắp xếp về giá
+            double delta = this.Price - other.Price;
+            if (delta > 0)      // giá lớn hơn xếp trước
+                return -1;
+            else if (delta < 0) // xếp sau, giá nhỏ hơn
+                return 1;
+            return 0;
+
+        }
+        // Triển khai IFormattable, lấy chuỗi thông tin của đối tượng theo định dạng
+        // format hỗ trợ "O" và "N"
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            if (format == null) format = "O";
+            switch (format.ToUpper()) {
+                case "O": // Xuất xứ trước
+                    return $"Xuất xứ: {Origin} - Tên: {Name} - Giá: {Price} - ID: {ID}";
+                case "N": // Tên xứ trước
+                    return $"Tên: {Name} - Xuất xứ: {Origin} - Giá: {Price} - ID: {ID}";
+                default: // Quăng lỗi nếu format sai
+                    throw new FormatException("Không hỗ trợ format này");
+            }
+        }
+
+        // Nạp chồng ToString
+        override public string ToString() => $"{Name} - {Price}";
+
+        // Quá tải thêm ToString - lấy chỗi thông tin sản phẩm theo định dạng
+        public string ToString(string format) => this.ToString(format, null);
+
+    }
+}
+```
+
+###### Khởi tạo List<T>
+
+- Để khởi tạo một danh sách rỗng, dùng toán tử new
+
+```csharp
+var numbers  = new List<int>();           // danh sách số nguyên
+var products = new List<Product>();       // danh sách Product
+```
+
+- Khởi tạo danh sách có sẵn một số phần tử, thì các phần tử liệt kê sau `{}`
+
+```csharp
+var numbers  = new List<int>() {1,2,3,4};     // khởi tạo 4 phần tử
+var products = new List<Product>()            // khởi tạo 1 phần tử
+{
+     new Product(1, "Iphone 6", 100, "Trung Quốc")
+};
+```
+
+###### Thêm, xóa, chèn và đọc phần tử trong List<T>
+
+**THÊM PHẦN TỬ vào cuối danh sách sử dụng phương thức `Add`**
+
+```csharp
+var p = new Product(2, "IPhone 7", 200, "Trung Quốc");
+products.Add(p);                                                // Thêm p vào cuối List
+products.Add(new Product(3, "IPhone 8", 400, "Trung Quốc"));    // thêm đối tượng mới vào cuối List
+```
+
+- Nếu muốn thêm nhiều phần tử một lúc (mảng các phần tử), dùng `AddRange`
+
+```csharp
+var arrayProducts = new Product[]                  // Mảng 2 phần tử
+{
+    new Product(4, "Glaxy 7", 500, "Việt Nam"),
+    new Product(5, "Glaxy 8", 700, "Việt Nam"),
+};
+products.AddRange(arrayProducts);                   // Nối các phần tử của mảng vào danh sách
+```
+
+**CHÈN PHẦN TỬ**
+
+- `CHÈN PHẦN TỬ` vào danh sách, phần tử sẽ ở vị trí chỉ ra dùng phương thức `Insert(index, object)` hoặc chèn cả một mảng `InsertRange(index,, arrayObject)`. Trong đó index là vị trí chèn phần tử (0 là đầu tiên).
+
+```csharp
+products.Insert(3, new Product(6, "Macbook Pro", 1000, "Mỹ"));     // chèn phần tử vào vị trí index 3, (thứ 4)
+```
+
+**ĐỌC PHẦN TỬ**
+
+- `ĐỌC PHẦN TỬ` trong List bạn dùng indexer với chỉ số (chỉ số bắt đầu từ 0). Ví dụ lấy phần tử ở Index = 1;
+
+```csharp
+var pro = products[2];                                             // đọc phần tử có index = 2
+Console.WriteLine(pro.ToString());
+```
+
+- Để duyệt qua các phần tử bạn có thể dùng lệnh for hoặc foreach
+
+```csharp
+// Duyệt qua tất cả các phần tử bằng for
+// products.Count = lấy tổng phần tử trong List
+for (int i = 1; i < products.Count; i++)
+{
+    var pi = products[i - 1];
+    Console.WriteLine(pi.ToString());
+}
+
+// Duyệt qua các phần tử bằng foreach
+foreach (var pi in products)
+{
+    Console.WriteLine(pi.ToString());
+}
+```
+
+**XÓA PHẦN TỬ**
+
+- `XÓA PHẦN TỬ` trong List - để xóa phần tử ở vị trí index dùng `RemoveAt(index)`, để xóa cả một đoạn count phần tử, từ vị trí index dùng `RemoveRange(index, count);`, để xóa toàn bộ (làm rỗng) gọi `Clear()`; hoặc `RemoveAll()`;
+
+```csharp
+products.RemoveAt(0);                           // xóa phần tử đầu tien
+products.RemoveRange(products.Count - 2, 2);    // xóa 2 phần tử cuối
+```
+
+- Khi bạn có tham chiếu đến đối tượng đang có trong List, cũng có thể loại nó bằng `Remove(obj)`;
+
+```csharp
+var pro_rm = products[1];
+products.Remove(pro_rm);
+```
+
+###### Tìm kiếm thông tin trong List
+
+- Một số phương thức cho phép tìm kiếm, tra cứu vị trị trí các phần tử trong `List`
+  - `IndexOf(obj)`: Tìm index của đối tượng trong List
+  - `LastIndexOf(obj)`: Tìm index của phần tử cuối cùng có giá trị bằng obj trong List
+  - `FindIndex`: Tìm kiếm trả về Index
+  - `FindLastIndex`: Tìm kiếm trả về Index cuối
+  - `Find(Predicate)`: Tìm kiếm trả về phần tử
+  - `FindAll(Predicate)`: Tìm kiếm trả về danh sách phần tử
+  - `FindLast`: Tìm kiếm trả về phần tử cuối tìm thấy
+- Trong các phương thức trên, có các phương thức ví dụ `Find`, chứa tham số là` delegate bool Predicate<in T>(T obj);`, nó là hàm `callback`, trả về `true` là phần tử phù hợp trả về.
+- Ví dụ sau đây là một `Delegate` phù hợp gán cho tham số `Predicate`
+
+```csharp
+// Delegate trả về true khi tên bằng "Glaxy 8"
+(Product ob) => {
+    return (ob.Name == "Glaxy 8");
+}
+```
+
+- Đoạn mã này có thể làm tham số cho `Find`, `FindAll` ...
+
+```csharp
+Product foundpr1 = products.Find(
+    (Product ob) => { return (ob.Name == "Glaxy 8");}
+);
+if (foundpr1 != null)
+    Console.WriteLine("(found) " + foundpr1.ToString("O"));
+// (found) Xuất xứ: Việt Nam - Tên: Glaxy 8 - Giá: 700 - ID: 5
+```
+
+- Các `delegate` cũng có thể viết gọn lại
+
+```csharp
+// tìm index của đối tượng có xuất xứ là "Trung Quốc"
+var ifound = products.FindIndex(x => x.Origin == "Trung Quốc");
+// tìm các sản phẩm có giá trên 100
+List<Product> p_100 = products.FindAll(product => product.Price > 100);
+```
+
+- Nếu muốn tùy biến cao hơn `Delegate`, để tìm kiếm theo tham số tùy chọn, bạn có thể để `Delegate` trên vào lớp chức năng, ví dụ xây dựng lớp `SearchNameProduct`
+
+```csharp
+public class SearchNameProduct {
+    string namesearch;
+    public SearchNameProduct(string name) {
+        namesearch = name;
+    }
+    // Hàm gán cho delegage
+    public bool search(Product p) {
+        return p.Name == namesearch;
+    }
+}
+```
+
+- Thực hiện tìm kiếm, ví dụ
+
+```csharp
+Product pr1 = products.Find( (new SearchNameProduct("Glaxy 8")).search);        // Tìm sản phẩm có tên Glaxy 8
+Product pr2 = products.Find( (new SearchNameProduct("IPhone 6")).search);       // Tìm sản phẩm có tên IPhone 6
+```
+
+###### Sắp xếp các phần tử trong List
+
+- Để sắp xếp các phần tử trong danh sách, nếu phần tử đó có triển khai giao diện `IComparable` thì chỉ việc gọi `Sort()` để có danh sách theo thứ tự.
+- Ví dụ trên, lớp `Product` có triển khai `IComparable`, với phương thức `CompareTo`, thì sản phẩm nào có giá cao hơn xếp trước, có giá thấp hơn xếp sau.
+
+```csharp
+products.Sort();
+foreach (var pi in products)
+{
+    Console.WriteLine(pi.ToString("N"));
+}
+// Kết quả
+// Tên: Macbook Pro - Xuất xứ: Mỹ - Giá: 1000 - ID: 6
+// Tên: Glaxy 8 - Xuất xứ: Việt Nam - Giá: 700 - ID: 5
+// Tên: Glaxy 7 - Xuất xứ: Việt Nam - Giá: 500 - ID: 4
+// Tên: IPhone 8 - Xuất xứ: Trung Quốc - Giá: 400 - ID: 3
+// Tên: IPhone 7 - Xuất xứ: Trung Quốc - Giá: 200 - ID: 2
+// Tên: Iphone 6 - Xuất xứ: Trung Quốc - Giá: 100 - ID: 1
+```
+
+- Bạn cũng có thể tùy biến cách thức sắp xếp bằng cách cung cấp hàm `callback` dạng `deleage` hai tham số kiểu cùng với kiểu phần tử cho `Search`, thay vì sắp xếp mặc định như trên.
+- Nhớ là trả về > 0 thì phần tử hiện tại xếp sau phần tử tham số.
+- Ví dụ hàm callback sau xếp ID nhỏ lên trước
+
+```csharp
+products.Sort(
+
+    (p1, p2) => {
+        if (p1.ID > p2.ID)
+            return 1;
+        else if (p1.ID == p2.ID)
+            return  0;
+        return   -1;
+    }
+
+);
+foreach (var pi in products)
+{
+    Console.WriteLine(pi.ToString("N"));
+}
+```
+
+- Một số phương thức khác tham khảo
+  - `Contains(obj)`: kiểm tra có chứa phần tử obj
+  - `Reverse()`: đảo thứ tự danh sách
+  - `ToArray()`: copy các phần tử ra mảng
+
+### 11. SortedList trong lập trình C#
+
+- Tìm hiểu về `SortedList`, khai báo, khởi tạo và ví dụ áp dụng `SortedList` để lưu danh sách được sắp xếp theo key
+
+###### SortedList trong C#
+
+- Nếu tập dữ liệu của bạn được sắp xếp dựa trên một `key` (khóa), thì bạn có thể dùng đến `SortedList<Tkey,TValue>`. Lớp này sắp xếp dữ liệu dựa trên một `key`, kiểu đề làm `key` là bất kỳ.
+- `SortedList` được định nghĩa ở namespace: `System.Collections`, sử dụng bạn cần nạp namespace gồm:
+
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+```
+
+- Một đối tượng dữ liệu lưu vào `SortedList` dưới dạng cặp `key/value`, truy cập đến phần tử thông qua key hoặc thông qua vị trí `(index)` của dữ liệu trong danh sách. **Chú ý, không cho phép trùng key**.
+- Các thuộc tính, phương thức trong SortedList
+  - `Count`: Thuộc tính cho biết số phần tử
+  - `[key]`: Indexer truy cập đến phần tử có key
+  - `Keys`: Thuộc tính là danh sách các key trong danh sách sắp xếp
+  - `Values`: Thuộc tính lấy danh sách các giá trị trong danh sách
+  - `Add(key, value)`: Thêm một phần tử vào danh sách
+  - `Remove(key)`: Xóa phần tử bằng key của nó
+  - `Clear()`: Loại bỏ tất cả các phần tử khỏi danh sách
+  - `ContainKey(key)`: Kiểm tra có phần tử nào có khóa là key
+  - `ContainValue(value)` Kiểm tra có phần tử nào có giá trị là value
+  - `IndexOfKey(key)` Lấy chỉ số của phần tử có khóa là key
+  - `IndexOfValue(value)`: Lấy chỉ số của phần tử có giá trị là value
+
+###### Ví dụ SortedList
+
+- Ví dụ tạo danh sách các sản phẩm, mỗi sản phẩm lưu vào danh sách với key tương ứng là tên và giá trị là mã sản phẩm. Từ đó, thực hiện một số thao tác trên danh sách này
+
+```csharp
+public static void test () {
+
+      // Khởi tạo SortedList
+      var products = new SortedList<string, string> ();
+      products.Add ("Iphone 6", "P-IPHONE-6"); // Thêm vào phần tử mới (key, value)
+      products.Add ("Laptop Abc", "P-LAP");
+      products["Điện thoại Z"] = "P-DIENTHOAI"; // Thêm vào phần tử bằng Indexer
+      products["Tai nghe XXX"] = "P-TAI";       // Thêm vào phần tử bằng Indexer
+
+
+      // Duyệt qua các phần tử, mỗi phần tử lấy key/value lưu trong biến
+      // kiểu KeyValuePair
+      Console.WriteLine ("TÊN VÀ MÃ");
+      foreach (KeyValuePair<string, string> p in products) {
+        Console.WriteLine ($"    {p.Key} - {p.Value}");
+      }
+      // kết quả: (để ý danh sách đã xếp theo key)
+      // TÊN và MÃ
+      //     Điện thoại Z - P-DIENTHOAI
+      //     Iphone 6 - P-IPHONE-6
+      //     Laptop Abc - P-LAP
+      //     Tai nghe XXX - P-TAI
+
+      // Đọc value khi biết key
+      string productName = "Tai nghe XXX";
+      Console.WriteLine ($"{productName} có mã là {products[productName]}");
+
+      // Cập nhật giá trị vào phần tử theo key
+      products[productName] = "P-TAI-UPDATED";
+
+      // Duyệt qua các giá trị
+      Console.WriteLine ("\nDANH SÁCH MÃ SẢN PHẢM");
+      foreach (var product_code in products.Values) {
+          Console.WriteLine ($"--- {product_code}");
+      }
+      // kết quả:
+      // DANH SÁCH MÃ SẢN PHẢM
+      // -- P-DIENTHOAI
+      // -- P-IPHONE-6
+      // -- P-LAP
+      // -- P-TAI-UPDATED
+
+      // Duyệt qua các key
+      Console.WriteLine ("\nDANH SÁCH TÊN SP");
+      foreach (var product_name in products.Keys) {
+        Console.WriteLine ($"... {product_name}");
+      }
+      // DANH SÁCH TÊN SP
+      // -- Điện thoại Z
+      // -- Iphone 6
+      // -- Laptop Abc
+      // -- Tai nghe XXX
+
+}
+```
+
+### 12. Queue / Stack trong C#
+
+###### Hàng đợi Queue trong C#
+
+- Hàng đợi là mô hình `FIFO` (first in, first out - vào trước, ra trước hay đến trước được phục vụ trước), nó giải quyết các bài toán thực tế giống như xếp hàng mua vé máy bay ...
+- `.NET` cung cấp lớp Queue<T> để giả quyết giải thuật hàng đợi.
+- Các phương thức, thuộc tính của Queue
+  - `Count`: Thuộc tính lấy tổng số phần tử trong hàng
+  - `Enqueue`: vào xếp hàng - đưa phần tử vào cuối hàng đợi
+  - `Dequeue`: đọc - và loại ngay phần tử ở đầu hàng đợi va` lỗi nếu hàng đợi không có phần tử nào
+  - `Peek`: đọc phần tử đầu hàng đợi
+- Vi dụ, các hồ sơ cần xử lý của khách hàng gửi đến, ai đến trước được đưa vào danh sách trước - và khi xử lý thì được xử lý trước
+
+```csharp
+public static void testQueue () {
+
+    Queue<string> hoso_canxuly = new Queue<string> ();
+
+    hoso_canxuly.Enqueue ("Hồ sơ A"); // Hồ sơ xếp thứ nhất trong hàng đợi
+    hoso_canxuly.Enqueue ("Hồ sơ B"); // Hồ sơ xếp thứ hai
+    hoso_canxuly.Enqueue ("Hồ sơ C");
+
+
+    // Lấy hồ sơ xếp trước xử lý  trước, cho đến hết
+    while (hoso_canxuly.Count > 0) {
+        var hs = hoso_canxuly.Dequeue();
+        Console.WriteLine($"Xử lý {hs}, còn lại {hoso_canxuly.Count}");
+    }
+
+}
+// KẾT QUẢ
+// Xử lý Hồ sơ A, còn lại 2
+// Xử lý Hồ sơ B, còn lại 1
+// Xử lý Hồ sơ C, còn lại 0
+```
+
+###### Ngăn xếp Stack C#
+
+- Ngăn xếp `stack` khá giống hàng đợi, nhưng khác đó là `LIFO` (last in, first out) - vào sau thì ra trước, nó giống như xếp hàng hóa vào các `container`, vào nhà kho - cái nào đưa vào sau thì khi thảo dỡ lại thực hiện đầu tiên, nó giống như xếp đĩa vào cọc đĩa CD cái nào đưa vào cọc trước sẽ được lấy ra sau ...
+- Trong C# với `.NET` nó cung cấp lớp `Stack<T>` để thực hiện giải thuật này.
+- Các phương thức, thuộc tính của Stack
+  - `Count`: Thuộc tính lấy tổng số phần tử trong hàng
+  - `Push`: đẩy (thêm) một phần tử vào đỉnh stack
+  - `Pop`: đọc - xóa phần tử đỉnh stack
+  - `Peek`: đọc phần tử đỉnh stack
+  - `Contains`: kiểm tra một phần tử có trong stack hay không
+- Ví dụ, nhập vào A, B, C thì in ra CBA (vào sau ra trước)
+
+```csharp
+public static void testQueue () {
+
+      Queue<string> hoso_canxuly = new Queue<string> ();
+
+      hoso_canxuly.Enqueue ("Hồ sơ A"); // Hồ sơ xếp thứ nhất trong hàng đợi
+      hoso_canxuly.Enqueue ("Hồ sơ B"); // Hồ sơ xếp thứ hai
+      hoso_canxuly.Enqueue ("Hồ sơ C");
+
+
+      // Lấy hồ sơ xếp trước xử lý  trước, cho đến hết
+      while (hoso_canxuly.Count > 0) {
+        var hs = hoso_canxuly.Dequeue();
+        Console.WriteLine($"Xử lý {hs}, còn lại {hoso_canxuly.Count}");
+      }
+}
+// Bốc dỡ Sản phẩm C / còn lại 2
+// Bốc dỡ Sản phẩm B / còn lại 1
+// Bốc dỡ Sản phẩm A / còn lại 0
+```
+
+### 13. LinkedList - Danh sách liên kết trong C#
+
+###### LinkedList trong C#
+
+- Trong thư viện `.NET` cung cấp lớp `LinkedList<T>` là loại danh sách liên kết kép (từ đây gọi tắt là danh sách liên kết).
+- `Danh sách liên kết` là một danh sách chứa các phần tử, mỗi phần tử trong loại danh sách này được gọi là một nút `(Node)`. Mỗi nút ngoài dữ liệu của nút đó, nó sẽ gồm hai biến - một biến tham chiếu đến `Node` phía trước, một nút tham chiếu đến `Node` phía sau.
+- Điều này có nghĩa, có có một nút - có thể lấy được nút phía trước nó - cứ thế cho đến nút đầu tiên, nút đầu, tương tự lấy được nút phía sau và dịch chuyển dần được về cuối.
+- Khai báo - khởi tạo một `LinkedList`, ví dụ tạo danh sách liên kết mà dữ liệu các nút có kiểu string
+
+```csharp
+LinkedList<string> cacbaihoc = new  LinkedList<string>();
+```
+
+- Danh sách khởi tạo trên có dữ liệu trong các nút là kiểu `string`, tuy nhiên bản thân các nút được biểu diễn bởi lớp `LinkedListNode`
+
+###### LinkedListNode trong C#
+
+- `LinkedListNode<T>` là lớp biểu diễn `NÚT` trong `LinkedList`, các đối tượng của `LinkedListNode` được tạo ra từ `LinkedList`. Nó có các thuộc tính sau:
+  - `List`: Thuộc tính - tham chiếu (trỏ) đến LinkedList
+  - `Value`: Thuộc tính - là dữ liệu của Node
+  - `Next`: Thuộc tính - tham chiếu (trỏ) đến NÚT tiếp theo (phía sau) - null thì nó là nút cuối
+  - `Previous`: Thuộc tính - tham chiếu (trỏ) đến NÚT phía trước - null thì nó là nút đầu tiên
+
+###### Một số phương thức trong LinkedList
+
+- `Count`: Số nút trong danh sách
+- `First`: Nút đầu tiên của danh sách
+- `Last`: Nút đầu tiên của danh sách
+- `AddFirst(T)`: Chèn một nút có dữ liệu T vào đầu danh sách
+- `AddLast(T)`: Chèn một nút có dữ liệu T vào cuối danh sách
+- `AddAfter(Node, T)`: Chèn nút với dữ liệu T, vào sau nút Node (kiểu LinkedListNode)
+- `AddBefore(Node, T)`: Chèn nút với dữ liệu T, vào trước nút Node (kiểu `LinkedListNode`)
+- `Clear()`: Xóa toàn bộ danh sách
+- `Contains(T)`: Kiểm tra xem có nút với giá trị dữ liệu bằng T
+- `Remove(T)`: Xóa nút có dữ liệu bằng T
+- `RemoveFirst()`: Xóa nút đầu tiên
+- `RemoveLast()`: Xóa nút cuối cùng
+- `Find(T)`: Tìm một nút
+
+**Thử tạo ra danh sách liên kết chứa tên các bài học**
+
+```csharp
+LinkedList<string> cacbaihoc = new  LinkedList<string>();
+
+
+cacbaihoc.AddFirst("Bài học 3");   // thêm vào đầu danh sach
+cacbaihoc.AddLast("Bài học 4");    // thêm vào cuối
+cacbaihoc.AddFirst("Bài học 2");
+cacbaihoc.AddFirst("Bài học 1");
+
+
+// Lấy phần tử đầu tiên, sau đó duyệt đến cuối
+Console.WriteLine("---------Nút từ đầu về cuối");
+LinkedListNode<string> node = cacbaihoc.First;
+while (node != null) {
+    Console.WriteLine(node.Value);
+    node = node.Next;   // node gán bằng nút sau nó
+}
+
+
+// Lấy phần tử cuối cùng, sau đó duyệt về phần tử đầu  tiên
+Console.WriteLine("--------Nút từ cuối đến đầu");
+node = cacbaihoc.Last;
+while (node != null) {
+    Console.WriteLine(node.Value);
+    node = node.Previous;   // node gán bằng nút phía trước nó
+}
+
+/*  Kết quả
+---------Nút từ đầu về cuối
+Bài học 1
+Bài học 2
+Bài học 3
+Bài học 4
+--------Nút từ cuối đến đầu
+Bài học 4
+Bài học 3
+Bài học 2
+Bài học 1 */
+```
+
+### 14. Lớp Dictionary - HashSet trong C#
+
+- Tìm hiểu lớp Dictionary và HashSet trong C#, khai báo, khởi tạo và sử dụng HashSet, SortedDictionary
+
+###### Dictionary trong C#
+
+- Lớp `Dictionary<Tkey,TValue>` khá giống `SortedList`, `Dictionary` được thiết kế với mục đích tăng hiệu quả với tập dữ liệu lớn, phức tạp.
+- Một đối tượng dữ liệu lưu vào `Dictionary` dưới dạng cặp `key/value`, truy cập đến phần tử thông qua key hoặc thông qua vị trí (index) của dữ liệu trong danh sách. Chú ý, không cho phép trùng `key`.
+- Các thuộc tính, phương thức trong `Dictionary`
+  - `Count`: Thuộc tính cho biết số phần tử
+  - `[key]`: Indexer truy cập đến phần tử có key
+  - `Keys`: Thuộc tính là danh sách các key
+  - `Values`: Thuộc tính lấy danh sách các giá trị
+  - `Add(key, value)`: Thêm một phần tử vào Dictionary
+  - `Remove(key)`: Xóa phần tử bằng key của nó
+  - `Clear()`: Loại bỏ tất cả các phần tử
+  - `ContainKey(key)`: Kiểm tra có phần tử nào có khóa là key
+  - `ContainValue(value)` Kiểm tra có phần tử nào có giá trị là value
+- Ví dụ, khai báo Dictionary với key kiểu string, giá trị kiểu int - khởi tạo ngay 2 phần tử
+
+```csharp
+public static void testDic()
+{
+    // Khởi tạo với 2 phần tử
+    Dictionary<string, int> sodem = new Dictionary<string, int>()
+    {
+      ["one"] = 1,
+      ["tow"] = 2,
+    };
+    // Thêm hoặc cập nhật
+    sodem["three"] = 3;
+
+
+    var keys = sodem.Keys;
+    foreach (var k in keys)
+    {
+        var value = sodem[k];
+        Console.WriteLine($"{k} = {value}");
+    }
+
+}
+// one = 1
+// two = 2
+// three = 3
+```
+
+###### SortedDictionary trong C#
+
+- Lớp `SortedDictionary<Tkey,TValue>` sử dụng, khai báo và khởi tạo ... giống như lớp `Dictionary<Tkey,TValue>`.
+- Chỉ cần lưu ý, nếu dùng `SortedDictionary` thì các các phần tử được lưu và sắp xếp theo `key`, thích hợp khi tăng tốc chèn, xóa, tìm kiếm theo `key`.
+
+###### HashSet trong C#
+
+- `HashSet` là tập hợp danh sách không cho phép trùng giá trị. `HashSet<T>` khác với các collection khác là nó cung cấp cơ chế đơn giản nhất để lưu các giá trị, nó không chỉ mục thứ tự và các phần tử không sắp xếp theo thứ tự nào. `HashSet<T>` cung cấp hiệu năng cao cho các tác vụ tìm kiếm, thêm vào, xóa bỏ ...
+- Một số phương thức trong `HashSet`
+  - `Count`: Thuộc tính cho biết số phần tử
+  - `Add(T)`: Thêm phần tử vào HashSet
+  - `Remove(T)`: Xóa phần tử khỏi HashSet
+  - `Clear()`: Xóa tất cả các phần tử
+  - `Contains(T)`: Kiểm tra xem có phần tử trong HashSet
+  - `IsSubsetOf(c)`: Kiểm tra xem có là tập con của HashSet c
+  - `IsSupersetOf(c)`: Kiểm tra xem có chứa tập HashSet c
+  - `UnionWith(c)`: Hợp với tập HashSet c
+  - `IntersectWith(c)`: Giao với tập HashSet c
+  - `ExceptWith(c)`: Loại bỏ hết các phần tử chung với c
+
+```csharp
+HashSet>int< hashset1 = new HashSet>int<() {
+     5,2,3,4
+ };
+ Console.WriteLine($"Phần tử trong hashset1 {hashset1.Count}");
+ foreach (var v in hashset1)
+ {
+     Console.Write(v + " ");
+ }
+ Console.WriteLine();
+
+HashSet>int< hashset2 = new HashSet>int<();
+hashset2.Add(3);
+hashset2.Add(4);
+if (hashset1.IsSupersetOf(hashset2))
+    Console.WriteLine($"hashset1 là tập chứa hashset2");
+
+/*
+Phần tử trong hashset1 4
+5 2 3 4
+hashset1 là tập chứa hashset2
+*/
+```
