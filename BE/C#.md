@@ -5186,10 +5186,10 @@ foreach (var item in ketqua)
 /// OrderBy OrderByDescending
 /// Reverse
 /// GroupBy
-/// Distinct
-/// Single SingleOrDefault
-/// Any All
-/// Count ()
+/// Distinct: loại bỏ giá trị trùng
+/// Single SingleOrDefault: kiểm tra 1 phần tử thỏa mãn logic -> trả về phần tử đó, nếu không có hoặc nhiều hơn -> lỗi -> nên dùng SingleOrDefault (không tìm thấy thì trả về null)
+/// Any All: Any trả về true nếu thỏa mãn đk nào đó, All kiểm tra tất cả phần tử thỏa mãn đk nào đó
+/// Count (): đếm số lượng, cũng nhận vào delegate
 ```
 
 ### 17. Lập trình bất đồng bộ asynchronou, C# với bất đồng bộ theo mô hình tác vụ
