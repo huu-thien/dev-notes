@@ -6869,3 +6869,266 @@ myservice.PrintData();
 ```
 
 - Kỹ thuật DI với thư viện `DependencyInjection` ở trên là kiến rất cần nắm vững, nó là cơ sở để học các các mô hình lập trình hiện đại, nhất là sau này áp dụng với Asp.Net Core bạn cần hiểu nó.
+
+### 21. Lập trình multi thread C# sử dụng Parallel chạy song song các tác vụ
+
+- Sử dụng kỹ thuật chạy song song với lớp `Parallel` để chạy nhiều thread (lập trình đa luồng), trên luồng chạy các `Task`
+
+###### Thi hành song song tác vụ với `Parallel.For`
+
+- Lớp `Parallel` thuộc namespace `System.Threading.Tasks`, nó trừu tượng hóa các thread, lớp này có phương thức tĩnh `Parallel.For`, `Parallel.ForEach` để thực hiện vòng lặp for và foreach để chạy song song các tác vụ. Nếu với for và foreach trong C#, thì vòng lặp đó chạy trong một thread, nhưng với `Parallel` nó sử dụng đa tác vụ, đa tiến trình để thực hiện nội dung lặp. Ngoài ra là `Parallel.Invoke` để thực hiện một `Action` có khả năng chạy song song.
+- `Parallel.For` có nhiều quá tải, cú pháp bản đơn giản như sau:
+
+```csharp
+ParallelLoopResult result = Parallel.For(i1, i2, task);
+```
+
+- Vòng lặp chạy (biến chạy) từ số nguyên i1 đến i2, mỗi lần lặp nó sẽ thực hiện Action task
+- `task` là một `delegate`, kiểu `Action<int>` có nghĩa nó làm phương thức trả về void, có một tham số kiểu int, tham số này là biến chạy. Ví dụ đây là một action phù hợp cho `Parallel.For`
+
+```csharp
+Action<int> action = (int x) => {
+    // Doing somthing here ...
+};
+```
+
+- result đối tượng lớp `ParallelLoopResult` trả về từ `Paralell.For`, thuộc tính `ParallelLoopResult.IsCompleted` cho biết vòng lặp đã được duyệt qua hết, tất cả các task đã khởi chạy.
+
+```csharp
+class Program
+{
+    //In thông tin, Task ID và thread ID đang chạy
+    public static void PintInfo(string info) =>
+            Console.WriteLine($"{info, 10}    task:{Task.CurrentId,3}    " +
+                              $"thread: {Thread.CurrentThread.ManagedThreadId}");
+
+    // Phương thức phù hợp với Action<int>, được làm tham số action của Parallel.For
+    public static void RunTask(int i)  {
+        PintInfo($"Start {i,3}");
+        Task.Delay(1000).Wait();          // Task dừng 1s - rồi mới chạy tiếp
+        PintInfo($"Finish {i,3}");
+    }
+
+    public static void ParallelFor() {
+        ParallelLoopResult result = Parallel.For(1, 20, RunTask);   // Vòng lặp tạo ra 20 lần chạy RunTask
+        Console.WriteLine($"All task start and finish: {result.IsCompleted}");
+    }
+    static void Main(string[] args)
+    {
+        ParallelFor();
+
+        Console.WriteLine("Press any key ..."); Console.ReadKey();
+    }
+}
+```
+
+- Từ kết quả trên bạn thấy:
+  - Lệnh `Parallel.For` khởi chạy song song nhiều tác vụ, thời điểm bắt đầu của mỗi tác vụ không giống nhau, có những tác vụ đã kết thúc thì tác vụ sau mới chạy, nó có thể phụ thuộc vào tài nguyên hệ thống RAM, CPU ...
+  - Một task nó có chạy trên một thread nào đó (chứ không phải mỗi task một thread), một thread có thể sử dụng bởi nhiều task. Ví dụ nhìn vào kết quả, task với i = 1, và task với id = 15 chạy trên một thread
+  - Khi tất vòng lặp duyệt qua hết, có nghĩa là đã khởi chạy hết các tác vụ, nếu tất cả các tác vụ trả về (khi chạy xong hàm Action, hoặc ngay khi gọi Action nếu Action là async - hãy xem kỹ phần async - await ở phần trước) thì kết quả lưu vào result với result.IsCompleted là true
+
+###### Parallel.For khi Action là async
+
+- Để ý, bản thân vòng lặp `Parallel.For`, khi các Action chạy, mặc dù chúng chạy trên những Task và Thread, nhưng khi tất cả các Action hoàn hành thì vòng lặp mới hoàn thành. Ở ví dụ trên, bạn thấy tất cả đều Finish mới trả về kết quả result (All task start and finish: True)
+- Điều này, lại dẫn đến `Parallel.For` khóa(block) thread gọi nó. Để không bị khóa, có thể chuyển các Action là async
+
+```csharp
+public static async void RunTask(int i)  {
+    PintInfo($"Start {i,3}");
+    // Task.Delay(1000).Wait();          // Task dừng 1s - rồi mới chạy tiếp
+    await Task.Delay(1);         // Task.Delay là một async nên có thể await, RunTask chuyển điểm gọi nó tại đây
+    PintInfo($"Finish {i,3}");
+}
+```
+
+- Kết quả khi chạy, vòng lặp `Parallet.For` nó trả về ngay khi tất cả các Task đã khởi chạy - (chứ không cần tất cả các task chạy và kết thúc như trường hợp trước). Khi `Parallet.For` hoàn thành, có một số Task đã kết thúc có những Task vẫn đang chạy.
+
+###### Parallel.ForEach chạy song song tác vụ
+
+- Với `Parallet.ForEach` cũng là vòng lặp để chạy nhiều tác vụ, nhưng nó duyệt qua các Collection như Mảng, List ... tương tự như vòng lặp foreach. Cú pháp cơ bản như sau:
+
+```csharp
+ParallelLoopResult result = Parallel.ForEach(source, RunTask);
+```
+
+- Trong đó source là một `Collection` như mảng, List. RunTask là Action, có 1 tham số có kiểu giống kiểu phần tử trong source, giá trị tham số này là giá trị phần tử trong source trong mỗi vòng lặp. Ví dụ:
+
+```csharp
+public static async void RunTask(string s)  {
+    PintInfo($"Start {s,10}");
+    await Task.Delay(1);                 // Task.Delay là một async nên có thể await, RunTask chuyển điểm gọi nó tại đây
+    PintInfo($"Finish {s,10}");
+}
+
+public static void ParallelFor() {
+
+    string[] source = new string[] {"xuanthulab1","xuanthulab2","xuanthulab3",
+                                    "xuanthulab4","xuanthulab5","xuanthulab6",
+                                    "xuanthulab7","xuanthulab8","xuanthulab9"};
+    // Dùng List thì khởi tạo
+    // List<string> source = new List<string>();
+    // source.Add("xuanthulab1");
+
+    ParallelLoopResult result = Parallel.ForEach(
+        source, RunTask
+    );
+
+    Console.WriteLine($"All task started: {result.IsCompleted}");
+}
+static void Main(string[] args)
+{
+    ParallelFor();
+    Console.WriteLine("Press any key ...");
+    Console.ReadKey();
+}
+```
+
+###### Parallel.Invoke chạy song song nhiều loại tác vụ (phương thức)
+
+- Với các vòng lặp ở trên, thì các tác vụ định nghĩa trọng một Action, nhưng nếu muốn chạy song song nhiều loại Action (phương thức) một lúc thì dùng `Paralell.Invoke`
+
+```csharp
+Parallel.Invoke(action1, action2, action3);
+```
+
+- Trong đó tham số là các Action
+
+```csharp
+public static void PintInfo(string info) =>
+Console.WriteLine($"{info, 10}    task:{Task.CurrentId,3}    "
+                + $"thread: {Thread.CurrentThread.ManagedThreadId}");
+
+public static async void RunTask(string s)  {
+    PintInfo($"Start {s,10}");
+    await Task.Delay(1);
+    PintInfo($"Finish {s,10}");
+}
+
+public static void actionA() {
+    PintInfo($"Finish {"ActionA",10}");
+}
+
+public static void actionB() {
+    PintInfo($"Finish {"ActionB",10}");
+}
+
+
+public static void ParallelInvoke() {
+    Action action1  = () => {
+        RunTask("Action1");
+    };
+
+    Parallel.Invoke(action1, actionA, actionB);
+}
+static void Main(string[] args)
+{
+    ParallelInvoke();
+    Console.WriteLine("Press any key ...");
+    Console.ReadKey();
+}
+```
+
+# Chương 3: Networking
+
+### 1.Lớp Uri Dns Ping và các lớp về Networking trong lập trình C# NET Core
+
+- Sử dụng lớp `Uri`, `Dns` trong C#, kiểm tra phản hồi của `Server` với `Ping` và các thư viện về Networking trong .NET với C#
+
+###### Một số namespace, class về Networking
+
+- Namespace: System.Net, System.Net.Mail, System.Net.NetworkInformation, System.Net.Http
+- Làm việc với máy chủ Dns, Uri, địa chỉ mạng có các lớp `Dns, Uri, Cookie, IPAddress ...`
+- Làm việc với FTP Server có các lớp `FtpStatusCode, FtpWebRequest, FtpWebResponse ...`
+- Làm việc với giao thức HTTP (máy chủ web) có các lớp như: `HttpStatusCode, HttpWebRequest, HttpWebResponse, HttpClient, HttpMethod, HttpRequestMessage, HttpResponseMessage`
+- Làm việc với máy chủ SMTP gửi email: `SmtpClient, MailMessage, MailAddress, MailAddress`
+- Làm việc với giao thức mạng: `IPStatus, NetworkChange, Ping, TcpStatistics ...`
+
+###### Lớp Uri
+
+- `System.Uri` là lớp biểu diễn về địa chỉ `URI` (URL) (xem thêm Tìm hiểu URI, URL), nó giúp cho nhanh chóng lấy thông tin các thành phần của URL như host, path, query ... Đối tượng Uri còn sử dụng trong tham số để thực hiện các truy vấn HTTP Request ở các phần sau.
+- Ví dụ, hiện thị các thuộc tính - giá trị thuộc tính của Uri
+
+```csharp
+string url = "https://xuanthulab.net/lap-trinh/csharp/?page=3#acff";
+var uri = new Uri(url);
+var uritype = typeof(Uri);
+uritype.GetProperties().ToList().ForEach(property => {
+    Console.WriteLine($"{property.Name, 15} {property.GetValue(uri)}");
+});
+Console.WriteLine($"Segments: {string.Join(",", uri.Segments)}");
+// KET QUA
+
+//    AbsolutePath /lap-trinh/csharp/
+//     AbsoluteUri https://xuanthulab.net/lap-trinh/csharp/?page=3#acff
+//       LocalPath /lap-trinh/csharp/
+//       Authority xuanthulab.net
+//    HostNameType Dns
+//   IsDefaultPort True
+//          IsFile False
+//      IsLoopback False
+//    PathAndQuery /lap-trinh/csharp/?page=3
+//        Segments System.String[]
+//           IsUnc False
+//            Host xuanthulab.net
+//            Port 443
+//           Query ?page=3
+//        Fragment #acff
+//          Scheme https
+//  OriginalString https://xuanthulab.net/lap-trinh/csharp/?page=3#acff
+//     DnsSafeHost xuanthulab.net
+//         IdnHost xuanthulab.net
+//   IsAbsoluteUri True
+//     UserEscaped False
+//        UserInfo
+//  Segments: /,lap-trinh/,csharp/
+```
+
+###### Lớp tĩnh Dns và lớp IPHostEntry
+
+- Lớp `Dns` (System.Net.Dns) cung cấp các phương thức tính để lấy thông tin về host (địa chỉ website, server cung cấp các dịch vụ mạng) từ hệ thống phân giải tên miền (Dns). Các thông tin truy vấn được nó trả về một đối tượng giao diện `IPHostEntry`
+- DNS là hệ thống phân giải tên miền, giúp cho các trình client (như các trình duyệt) truy vấn để chuyển đổi một tên miền (như xuanthulab.net) sang địa chỉ IP vật lý tương ứng của tên miên đó. Sau đó địa chỉ IP này được dùng để kết nối client/server. Dữ liệu DNS được lưu trữ và phục vụ truy vấn từ các Server DNS được vận hành bởi các nhà cung cấp dịch vụ và các tổ chức
+- Một số phương thức của lớp Dns
+  - `GetHostName()`: Lấy hostname của máy local
+  - `GetHostEntry(String) , GetHostEntry(IPAddress)`: Phân giải host hoặc IP thành đối tượng `IPHostEntry`. Đối tượng kiểu `IPHostEntry` nó chứa thông tin địa chỉ về host.
+- `IPHostEntry` có các thuộc tính để lấy thông tin về host như
+  - `HostName`: Chuỗi chứa hostname của Server
+  - `AddressList`: Mảng các phần tử kiểu IPAddress chứa các địa chỉ IP
+- Ví dụ:
+
+```csharp
+string url = "https://www.bootstrapcdn.com/";
+var uri = new Uri(url);
+var hostEntry = Dns.GetHostEntry(uri.Host);
+Console.WriteLine($"Host {uri.Host} có các IP");
+hostEntry.AddressList.ToList().ForEach(ip => Console.WriteLine(ip));
+
+
+// Host www.bootstrapcdn.com có các IP
+// 54.84.220.80
+// 52.203.100.2
+// 54.226.184.31
+// 34.235.106.23
+// 54.159.163.191
+// 54.164.152.149
+// 34.196.72.78
+// 34.195.37.70
+```
+
+###### Lớp Ping
+
+- Lớp `Ping` (System.Net.NetworkInformation.Ping), lớp này cho phép ứng dụng xác định một máy từ xa (như server, máy trong mạng ...) có phản hồi không.
+
+```csharp
+var ping = new Ping();
+var pingReply = ping.Send("google.com.vn");
+Console.WriteLine(pingReply.Status);
+if (pingReply.Status == IPStatus.Success)
+{
+    Console.WriteLine(pingReply.RoundtripTime);
+    Console.WriteLine(pingReply.Address);
+}
+
+// Success
+// 322
+// 172.217.24.195
+```
