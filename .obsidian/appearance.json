@@ -1,3 +1,13 @@
 {
-  "accentColor": ""
+  "accentColor": "",
+  "theme": "moonstone",
+  "monospaceFontFamily": "SF Mono Ligatures",
+  "baseFontSize": 16,
+  "enabledCssSnippets": [
+    "bread-color",
+    "icon-color",
+    "list-style",
+    "no-border",
+    "text-color-animation"
+  ]
 }
