@@ -1,0 +1,154 @@
+{
+  "main": {
+    "id": "18b98905f49f9fff",
+    "type": "split",
+    "children": [
+      {
+        "id": "fac12216919e3045",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a9b216ebf20f620d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "BE/ASP.NET/2. C# Nâng cao/1. Delegate.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4b3b7b47e89a1f02",
+    "type": "split",
+    "children": [
+      {
+        "id": "383e21019eba9f4b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "16a2166f41ce3684",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8076e8ffc1884631",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2354d44175177a19",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "a3cbc3beb22b7a96",
+    "type": "split",
+    "children": [
+      {
+        "id": "449f0726588b62b4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "96332d0d5695eac0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "BE/ASP.NET/2. C# Nâng cao/1. Delegate.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "9abbbc62e0d398aa",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "BE/ASP.NET/2. C# Nâng cao/1. Delegate.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "577bf7ff66686109",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "666f9f2b882c66b3",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "BE/ASP.NET/2. C# Nâng cao/1. Delegate.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "a9b216ebf20f620d",
+  "lastOpenFiles": [
+    "FE/Interview/interview-frontend.md",
+    "Git/git.md"
+  ]
+}
