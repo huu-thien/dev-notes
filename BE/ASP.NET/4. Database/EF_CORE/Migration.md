@@ -4,17 +4,19 @@ Thay đổi và cập nhật cấu trúc database trong EF với kỹ thuật Mi
 
 ## Tóm tắt các lệnh với Migration
 
-| Lệnh                                                  | Ý nghĩa                                              |
-| ----------------------------------------------------- | ---------------------------------------------------- |
-| `dotnet tool install --global dotnet-ef`              | Cài đặt công cụ dotnet ef                            |
-| `dotnet tool update --global dotnet-ef`               | Cập nhật công cụ dotnet ef                           |
-| `dotnet ef migrations add NameMigration`              | Tạo một Migration có tên NameMigration               |
-| `dotnet ef migrations list`                           | Danh sách các Migration                              |
-| `dotnet ef database update`                           | Cập nhật Database đến Migration cuối                 |
-| `dotnet ef database update NameMigration`             | Cập nhật Database đến Migration có tên NameMigration |
-| `dotnet ef migrations remove`                         | Xóa migration cuối                                   |
-| `dotnet ef migrations script --output migrations.sql` | Xuất lệnh SQL khi thực hiện Migration                |
-| `dotnet ef database drop -f`                          | Xóa database                                         |
+| Lệnh                                                                                                       | Ý nghĩa                                                |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `dotnet tool install --global dotnet-ef`                                                                   | Cài đặt công cụ dotnet ef                              |
+| `dotnet tool update --global dotnet-ef`                                                                    | Cập nhật công cụ dotnet ef                             |
+| `dotnet ef migrations add NameMigration`                                                                   | Tạo một Migration có tên NameMigration                 |
+| `dotnet ef migrations list`                                                                                | Danh sách các Migration                                |
+| `dotnet ef database update`                                                                                | Cập nhật Database đến Migration cuối                   |
+| `dotnet ef database update NameMigration`                                                                  | Cập nhật Database đến Migration có tên NameMigration   |
+| `dotnet ef migrations remove`                                                                              | Xóa migration cuối                                     |
+| `dotnet ef migrations script --output migrations.sql`                                                      | Xuất lệnh SQL khi thực hiện Migration                  |
+| `dotnet ef database drop -f`                                                                               | Xóa database                                           |
+| `dotnet  ef migrations script -o migrations.sql`                                                           | Lưu các câu lệnh thực thi sql từ migration đầu -> cuối |
+| `dotnet è dbcontext scaffold -o Models -d "sqlConnectionString" "Microsoft.EntityFrameworkCore.SqlServer"` | Phát sinh entity từ database cho trước                 |
 
 ## Giới thiệu migration
 
