@@ -1,0 +1,1 @@
+[EF Core In depth – what happens when EF Core writes to the database? – The Reformed Programmer](https://www.thereformedprogrammer.net/ef-core-in-depth-what-happens-when-ef-core-writes-to-the-database/)
