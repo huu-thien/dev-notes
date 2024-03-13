@@ -1,5 +1,6 @@
 ---
-tags: aspnet
+tags:
+  - aspnet
 ---
 - Những code khởi tạo dự án được chứa trong file Program.cs
     - Cài đặt những Services
