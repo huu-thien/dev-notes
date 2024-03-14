@@ -11,12 +11,12 @@ tags: architecture
  
 ### Tiers and layers
 
-| Layer                                                 | Tier                                  |
-| ----------------------------------------------------- | ------------------------------------- |
-| logical separation of code                            | physical separation of code           |
-| in different projects (.dll code) in the same machine | deployed on different machines        |
-| communicates by passing object between layers         | send data over the network            |
-| improve **readability** and **reusability**           | advantage of layers + **scalability** | 
+| Layer                                                 | Tier                                  |     |
+| ----------------------------------------------------- | ------------------------------------- | --- |
+| logical separation of code                            | physical separation of code           |     |
+| in different projects (.dll code) in the same machine | deployed on different machines        |     |
+| communicates by passing object between layers         | send data over the network            |     |
+| improve **readability** and **reusability**           | advantage of layers + **scalability** |     |
 
 - A tier can contains multiple layers:
 	- Presentation tier: HTML/CSS/JS, Flutter code...
