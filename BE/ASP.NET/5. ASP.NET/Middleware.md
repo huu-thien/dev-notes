@@ -2,7 +2,7 @@
 
 - Request pipeline bao gồm một chuỗi các request delegate nối tiếp nhau. Mỗi delegate có thể thực hiện các tác vụ trước và sau khi thực hiện delegate tiếp theo.
 
-![Pasted image 20230729214457](Pasted%20image%2020230729214457.png)
+![Pasted image 20230729214457](./attachments/Pasted%20image%2020230729214457.png)
 
 ```csharp
 public delegate Task RequestDelegate(HttpContext context);
