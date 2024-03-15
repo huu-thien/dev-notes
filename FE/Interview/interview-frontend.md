@@ -367,8 +367,9 @@ top | right | bottom | left | z-index
   align-self: auto | flex-start | flex-end | center | baseline | stretch;
 }
 ```
-
-<<<<<<< HEAD
+#### Tham khảo `flex-grow` `flex-shrink` `flex-basic`
+[evondev](https://evondev.com/css-flexbox-phan-3/)
+[Blog](https://homiedev.com/tim-hieu-ve-flex-grow-flex-shrink-va-flex-basis/)
 
 ### 4. Grid Layout
 
