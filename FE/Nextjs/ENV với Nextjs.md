@@ -1,0 +1,1 @@
+Nếu không bắt đầu bằng `NEXT_PUBLIC` thì biến env chỉ được sử dụng ở server

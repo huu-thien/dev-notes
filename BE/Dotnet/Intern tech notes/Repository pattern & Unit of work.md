@@ -8,7 +8,7 @@ tags: aspnet, efcore, arch
     - Reuse access database code
     - Easier to test business logic part
 - Generic repository: contains common operations (CRUD) of all the entities, avoid duplicate code
-- Specific repository: inheir from generic repository, contains entity-specific operations
+- Specific repository: inherit  from generic repository, contains entity-specific operations
 ![Pasted image 20230729224639](attachments/Pasted%20image%2020230729224639.png)
 
 - Problem: lack of transaction mechanic. Each repository hold a dbcontext on its own, if a repository SaveChanges successfully but another repository doesn’t → _inconsistent_
@@ -132,3 +132,4 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         return Ok();
     }
 ```
+
