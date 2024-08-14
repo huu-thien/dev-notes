@@ -2,7 +2,7 @@
 
 ### 1. Kể tên các loại đơn vị trong css
 
-- Đơn vị tuyệt đối: absolute mm
+- Đơn vị tuyệt đối: absolute 
   - `px`: kích thước cố định, không thay đổi
 - Đơn vị tương đối:
 
