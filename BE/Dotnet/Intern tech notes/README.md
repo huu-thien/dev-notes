@@ -2,7 +2,7 @@
 [App startup](App%20startup.md)
 [Coding conventions](Coding%20conventions.md)
 [Collection & LINQ](Collection%20&%20LINQ.md)
-[OOP](OOP.md)
+[OOP](BE/Dotnet/Intern%20tech%20notes/OOP.md)
 [Top-down programming](Top-down%20programming.md)
 [Asynchronous programming](Asynchronous%20programming.md)
 [Parallel programming](Parallel%20programming.md)
