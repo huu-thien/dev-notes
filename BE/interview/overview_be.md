@@ -86,3 +86,5 @@
     - **500 Internal Server Error**: Lỗi máy chủ nội bộ, server gặp sự cố khi xử lý yêu cầu.
     - **503 Service Unavailable**: Server tạm thời không thể xử lý yêu cầu (ví dụ: do quá tải hoặc bảo trì).
 
+## Event Driven (Lập trình hướng sự kiện)
+https://viblo.asia/p/dao-sau-mot-chut-ve-module-events-trong-nodejs-924lJAWmZPM
