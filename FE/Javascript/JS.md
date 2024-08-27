@@ -501,6 +501,13 @@ const handle = (a, b, ...c) => {
 };
 
 handle(1, 2, 3, 4, 5, 6); // output: [ 3, 4, 5, 6 ]
+
+const handle1 = ({a, b, ...c}) => {
+  return c;
+};
+
+const value = handle1({a:1, b:2, c:3, d:4, e:5})
+console.log(value) // {c: 3. d:4, e:5}
 ```
 
 # 21. Spread syntax
