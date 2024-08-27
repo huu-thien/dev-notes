@@ -749,3 +749,99 @@ body {
 - Mobile: 320px, 480px,
 - Tablet: 786px, 1024px,
 - Laptop: 1280, 1366, 1440, 1600, 1920px
+
+
+### 21. **Animation trong CSS**
+
+Animation trong CSS cho phép bạn tạo các hiệu ứng chuyển động hoặc thay đổi kiểu dáng cho các phần tử trên trang web mà không cần sử dụng JavaScript. CSS Animation bao gồm hai phần chính: `@keyframes` và các thuộc tính animation.
+
+#### a. **@keyframes**
+
+- `@keyframes` xác định các giai đoạn của animation và các trạng thái tại mỗi giai đoạn.
+- Bạn có thể chỉ định các giá trị khác nhau cho các thuộc tính CSS tại các thời điểm khác nhau của animation.
+```css
+@keyframes myAnimation {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(50px); }
+  100% { transform: translateX(0); }
+}
+
+```
+
+#### **Thuộc tính Animation**
+
+- **animation-name:** Tên của animation, tương ứng với tên của `@keyframes`.
+- **animation-duration:** Thời gian chạy animation (ví dụ: `2s`, `500ms`).
+- **animation-timing-function:** Hàm thời gian của animation (ví dụ: `ease`, `linear`, `ease-in-out`).
+- **animation-delay:** Thời gian trễ trước khi animation bắt đầu.
+- **animation-iteration-count:** Số lần lặp lại của animation (`infinite` để lặp vô hạn).
+- **animation-direction:** Hướng chạy của animation (`normal`, `reverse`, `alternate`).
+- **animation-fill-mode:** Xác định trạng thái của phần tử khi animation chưa bắt đầu hoặc sau khi kết thúc (`none`, `forwards`, `backwards`, `both`).
+
+Ví dụ sử dụng:
+
+```css
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  animation-name: myAnimation;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+```
+
+22. **Animation trong CSS**
+
+Transform trong CSS cho phép thay đổi kích thước, hình dáng, vị trí và góc quay của phần tử.
+
+#### a. **Các thuộc tính Transform phổ biến**
+
+- **translate(x, y):** Dịch chuyển phần tử theo trục X và Y.
+- **rotate(angle):** Xoay phần tử theo một góc nhất định (tính bằng độ hoặc radian).
+- **scale(x, y):** Thay đổi kích thước của phần tử theo trục X và Y.
+- **skew(x, y):** Nghiêng phần tử theo trục X và Y.
+- **matrix(n, n, n, n, n, n):** Kết hợp các phép biến đổi trên vào một ma trận.
+
+```css
+
+.element {
+  transform: translate(50px, 100px) rotate(45deg) scale(1.5);
+}
+
+```
+
+#### b. **Transform-origin**
+
+- Thuộc tính `transform-origin` xác định điểm gốc của các phép biến đổi.
+- Điểm này có thể được xác định bằng giá trị `percentage` (phần trăm), `px` (pixel), hoặc từ khóa `top`, `bottom`, `left`, `right`, `center`.
+```css
+.element { transform: rotate(45deg); transform-origin: 50% 50%; /* Điểm giữa của phần tử */ }
+```
+
+### **Kết hợp Animation và Transform**
+
+Animation và Transform có thể được kết hợp để tạo ra các hiệu ứng phức tạp hơn. Ví dụ, bạn có thể tạo animation để xoay một phần tử trong khi nó di chuyển theo đường cong.
+
+```css
+@keyframes complexAnimation {
+  0% { transform: translateX(0) rotate(0); }
+  50% { transform: translateX(100px) rotate(180deg); }
+  100% { transform: translateX(200px) rotate(360deg); }
+}
+
+.element {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  animation: complexAnimation 5s ease-in-out infinite;
+}
+
+```
+
+### **Lưu ý**
+
+- Hãy cẩn thận khi sử dụng quá nhiều animation hoặc transform phức tạp, vì điều này có thể ảnh hưởng đến hiệu suất của trang web.
+- Các thuộc tính này đều tương thích với hầu hết các trình duyệt hiện đại, nhưng bạn nên kiểm tra khả năng tương thích trên các trình duyệt cũ nếu cần.
