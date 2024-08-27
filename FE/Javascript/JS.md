@@ -571,8 +571,15 @@ console.log(clone) // {name: 'John', age: 30}
 **_Deep Clone_**
 
 - Dùng JSON.parse(JSON.stringify())
-- Dùng method \_.cloneDeep(obj) của thư viện lodash
-- Dùng các thư viện như **_immer_** -> recomand
+
+```ts
+const user = {name: 'John', city: ['HN', 'DN']}
+const userDeepClone = JSON.parse(JSON.stringify(user))
+console.log(userDeepClone.city === user.city) // false
+```
+
+- Dùng method **\_.cloneDeep(obj)** của thư viện lodash
+- Dùng các thư viện như **_immer_** -> recomand vì đôi lúc ta không cần thiết phải clone hết cả 1 object lớn, cơ chế của immer sẽ chỉnh sửa thuộc tính nào thì nó tự tính và clone cho đúng. Vậy nên giúp cải thiện về mặt performance trong 1 số trường hợp
 
 **Lưu ý**: khai báo const obj cũng có thể chỉnh sửa
 
