@@ -546,7 +546,7 @@ console.log(clonedUser.city === user.city); // output : true
 - Nhưng trong nhiều trường hợp chúng ta muốn nhân đôi 1 object để khi chỉnh sửa biens này thì không ảnh hưởng đến biến kia => Chúng ta gọi đó là **clone**
 
 **_Shallow clone_**
-- Với clone thường thì dùng spread syntax để clone -> clone ra 1 object mới
+- Với clone thường thì dùng spread syntax để clone => clone ra 1 object mới
 
 ```ts
 const user = {name: 'John', city: ['HN', 'DN']}
@@ -554,7 +554,19 @@ const cloneUser = {...user}
 ```
 
 - Có thể clone bằng vòng lặp: dùng for/in
-  -> Clone thường chỉ hiệu quả với những object 1 cấp, những object nested nhiều cấp thì phải **deep clone**
+
+```ts
+let user = {name: 'John', age: 30}
+let clone = {} // Một objct rỗng
+
+for (let key in user) {
+	clone[key] = user[key] // Copy các thuộc tính
+}
+
+console.log(clone) // {name: 'John', age: 30}
+```
+
+  =>  Clone thường chỉ hiệu quả với những object 1 cấp, những object nested nhiều cấp thì phải **deep clone**
 
 **_Deep Clone_**
 
