@@ -542,10 +542,19 @@ console.log(clonedUser.city === user.city); // output : true
 - Khi chúng ta copy 1 biến object , tham chiếu của nó bị copy, object không bị nhân đôi lên
 
 **_Clone và merge_**
+- Copy một biến object sẽ tạo thêm 1 biến khác tham chiếu đến cùng object đó
+- Nhưng trong nhiều trường hợp chúng ta muốn nhân đôi 1 object để khi chỉnh sửa biens này thì không ảnh hưởng đến biến kia => Chúng ta gọi đó là **clone**
 
+**_Shallow clone_**
 - Với clone thường thì dùng spread syntax để clone -> clone ra 1 object mới
+
+```ts
+const user = {name: 'John', city: ['HN', 'DN']}
+const cloneUser = {...user}
+```
+
 - Có thể clone bằng vòng lặp: dùng for/in
-  -> Clone thường chỉ hiệu quả với những object 1 cấp, những object nested nhiều cấp thì phải deep clone
+  -> Clone thường chỉ hiệu quả với những object 1 cấp, những object nested nhiều cấp thì phải **deep clone**
 
 **_Deep Clone_**
 
