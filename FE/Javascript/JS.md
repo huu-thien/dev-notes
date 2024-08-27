@@ -516,7 +516,7 @@ const user = {
 
 // Shallow copy (Copy nông)
 const clonedUser = { ...user };
-
+console.log(clonedUser === user); // false
 console.log(clonedUser.city === user.city); // output : true
 ```
 
