@@ -514,6 +514,7 @@ const user = {
   city: ["San Francisco"],
 };
 
+// Shallow copy (Copy nông)
 const clonedUser = { ...user };
 
 console.log(clonedUser.city === user.city); // output : true
