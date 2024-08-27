@@ -585,6 +585,8 @@ console.log(userDeepClone.city === user.city) // false
 
 # 23. Toán tử logic và template string
 
+### Toán tử logic
+
 - Dựa trên Truthy và Falsy
 - Ngoài những giá trị sau thì tất cả đều là truthy: **false, 0, 0n , undefined, null, '', NaN**
 
@@ -593,6 +595,16 @@ console.log(userDeepClone.city === user.city) // false
 - Toán tử optional chaining ?. : để tránh gặp lỗi khi null hoặc undefined cố tình truy cập thuộc tính
 - Toán tử nill list ?? : dùng trong trường hợp cần check một giá trị có phải là **undefined** hay **null** không
   user ?? 'hello' -> nếu user là null hoặc undefined thì là 'hello', nếu không vẫn là user
+
+### Template string
+- Nếu dùng dấu "" thì không thể xuống hàng 
+- Nhưng dùng `template string` thì có thể xuống hàng
+- Với `template string` thì có thể đặt biến động vào trong
+
+```ts
+const name = 'John'
+console.log(`${name}`)
+```
 
 # 24. Class và con trỏ this
 
