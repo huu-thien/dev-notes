@@ -697,17 +697,170 @@ const value2 = findNumber(10)((number) => number % 2 !== 0)
 console.log(value) // [1, 3, 5, 7, 9]
 ```
 
-# 26. Bất đồng bộ với async / await và Promise
+# 26. Bất đồng bộ với async / await và promise   
 
-- Đồng bộ: code viết trước chạy trước, viết sau chạy sau
-- Bất đồng bộ: code viết sau chạy trước
-- Những thao tác bất đồng bộ: fetch, promise, setTimeout, ....
+##### Đồng Bộ và Bất Đồng Bộ trong JavaScript
 
-## async / await
+####  Code Đồng Bộ (Synchronous Code)
 
-- async/ await chỉ dùng với promise
-- async được sử dụng cho 1 function bên trong có xử lý promise
-- await / chờ đợi để code chạy đúng trình tự
+- **Khái niệm**: Trong JavaScript, code đồng bộ được thực thi theo tuần tự, từ trên xuống dưới. Khi một dòng code đang được thực thi, toàn bộ chương trình sẽ chờ đợi cho đến khi dòng code đó hoàn thành trước khi chuyển sang dòng tiếp theo.
+
+- **Ví dụ**:
+
+  ```javascript
+
+  console.log('Bắt đầu'); // 1
+
+  const result = 10 + 20; // 2
+
+  console.log('Kết quả:', result); // 3
+
+  console.log('Kết thúc'); // 4
+
+  ```
+
+  Kết quả:
+
+  ```
+
+  Bắt đầu
+
+  Kết quả: 30
+
+  Kết thúc
+
+  ```
+
+  
+
+####  Code Bất Đồng Bộ (Asynchronous Code)
+
+- **Khái niệm**: Code bất đồng bộ trong JavaScript cho phép một số đoạn mã không cần phải chờ đợi để hoàn thành trước khi tiếp tục thực thi đoạn mã khác. Điều này đặc biệt quan trọng khi xử lý các tác vụ tốn thời gian như gọi API, đọc/ghi file, hoặc xử lý hình ảnh, mà bạn không muốn làm gián đoạn toàn bộ chương trình.
+
+- **Ví dụ**:
+
+  ```javascript
+
+  console.log('Bắt đầu'); // 1
+
+  setTimeout(() => {
+
+    console.log('Tác vụ bất đồng bộ'); // 3
+
+  }, 1000);
+
+  console.log('Kết thúc'); // 2
+
+  ```
+
+  Kết quả sẽ là:
+
+  ```
+
+  Bắt đầu
+
+  Kết thúc
+
+  Tác vụ bất đồng bộ
+
+  ```
+
+  
+
+####  Tại Sao JavaScript Lại Bất Đồng Bộ?
+
+JavaScript là ngôn ngữ đơn luồng (single-threaded), có nghĩa là nó chỉ có một ngăn xếp thực thi (call stack). Nếu JavaScript chỉ sử dụng cách thực thi đồng bộ, mọi tác vụ dài như gọi API, xử lý file, hay truy vấn cơ sở dữ liệu sẽ khiến toàn bộ chương trình bị tắc nghẽn cho đến khi tác vụ đó hoàn thành. Điều này sẽ làm cho giao diện người dùng bị đóng băng hoặc trải nghiệm người dùng trở nên chậm chạp.
+
+  
+
+**Bất đồng bộ** được giới thiệu để giải quyết vấn đề này bằng cách cho phép JavaScript xử lý các tác vụ dài mà không làm gián đoạn luồng thực thi chính. Thay vì chặn, các tác vụ này được xử lý riêng biệt và JavaScript tiếp tục thực thi các dòng code khác. Khi tác vụ bất đồng bộ hoàn thành, nó sẽ "quay lại" và đưa kết quả vào ngăn xếp thực thi thông qua cơ chế **callback**, **Promises**, hoặc **async/await**.
+
+  
+
+- **Event Loop**: JavaScript sử dụng một cơ chế gọi là `event loop` để quản lý cách các tác vụ bất đồng bộ được xử lý. Khi một tác vụ bất đồng bộ hoàn thành, nó sẽ được đưa vào hàng đợi (queue) và chờ đợi `event loop` đưa nó trở lại ngăn xếp thực thi.
+
+  
+
+####  Các Cơ Chế Bất Đồng Bộ Phổ Biến
+
+- **Callbacks**: Một hàm được truyền vào như một đối số để thực thi sau khi tác vụ bất đồng bộ hoàn thành.
+
+  ```javascript
+
+  function doSomethingAsync(callback) {
+
+    setTimeout(() => {
+
+      callback('Kết quả đã sẵn sàng');
+
+    }, 1000);
+
+  }
+
+  
+
+  doSomethingAsync(result => {
+
+    console.log(result); // In ra "Kết quả đã sẵn sàng" sau 1 giây
+
+  });
+
+  ```
+
+- **Promises**: Giúp quản lý và xử lý các tác vụ bất đồng bộ một cách tuần tự và rõ ràng hơn.
+Ở then hoặc catch nếu return cái gì thì sẽ nhận được 1 promise mới
+Promise có 3 trạng thái:
+1. **Pending** (Đang chờ) 
+2. **Fulfilled** (Hoàn thành)
+3. **Rejected** (Bị từ chối)
+
+  ```javascript
+
+  function doSomethingAsync() {
+
+    return new Promise((resolve, reject) => {
+
+      setTimeout(() => {
+
+        resolve('Kết quả đã sẵn sàng');
+
+      }, 1000);
+
+    });
+
+  }
+
+  
+
+  doSomethingAsync().then(result => {
+
+    console.log(result); // In ra "Kết quả đã sẵn sàng" sau 1 giây
+
+  });
+
+  ```
+
+- **Async/Await**: Cung cấp cú pháp gọn gàng và dễ đọc hơn để làm việc với Promises.
+
+  ```javascript
+
+  async function main() {
+
+    const result = await doSomethingAsync();
+
+    console.log(result); // In ra "Kết quả đã sẵn sàng" sau 1 giây
+
+  }
+
+  
+
+  main();
+
+  ```
+
+  
+
+Nhờ cơ chế bất đồng bộ, JavaScript có thể xử lý nhiều tác vụ đồng thời mà không làm gián đoạn trải nghiệm người dùng, đặc biệt là trong các ứng dụng web hiện đại.
 
 # 27. ES6 module
 
