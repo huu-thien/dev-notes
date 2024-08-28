@@ -608,6 +608,41 @@ console.log(`${name}`)
 
 # 24. Class và con trỏ this
 
+```ts
+function Cat(name, color, type) {
+	this.name = name
+	this.color = color
+	this.type = type
+}
+
+// Thêm Method
+Cat.prototype.meow = function () {
+	console.log(`${thí.nam} meows: meow meow meow`)
+}
+
+// Khởi tạo 1 instanc object
+let alex = new Cat('Alex', 'Yellow', 'Bengal')
+
+alex.meow() // Alex meows: meow meow meow
+```
+
+hoặc
+
+```ts
+function Cat(name, color, type) {
+	this.name = name
+	this.color = color
+	this.type = type
+	this.meow = function () {
+		console.log(`${thí.nam} meows: meow meow meow`)
+	}
+}
+
+// Khởi tạo 1 instanc object
+let alex = new Cat('Alex', 'Yellow', 'Bengal')
+
+alex.meow() // Alex meows: meow meow meow
+```
 ## Con trỏ this
 
 - this trả về đối tượng object gần nhất chứa nó
@@ -617,15 +652,50 @@ console.log(`${name}`)
 - trong 1 event, this trả về element mà event đó tác động vào
 
 ## Class
-
-- trong class thì this trỏ đến đối tượng class chứa nó
-- các khai báo class (lớp) không được hoisting
+- Class giúp gom các thuộc tính và phương thức lại, giúp code nhìn clean hơn
+- Trong class thì this trỏ đến đối tượng class chứa nó
+- Các khai báo class (lớp) không được hoisting
 
 # 25. Arrow function, higher Order function, currying, callback
 
 ## Callback function
+```ts
+const nums = [1, 2, 3, 4, 5]
+
+const callback = (item, index) => {
+	console.log(`STT ${index} la ${item}`)
+}
+
+nums.forEach(callback)
+```
 
 ## Currying: là function mà return về 1 function
+
+```ts
+function findNumber(num) {
+	return function(func) {
+		const result = []
+		for(let i = 0; i <= num; i++) {
+			if(func(i)) result.push(i)
+		}
+		return result
+	}
+}
+// Arrow function
+const findNumberArrow = (num) => (func) => {
+	const result = []
+	for(let i = 0; i <= num; i++) { 
+		if(func(i)) result.push(i)
+	}
+	return result
+}
+
+const value = findNumber(10)((number) => number % 2 === 0)
+console.log(value) // [2, 4, 6, 8, 10]
+
+const value2 = findNumber(10)((number) => number % 2 !== 0)
+console.log(value) // [1, 3, 5, 7, 9]
+```
 
 # 26. Bất đồng bộ với async / await và Promise
 
