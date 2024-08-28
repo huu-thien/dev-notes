@@ -842,6 +842,9 @@ Promise có 3 trạng thái:
 
 - **Async/Await**: Cung cấp cú pháp gọn gàng và dễ đọc hơn để làm việc với Promises.
 
+**Await** chỉ sử dụng được trong 1 **Async  function**
+Chỉ sử dụng **Await** với promise
+
   ```javascript
 
   async function main() {
