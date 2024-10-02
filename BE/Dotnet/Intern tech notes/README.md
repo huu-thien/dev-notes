@@ -17,7 +17,7 @@
 [Repository pattern & Unit of work](Repository%20pattern%20&%20Unit%20of%20work.md)
 
 ## Lab 3
-[Authentication](Authentication.md)
+[Authentication](BE/Dotnet/Intern%20tech%20notes/Authentication.md)
 [Authorization](Authorization.md)
 [Hosting on Windows with IIS](Hosting%20on%20Windows%20with%20IIS.md)
 [How IIS process HTTP request](How%20IIS%20process%20HTTP%20request.md)
