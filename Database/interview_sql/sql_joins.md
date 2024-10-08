@@ -147,3 +147,5 @@ Các loại `JOIN` trong SQL có sự khác nhau chủ yếu ở cách mà chún
 - **`RIGHT JOIN`**: Khi muốn lấy tất cả các bản ghi từ bảng phụ, bao gồm cả những bản ghi không có trong bảng chính.
 - **`FULL OUTER JOIN`**: Khi muốn lấy tất cả các bản ghi từ cả hai bảng, bất kể có sự tương ứng hay không.
 - **`CROSS JOIN`**: Khi cần tạo tất cả các kết hợp có thể giữa các hàng trong hai bảng.
+
+![heap-callstack](../../attachments/join_different.png)
