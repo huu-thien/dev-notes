@@ -26,26 +26,47 @@ Các hàm tổng hợp phổ biến trong SQL bao gồm:
 | 6           | Sarah Wong  | 47000  | Marketing  |
 | 7           | David Brown | 48000  | Sales      |
 
-## Ví dụ Cụ Thể
+## Ví dụ Cụ Thể và Cú Pháp (Syntax)
 
-### 1. Sử dụng `MIN()`
-Trả về mức lương nhỏ nhất trong bảng `employees`:
+### 1. Hàm `MIN()`
+Trả về giá trị nhỏ nhất trong cột:
+```sql
+SELECT MIN(column_name)
+FROM table_name
+WHERE condition;
+```
+
+Ví dụ: Trả về mức lương nhỏ nhất trong bảng `employees`:
 ```sql
 SELECT MIN(salary) 
 FROM employees;
 ```
 **Kết quả**: 40000
 
-### 2. Sử dụng `MAX()`
-Trả về mức lương lớn nhất trong bảng `employees`:
+### 2. Hàm `MAX()`
+Trả về giá trị lớn nhất trong cột:
+```sql
+SELECT MAX(column_name)
+FROM table_name
+WHERE condition;
+```
+
+Ví dụ: Trả về mức lương lớn nhất trong bảng `employees`:
 ```sql
 SELECT MAX(salary) 
 FROM employees;
 ```
 **Kết quả**: 60000
 
-### 3. Sử dụng `COUNT()`
-Đếm số nhân viên trong phòng `Sales`:
+### 3. Hàm `COUNT()`
+Đếm số hàng trong một tập hợp:
+```sql
+SELECT COUNT(column_name)
+FROM table_name
+WHERE condition;
+```
+
+Ví dụ: Đếm số nhân viên trong phòng `Sales`:
 ```sql
 SELECT COUNT(*) 
 FROM employees 
@@ -53,8 +74,15 @@ WHERE department = 'Sales';
 ```
 **Kết quả**: 3 (John Doe, Michael Lee, David Brown)
 
-### 4. Sử dụng `SUM()`
-Tính tổng lương của tất cả nhân viên trong phòng `IT`:
+### 4. Hàm `SUM()`
+Tính tổng giá trị của một cột số:
+```sql
+SELECT SUM(column_name)
+FROM table_name
+WHERE condition;
+```
+
+Ví dụ: Tính tổng lương của tất cả nhân viên trong phòng `IT`:
 ```sql
 SELECT SUM(salary) 
 FROM employees 
@@ -62,8 +90,15 @@ WHERE department = 'IT';
 ```
 **Kết quả**: 115000 (Jane Smith + William Tan)
 
-### 5. Sử dụng `AVG()`
-Tính trung bình lương của nhân viên trong phòng `Marketing`:
+### 5. Hàm `AVG()`
+Tính giá trị trung bình của một cột số:
+```sql
+SELECT AVG(column_name)
+FROM table_name
+WHERE condition;
+```
+
+Ví dụ: Tính trung bình lương của nhân viên trong phòng `Marketing`:
 ```sql
 SELECT AVG(salary) 
 FROM employees 
