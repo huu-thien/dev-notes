@@ -18,14 +18,14 @@ SELECT column_name(s) FROM table2;
 
 ### Giả sử bạn có hai bảng: **customers** và **suppliers**
 
-| customers        |               | suppliers        |
-|------------------|---------------|------------------|
-| id               | name          | id               | name          |
-|------------------|---------------|------------------|---------------|
-| 1                | Alice         | 1                | David         |
-| 2                | Bob           | 2                | Eve           |
-| 3                | Charlie       | 3                | Frank         |
-| 4                | Alice         | 4                | Grace         |
+| customers |         | suppliers |       |
+| --------- | ------- | --------- | ----- |
+| id        | name    | id        | name  |
+| 1         | Alice   | 1         | David |
+| 2         | Bob     | 2         | Eve   |
+| 3         | Charlie | 3         | Frank |
+| 4         | Alice   | 4         | Grace |
+|           |         |           |       |
 
 **Câu truy vấn:** 
 ```sql
@@ -35,6 +35,7 @@ SELECT name FROM suppliers;
 ```
 
 **Kết quả:**
+
 | name            |
 |-----------------|
 | Alice           |
@@ -43,8 +44,7 @@ SELECT name FROM suppliers;
 | David           |
 | Eve             |
 | Frank           |
-| Grace           |
-
+| Grace           | 
 ### 4. Ví dụ UNION với điều kiện WHERE
 
 Lấy danh sách các khách hàng và nhà cung cấp nhưng chỉ những người có tên bắt đầu bằng chữ 'A'.
@@ -57,6 +57,7 @@ SELECT name FROM suppliers WHERE name LIKE 'A%';
 ```
 
 **Kết quả:**
+
 | name            |
 |-----------------|
 | Alice           |
@@ -73,6 +74,7 @@ SELECT name FROM suppliers WHERE id < 3;
 ```
 
 **Kết quả:**
+
 | name            |
 |-----------------|
 | Alice           |
@@ -101,6 +103,7 @@ SELECT id, name FROM suppliers;
 ```
 
 **Kết quả:**
+
 | id              | name           |
 |-----------------|----------------|
 | 1               | Table          |
@@ -120,6 +123,7 @@ SELECT name FROM suppliers;
 ```
 
 **Kết quả:**
+
 | name            |
 |-----------------|
 | Alice           |
