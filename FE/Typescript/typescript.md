@@ -575,4 +575,5 @@ class Calculator {
 const calculator = new Calculator();
 calculator.add(1, 2); // This will log the method call and result
 ```
+
 Trong ví dụ này, decorator log được áp dụng cho phương thức add trong lớp Calculator. Decorator này ghi log khi phương thức add được gọi và hiển thị các đối số và kết quả của phương thức.
