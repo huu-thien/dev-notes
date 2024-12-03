@@ -27,3 +27,128 @@
 - Nhược điểm
   - Kích thước: Dữ liệu JSONB có thể chiếm nhiều dung lượng hơn so với JSON do cần không gian cho cấu trúc nhị phân.
   -Khó đọc hơn: Dữ liệu không được lưu trữ dưới dạng văn bản, có thể khó đọc hơn so với JSON.
+
+
+# Làm việc với JSONB trong PostgreSQL
+
+## Các Toán Tử Cơ Bản
+
+1. **Truy cập giá trị**:
+   - `->`: Truy xuất giá trị JSON dưới dạng `JSONB`.
+   - `->>`: Truy xuất giá trị JSON dưới dạng chuỗi (`text`).
+   - `#>`: Truy xuất giá trị lồng nhau.
+
+   **Ví dụ**:
+   ```sql
+   SELECT metadata->'preferences' AS preferences
+   FROM users;
+
+   SELECT metadata->'preferences'->>'color' AS favorite_color
+   FROM users;
+   ```
+
+2. **So sánh JSONB**:
+   - `@>`: Kiểm tra JSONB bên trái chứa JSONB bên phải.
+   - `<@`: Kiểm tra JSONB bên phải chứa JSONB bên trái.
+   - `=`: So sánh hai giá trị JSONB.
+
+   **Ví dụ**:
+   ```sql
+   SELECT *
+   FROM products
+   WHERE attributes @> '{"brand": "Dell"}';
+   ```
+
+3. **Kiểm tra khóa trong JSONB**:
+   - `?`: Kiểm tra khóa tồn tại trong JSONB.
+   - `?|`: Kiểm tra ít nhất một khóa tồn tại.
+   - `?&`: Kiểm tra tất cả các khóa tồn tại.
+
+   **Ví dụ**:
+   ```sql
+   SELECT *
+   FROM users
+   WHERE metadata ? 'age';
+   ```
+
+## Các Hàm Xử Lý JSONB
+
+1. **jsonb_set**: Cập nhật hoặc thêm giá trị vào JSONB.
+   ```sql
+   UPDATE products
+   SET attributes = jsonb_set(attributes, '{features,Storage}', '"1TB"', true)
+   WHERE name = 'Laptop';
+   ```
+
+2. **jsonb_array_elements**: Trích xuất các phần tử từ mảng JSONB.
+   ```sql
+   SELECT jsonb_array_elements(metadata->'preferences'->'category')
+   FROM users;
+   ```
+
+3. **jsonb_object_keys**: Truy xuất các khóa của một JSONB object.
+   ```sql
+   SELECT jsonb_object_keys(metadata)
+   FROM users;
+   ```
+
+4. **jsonb_build_object**: Tạo một object JSONB từ các cặp khóa-giá trị.
+   ```sql
+   SELECT jsonb_build_object('user', name, 'email', email)
+   FROM users;
+   ```
+
+5. **jsonb_agg**: Tổng hợp các giá trị JSONB.
+   ```sql
+   SELECT jsonb_agg(attributes)
+   FROM products;
+   ```
+
+6. **jsonb_each**: Trích xuất từng cặp khóa-giá trị từ JSONB.
+   ```sql
+   SELECT key, value
+   FROM jsonb_each(metadata)
+   WHERE id = 1;
+   ```
+
+## Ví Dụ Thực Tế
+
+### 1. Truy xuất metadata người dùng với đơn hàng
+```sql
+SELECT u.id, u.name, u.metadata, json_agg(o.*) AS orders
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+GROUP BY u.id;
+```
+
+### 2. Tính tổng doanh thu theo thuộc tính sản phẩm
+```sql
+SELECT 
+    p.attributes ->> 'brand' AS brand,
+    SUM(oi.total_price) AS total_sales
+FROM products p
+JOIN order_items oi ON p.id = oi.product_id
+GROUP BY brand;
+```
+
+### 3. Cập nhật metadata sản phẩm
+```sql
+UPDATE products
+SET attributes = jsonb_set(attributes, '{features,SSD}', '"1TB"', true)
+WHERE name = 'Laptop';
+```
+
+### 4. Truy xuất sản phẩm với thuộc tính cụ thể
+```sql
+SELECT *
+FROM products
+WHERE attributes @> '{"brand": "Apple"}';
+```
+
+### 5. Tìm kiếm theo giá trị trong mảng JSONB
+```sql
+SELECT id, name
+FROM users
+WHERE metadata #> '{preferences,category}' \? 'electronics';
+```
+
