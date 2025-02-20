@@ -1,4 +1,12 @@
-### 7. Template
+#### 7. Template
+Template
+
+- **A.** 
+  **  
+- **B.** I prefer Japanese food  
+  **  
+- **C.** No, never  
+  **  
 
 #### 7. You ever been Japan before, haven't you?
 **Bạn đã ở Nhật Bản trước đây phải không?**  
