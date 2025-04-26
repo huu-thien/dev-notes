@@ -5,7 +5,7 @@ tags: aspnet
 
 - Request pipeline bao gồm một chuỗi các request delegate nối tiếp nhau. Mỗi delegate có thể thực hiện các tác vụ trước và sau khi thực hiện delegate tiếp theo.
 
-![Pasted image 20230729214457](attachments/Pasted%20image%2020230729214457.png)
+![Pasted image 20230729214457](be/dotnet/Intern%20tech%20notes/attachments/Pasted%20image%2020230729214457.png)
 
 ```csharp
 public delegate Task RequestDelegate(HttpContext context);
@@ -81,7 +81,7 @@ public delegate Task RequestDelegate(HttpContext context);
         app.UseMiddleware<MyMiddleware>();
         ```
         
-    - Hoặc tạo một [Extension method](../Basic%20concepts/Extension%20method.md) của `IApplicationBuilder`
+    - Hoặc tạo một [Extension method](Extension%20method.md) của `IApplicationBuilder`
         
         ```csharp
         public static class MyMiddlewareExtensions
@@ -322,10 +322,10 @@ public static class MiddlewareExtensions
 ```
 
 - Kết quả ở Development environment:
-![Pasted image 20230729222602](attachments/Pasted%20image%2020230729222602.png)
+![Pasted image 20230729222602](Pasted%20image%2020230729222602.png)
 
 - Kết quả ở Production environment:
-![Pasted image 20230729222620](attachments/Pasted%20image%2020230729222620.png)
+![Pasted image 20230729222620](Pasted%20image%2020230729222620.png)
 ## Response cache middleware
 
 - Middleware này quyết định response có được cache hay không

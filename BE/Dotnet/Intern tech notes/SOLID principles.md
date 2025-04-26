@@ -14,7 +14,7 @@ tags: general
 ## Single Responsibility Principle
 > **"a class should do one thing and therefore it should have only a single reason to change"**
 
-![](attachments/SOLID%20principles-020820231427.png)
+![](SOLID%20principles-020820231427.png)
 
 - Only one potential change (database logic, logging logic...) in the software’s specification should be able to affect the specification of the class
 - If software's specifications change, we only need to modify a specific class, and less likely to break the whole application
@@ -50,7 +50,7 @@ public class UserService
 ## Open-Closed Principle
 > **"software entities (classes, modules, functions...) should be open for extension and closed to modification"**
 
-![](attachments/SOLID%20principles-020820231429.png)
+![](SOLID%20principles-020820231429.png)
 
 - Modification means changing the code of an existing class, and extension means adding new functionality
 - We should be able to add new functionality without touching the existing code for the class 
@@ -112,7 +112,7 @@ public class DatabasePersistence : IInvoicePersistence
 ## Liskov Substitution Principle
 > **"subclasses should be substitutable for their base classes and have it behave in the same manner without modification"**
 
-![](attachments/SOLID%20principles-020820231429%201.png)
+![](SOLID%20principles-020820231429%201.png)
 
 - This principle can be consider as an extension of the OCP. We must ensure that newly derived classes extend the base classes without changing their behavior
 - Some checklist items to determine anti-Liskov:
@@ -126,7 +126,7 @@ public class DatabasePersistence : IInvoicePersistence
 ## Interface Segregation Principle
 > **"clients should not be forced to implement interfaces they don't use. Instead of one fat interface, many small interfaces are preferred based on groups of methods, each serving one submodule"**
 
-![](attachments/SOLID%20principles-020820231430.png)
+![](SOLID%20principles-020820231430.png)
 
 - The larger the interface, the more likely it includes methods not all implementers can use
 - Many client-specific interfaces are better than one general-purpose interface
@@ -189,12 +189,12 @@ public class TeamLead: IProgrammer, ILead
 > 
 > **"abstractions should not rely upon details. Details should depend upon abstractions"**
 
-![](attachments/SOLID%20principles-020820231431.png)
+![](SOLID%20principles-020820231431.png)
 
 - High-level modules/classes implement business rules or logic in a system. Low-level modules/classes deal with more detailed operations
 - If high-level modules depend on low-level modules, it raises the risk that changes to one class will break the other -> need to make both of them dependent on abstractions instead of knowing each other
 
-![](attachments/SOLID%20principles-020820232356.png)
+![](SOLID%20principles-020820232356.png)
 
 - *Why it important*:
 	- **Decoupling**: the code becomes more modular, making it easier to maintain, extend or replace completely

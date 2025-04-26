@@ -4,7 +4,7 @@ tags: architecture
 ## What is clean architecture
 - Clean architecture is a set of design principles that divides software components/modules into ring layers. The main idea is that code dependencies are supposed to only go from the outer layers to the inner ones
 - Clean architecture puts the business logic and application model at the center of the application. Instead of having business logic depend on data access or other infrastructure concerns
-![](attachments/Clean%20architectute-030820230936.png)
+![](Clean%20architectute-030820230936.png)
 
 - Clean architecture layers:
 	- **Domain**: contains enterprise logic and types that shared across many systems

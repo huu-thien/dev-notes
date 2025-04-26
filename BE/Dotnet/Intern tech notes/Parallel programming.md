@@ -1,7 +1,7 @@
 ---
 tags: dotnet 
 ---
-- [Parallel](../Advance%20concepts/Parallel.md) programming việc thực hiện nhiều công việc song song với nhau, tận dụng sức mạnh từ phần cứng để tăng tốc độ xử lí của chương trình.
+- [Parallel](Parallel.md) programming việc thực hiện nhiều công việc song song với nhau, tận dụng sức mạnh từ phần cứng để tăng tốc độ xử lí của chương trình.
 - Có 2 dạng là:
     - Data parallelism: thực hiện cùng một hành động lên tập dữ liệu. Mỗi điểm dữ liệu cần xử lí gần như độc lập với các điểm dữ liệu khác.
     - Task parallelism: tương tự, thực hiện một tập các công việc song song với nhau
@@ -58,7 +58,7 @@ tags: dotnet
     */
     ```
     
-    - vì chạy trên nhiều luồng nên cần [lock](../Advance%20concepts/Lock.md) biến chung trước khi sử dụng biến
+    - vì chạy trên nhiều luồng nên cần [lock](Lock.md) biến chung trước khi sử dụng biến
     - Để dừng vòng lặp, ta dùng state.
     
     ```csharp

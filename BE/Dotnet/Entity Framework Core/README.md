@@ -4,15 +4,15 @@
 
 [Logger](Logger.md)
 
-[Fluent API](Fluent%20API.md)
+[Fluent API](be/dotnet/Entity%20Framework%20Core/Fluent%20API.md)
 
 [Move configuration](Move%20configuration.md)
 
-[Client & server evaluation](../Intern%20tech%20notes/Data%20access.md#Client%20&%20Server%20evaluation%7CClient%20&%20server%20evaluation)
+[Client & server evaluation](Data%20access.md#Client%20&%20Server%20evaluation|Client%20&%20server%20evaluation)
 
-[Changes tracker](../Intern%20tech%20notes/Data%20access.md#Change%20tracker%7CChange%20tracker)
+[Changes tracker](Data%20access.md#Change%20tracker|Change%20tracker)
 
-[Tracking vs no-tracking](../Intern%20tech%20notes/Data%20access.md#Tracking%20vs%20no-tracking%7CTracking%20vs%20no-tracking)
+[Tracking vs no-tracking](Data%20access.md#Tracking%20vs%20no-tracking|Tracking%20vs%20no-tracking)
 
 [Loading strategies](Loading%20strategies.md)
 

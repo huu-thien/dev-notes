@@ -5,10 +5,10 @@ tags: architecture
 - An approach to building a server application as a set of small services. Each service runs in its own process and communicates with other processes using protocols such as HTTP/HTTPS, WebSockets, or AMQP
 - Each microservice implements a specific domain or business capability within a certain *context boundary*, and each must be developed autonomously and be deployable independently
 - Each microservice should own its related domain data model and domain logic (could be based on different technologies)
-![](attachments/Microservice%20architecture-100820231558%201.png)
+![](Microservice%20architecture-100820231558%201.png)
 
 ## Monolithic vs microservice
-![](attachments/Microservice%20architecture-100820231603.png)
+![](Microservice%20architecture-100820231603.png)
 
 ### Monolithic
 - Is an architectural pattern of **designing** and **developing** a **complete application** as a **single unit** -> **Easy development**
@@ -50,7 +50,7 @@ tags: architecture
  
 > **How to achieve consistency across multiple microservices?**
 
-![](attachments/Microservice%20architecture-110820231029.png)
+![](Microservice%20architecture-110820231029.png)
 - A good solution for this problem is to use eventual consistency between microservices articulated through event-driven communication and a publish-and-subscribe system
 
 > **How to design communication across microservice boundaries?**
@@ -67,12 +67,12 @@ tags: architecture
 
 ## API gateway
 - A service that provides a single-entry point for certain groups of microservices
-![](attachments/Microservice%20architecture-110820231907.png)
+![](Microservice%20architecture-110820231907.png)
 
 - It acts as a reverse proxy, routing requests from clients to services. It can also provide other cross-cutting features such as authentication, SSL termination, and cache
 - The API Gateways should be segregated based on business boundaries and the client apps and not act as a single aggregator for all the internal microservices
 - When splitting the API Gateway tier into multiple API Gateways, we can have a different facade for the needs of each client app
-![](attachments/Microservice%20architecture-110820231912.png)
+![](Microservice%20architecture-110820231912.png)
 
 ### Main features in the API Gateway pattern
 - **Reverse proxy or gateway routing**: provides a single endpoint or URL for the client apps
@@ -96,7 +96,7 @@ builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange
 builder.Services.AddOcelot(builder.Configuration)
 ```
 
-![](attachments/Microservice%20architecture-150820231342.png)
+![](Microservice%20architecture-150820231342.png)
 
 ocelot.json
 ```json
@@ -149,7 +149,7 @@ ocelot.json
 - `Limit`: maximum number of requests
 
 ##### Aggregation
-![](attachments/Microservice%20architecture-150820231355.png)
+![](Microservice%20architecture-150820231355.png)
 
 ##### Caching
 ```csharp
@@ -177,18 +177,18 @@ builder.Services.AddOcelot(builder.Configuration)
 	- Multiple: Must be asynchronous. Based on an event-bus interface or message broker when propagating data updates between multiple microservices through events
 
 - The communication between the microservices should be asynchronous. Having HTTP dependencies between microservices not only makes microservices not autonomous but also impact on performance 
-![](attachments/Microservice%20architecture-110820232329.png)
+![](Microservice%20architecture-110820232329.png)
 
 - If a microservice needs data that's owned by other microservices, do not rely on making synchronous requests. Instead, replicate or propagate that data into the service's database by using eventual consistency
 
 ### Asynchronous message-based communication
 #### Single-receiver message-based communication
-![](attachments/Microservice%20architecture-110820232352.png)
+![](Microservice%20architecture-110820232352.png)
 
 #### Multiple-receivers message-based communication
 - use a publish/subscribe mechanism and an event bus interface so that the communication available to additional subscriber microservices or to external applications -> open/closed principle in the sending service
 
-![](attachments/Microservice%20architecture-120820230016.png)
+![](Microservice%20architecture-120820230016.png)
 - One microservice publishes events to an event bus and many microservices can subscribe to it, to get notified and act on it
 
 ### Implementing event-based communication between microservices (integration events)
@@ -220,7 +220,7 @@ public class ProductPriceChangedIntegrationEvent : IntegrationEvent
 	- The abstraction or interface
 	- One or more implementations
  
-![](attachments/Microservice%20architecture-150820231430.png)
+![](Microservice%20architecture-150820231430.png)
 
 ```csharp
 public interface IEventBus
@@ -245,7 +245,7 @@ public interface IEventBus
 
 #### RabbitMQ
 RabbitMQ functions as an intermediary between message publisher and subscribers, to handle distribution
-![](attachments/Microservice%20architecture-150820231433.png)
+![](Microservice%20architecture-150820231433.png)
 
 ```csharp
 public class EventBusRabbitMQ : IEventBus, IDisposable
@@ -307,10 +307,10 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
 	3. Finally, it commits the transaction, so you get the desired atomicity and then
 	4. You publish the event somehow (next).
 		- Publish the integration event right after committing the transaction and use another local transaction to mark the events in the table as being published. Need an additional worker microservice that is in charge of checking and confirming the success of the published integration events
-		![](attachments/Microservice%20architecture-150820231523.png)
+		![](Microservice%20architecture-150820231523.png)
 
 		- Use the table as a kind of queue. A separate thread/process queries the integration event table, publishes the events to the event bus, and then uses a local transaction to mark the events as published.
-		![](attachments/Microservice%20architecture-150820231524.png)
+		![](Microservice%20architecture-150820231524.png)
 
 
 

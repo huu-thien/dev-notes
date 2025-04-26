@@ -15,7 +15,7 @@ tags: aspnet
 ## In-process hosting
 
 - Runs [ASP.NET](http://ASP.NET) Core app in the same process as its IIS worker process → improve performance
-    ![Pasted image 20230729225427](attachments/Pasted%20image%2020230729225427.png)
+    ![Pasted image 20230729225427](Pasted%20image%2020230729225427.png)
     
     ```csharp
     <PropertyGroup>
@@ -34,7 +34,7 @@ tags: aspnet
 ## Out-of-process hosting
 
 - The ANCM handles process management, it starts the process for the app when first request arrives and restarts the app if it shuts down or crashes
-    ![Pasted image 20230729225439](attachments/Pasted%20image%2020230729225439.png)
+    ![Pasted image 20230729225439](Pasted%20image%2020230729225439.png)
     
     ```csharp
     <PropertyGroup>
@@ -46,9 +46,9 @@ tags: aspnet
 
 ## Other ways to host ASP.NET Core application 
  - Kestrel self-hosting: The Kestrel web server runs without requiring any other external web server such as IIS or HTTP.sys
-	 ![Pasted image 20230730211338](attachments/Pasted%20image%2020230730211338.png)
+	 ![Pasted image 20230730211338](Pasted%20image%2020230730211338.png)
 - Use with other reverse proxy server:
-	![Pasted image 20230730211545](attachments/Pasted%20image%2020230730211545.png)
+	![Pasted image 20230730211545](Pasted%20image%2020230730211545.png)
  - If ASP.NET Core apps are run on Windows, HTTP.sys is an alternative to Kestrel. Kestrel is recommended over HTTP.sys unless the app requires features not available in Kestrel
-	 ![Pasted image 20230730211744](attachments/Pasted%20image%2020230730211744.png)
+	 ![Pasted image 20230730211744](Pasted%20image%2020230730211744.png)
   

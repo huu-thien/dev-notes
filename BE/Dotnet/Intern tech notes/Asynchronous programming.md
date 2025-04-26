@@ -4,10 +4,10 @@ tags: dotnet
 ## Synchronous & Asynchronous
 
 - Thông thường các câu lệnh được thực hiện tuần tự từ trên xuống dưới
-    ![Pasted image 20230729220811](attachments/Pasted%20image%2020230729220811.png)
+    ![Pasted image 20230729220811](Pasted%20image%2020230729220811.png)
     
 - Bất đồng bộ: các công việc có thể thực hiện đồng thời
-    ![Pasted image 20230729220824](attachments/Pasted%20image%2020230729220824.png)
+    ![Pasted image 20230729220824](Pasted%20image%2020230729220824.png)
 
 - Các patterns:
     - **Task-based Asynchronous Pattern (TAP)**
@@ -16,7 +16,7 @@ tags: dotnet
 
 ## Task-based asynchronous pattern (TAP)
 
-- 1 [Task](../Advance%20concepts/Task.md) đại diện cho 1 công việc có thể thực hiện một cách bất đồng bộ trên các thread của threadpool. Task có một vài trạng thái như: `Created`, `Running`, `RanToCompleted`, `Canceled`, `Faulted`…
+- 1 [Task](Task.md) đại diện cho 1 công việc có thể thực hiện một cách bất đồng bộ trên các thread của threadpool. Task có một vài trạng thái như: `Created`, `Running`, `RanToCompleted`, `Canceled`, `Faulted`…
     
     ```csharp
     Console.WriteLine($"Main: Running on Thread {Thread.CurrentThread.ManagedThreadId}");
@@ -43,7 +43,7 @@ tags: dotnet
     
 - Hàm Wait, WaitAll, WaitAny sẽ block thread hiện tại cho đến khi task được hoàn thành
     
-## [Async & await](../Advance%20concepts/Async%20&%20await.md)
+## [Async & await](Async%20&%20await.md)
 
 ```csharp
 // See <https://aka.ms/new-console-template> for more information

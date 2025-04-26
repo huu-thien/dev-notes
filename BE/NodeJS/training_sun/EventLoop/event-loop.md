@@ -8,7 +8,7 @@ Javascript là single thread, là đơn luồng, chỉ chạy một thứ ở m�
 
 ## Call stack
 
-![heap-callstack](./attachments/heap-callstack.png)
+![heap-callstack](heap-callstack.png)
 
 ## Stack trace
 
@@ -41,9 +41,9 @@ Eventloop là một vòng lặp vô tận để kiểm tra các sự kiện và 
 
 Có 2 loại sự kiện mà Eventloop xử lý: sự kiện đồng bộ và sự kiện bất đồng bộ. Sự kiện đồng bộ được xử lý ngay lập tức trong vòng lặp Eventloop, trong khi sự kiện bất đồng bộ được đưa và một hàng đợi và xử lý sau khi các sự kiện đồng bộ đã được xử lý xong
 
-![event-loop-webapi](./attachments/event-loop-webapi.png)
+![event-loop-webapi](event-loop-webapi.png)
 
-![flow_event_loop_nodejs-callstack](./attachments/flow_event_loop_nodejs.jpg)
+![flow_event_loop_nodejs-callstack](flow_event_loop_nodejs.jpg)
 
 #### Vì sao JS đơn luồng
 

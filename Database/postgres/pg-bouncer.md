@@ -2,13 +2,13 @@
 
 - Hiện tại, nhiều service đang kết nối trực tiếp đến DB Postgres, nhưng PostgreSQL có giới hạn về số lượng kết nối đồng thời, được cấu hình bởi tham số `max_connections`. Mỗi service đang config `"maxPool": 100`, tuy nhiên `max_connections` của PostgreSQL thường được config khoảng `350`.
 
-  ![image](./attachments/img1.png)
+  ![image](img1.png)
 
 - Vấn đề xảy ra là:
   - **Quá tải server**: Nếu ứng dụng mở 1000 kết nối trực tiếp tới PostgreSQL mà server chỉ hỗ trợ 350 `max_connections`, các kết nối thừa sẽ bị từ chối (lỗi "too many connections").
   - **Hiệu năng giảm**: Tạo và hủy kết nối liên tục (connection overhead) làm tăng latency.
   - **Mỗi kết nối tiêu tốn tài nguyên**: Mỗi connection tới PostgreSQL tạo ra một tiến trình trên server. Mỗi process tiêu tốn khoảng 5-10MB RAM, chưa kể CPU và I/O khi xử lý query.
-    ![image](./attachments/img2.png)
+    ![image](img2.png)
 
 ### 2. PgBouncer
 
@@ -38,7 +38,7 @@
 4. **Thực thi transaction**: `PostgreSQL` xử lý transaction và trả kết quả về `PgBouncer`, rồi `PgBouncer` gửi lại cho client.
 5. **Giải phóng kết nối**:
    - Sau khi transaction hoàn tất, kết nối không bị đóng mà được đưa trở lại pool để tái sử dụng cho client khác.
-     ![image](./attachments/img3.png)
+     ![image](img3.png)
 
 ### 5. Một số điểm quan trọng
 

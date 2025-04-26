@@ -102,13 +102,13 @@ tags: aspnet
     ```
     
 - When working within an API controller in [ASP.NET](http://ASP.NET) we can access the current principal via the `User` property
-    ![Pasted image 20230729224843](attachments/Pasted%20image%2020230729224843.png)
+    ![Pasted image 20230729224843](Pasted%20image%2020230729224843.png)
 
 ## Token-based & cookie-based authentication
-![Pasted image 20230729224900](attachments/Pasted%20image%2020230729224900.png)
+![Pasted image 20230729224900](Pasted%20image%2020230729224900.png)
 
 ## Json web token
-![Pasted image 20230729224912](attachments/Pasted%20image%2020230729224912.png)
+![Pasted image 20230729224912](Pasted%20image%2020230729224912.png)
 
 - **Header**: Consists of two parts:
     - The signing algorithm that’s being used.
@@ -273,9 +273,9 @@ tags: aspnet
 - Manages users, passwords, profile data, roles, claims, tokens, email confirmation, and more
     
 - Users can create an account with the login information stored in Identity or they can use an external login provider (Facebook, Google, Microsoft…)
-![Pasted image 20230729224936](attachments/Pasted%20image%2020230729224936.png)
+![Pasted image 20230729224936](Pasted%20image%2020230729224936.png)
     
-![Pasted image 20230729224951](attachments/Pasted%20image%2020230729224951.png)
+![Pasted image 20230729224951](Pasted%20image%2020230729224951.png)
 
 - Create entity with custom data from Identity’s entity:
     
@@ -314,7 +314,7 @@ tags: aspnet
     ```
     
 - [ASP.NET](http://ASP.NET) Core Identity architecture:
-    ![Pasted image 20230729225010](attachments/Pasted%20image%2020230729225010.png)
+    ![Pasted image 20230729225010](Pasted%20image%2020230729225010.png)
     
     - _Managers_ are high-level classes which an app developer uses to perform operations, such as creating an Identity user. Managers are decoupled from stores.
     - _Stores_ are lower-level classes that specify how entities, such as users and roles, are persisted. Stores follow the repository pattern and are _closely coupled_ with the persistence mechanism

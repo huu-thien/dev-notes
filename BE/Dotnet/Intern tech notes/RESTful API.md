@@ -53,7 +53,7 @@ tags: aspnet, general
     - **PUT** either creates or replaces the resource. The body specifies the resource to be created or updated.
     - **PATCH** performs a partial update of a resource. The request body specifies the set of changes to apply to the resource.
     - **DELETE** removes the resource at the specified URI.
-    ![Pasted image 20230729223752](attachments/Pasted%20image%2020230729223752.png)
+    ![Pasted image 20230729223752](Pasted%20image%2020230729223752.png)
     
 - **Conform to HTTP semantics:** sử dụng đúng các header và status code
     
@@ -104,7 +104,7 @@ tags: aspnet, general
     - **Multipart/form-data request inference:** những action có parameter là IFromFile và IFormFileCollection thì được ngầm hiểu là có content type là `multipart/form-data`
         
     - **Problem details for error status codes:** tự động chuyển những error result thành result theo kiểu `ProblemDetails` (RFC 7807)
-        ![Pasted image 20230729223915](attachments/Pasted%20image%2020230729223915.png)
+        ![Pasted image 20230729223915](Pasted%20image%2020230729223915.png)
         
 - Action return type
     

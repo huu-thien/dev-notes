@@ -1,6 +1,6 @@
 - Configuring EFCore: a process the EF Core does on the first use of application’s DbContext
 - EFCore never look at the database to build models, it only uses the entity classes and configuration commands -> any mismatch will result in failure when it tried to access the database 
-![](attachments/Configuring%20in%20depth-181220230917.png)
+![](Configuring%20in%20depth-181220230917.png)
 
 #### Relationship conventions
 - Name your primary key as _Id_ or _<ClassName>Id_ (e.g. BookId)
@@ -26,14 +26,14 @@
 
 #### Avoid expression body properties with EF Core
 
-![](attachments/Configuring%20in%20depth-191220230901.png)
+![](Configuring%20in%20depth-191220230901.png)
 
 - Sort/filter on FullName -> exception
 - Need to add an actual FullName property that will be mapped to the database and set the properties via a constructor, or use EF Core’s [backing fields](https://docs.microsoft.com/en-us/ef/core/modeling/backing-field)
 
-![](attachments/Configuring%20in%20depth-191220230910.png)
+![](Configuring%20in%20depth-191220230910.png)
 
 #### Adding your configuration rules automatically
 
-![](attachments/Configuring%20in%20depth-191220230915.png)
+![](Configuring%20in%20depth-191220230915.png)
 

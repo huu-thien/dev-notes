@@ -20,13 +20,13 @@ public class Person
 - class có _access modifier_ mặc định là internal (chỉ cho phép truy cập trong cùng assembly)
     
 - các members của class (fields & methods) có access modifier mặc định là private
-    ![Pasted image 20230729220113](attachments/Pasted%20image%2020230729220113.png)
+    ![Pasted image 20230729220113](Pasted%20image%2020230729220113.png)
     
 - Field: để lưu dữ liệu
     
     - const: “compile-time constant”
         - mặc định là static
-    - [readonly](../OOP/readonly.md): “runtime constant”, giá trị được xác định lần đầu khi chương trình chạy và không thể thay đổi
+    - [readonly](readonly.md): “runtime constant”, giá trị được xác định lần đầu khi chương trình chạy và không thể thay đổi
         - có thể set các giá trị như DateTime.Now()
         - có thể set giá trị trong constructor
         - không thể khai báo trong method
@@ -34,10 +34,10 @@ public class Person
     - required: field phải được khởi tạo trong object initializer
 - Method:
     
-    - [Properties](../OOP/Properties.md): là những method mà có thể gọi như là field của đối tượng
+    - [Properties](Properties.md): là những method mà có thể gọi như là field của đối tượng
         - cho phép thêm logic vào khi get hoặc set giá trị
         - getter và setter có thể có access level khác nhau
-    - [Indexers](../OOP/Indexers.md): cho phép get/set data sử dụng cú pháp như array: []
+    - [Indexers](Indexers.md): cho phép get/set data sử dụng cú pháp như array: []
 
 ## Encapsulation
 
@@ -208,7 +208,7 @@ public class Person
         //Hello, I am Phuc and I live in Da Nang
         ```
         
-    - [Operator overloading](../OOP/Operator%20overloading.md): tạo 1 static method trên kiểu cần thực hiện
+    - [Operator overloading](Operator%20overloading.md): tạo 1 static method trên kiểu cần thực hiện
         
 - Runtime Polymorphism: sử dụng `override` keyword. Cho phép đối tượng thuộc class con được gọi như đối tượng thuộc class cha
     

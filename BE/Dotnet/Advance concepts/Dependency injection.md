@@ -4,9 +4,9 @@ tags: dotnet, aspnet
 ### Dependency Injection
 
 - Direct Dependency: class A tham chiếu trực tiếp đến class B
-	![Pasted image 20230729211113](attachments/Pasted%20image%2020230729211113.png)
+	![Pasted image 20230729211113](Pasted%20image%2020230729211113.png)
 - Inverse Dependency: class A sử dụng interface (hoặc lớp abstract) mà class B triển khai
-	![Pasted image 20230729211139](attachments/Pasted%20image%2020230729211139.png)
+	![Pasted image 20230729211139](Pasted%20image%2020230729211139.png)
 - **Dependency injection (DI)** là một kỹ thuật trong lập trình, nó là một hình thức cụ thể của **Inverse of Control (Dependency Inverse)**. 
 	- Xây dựng các class (service) có sự phụ thuộc nhau một cách lỏng lẻo, và dependency có thể tiêm vào object (injection) - thường qua phương thức khởi tạo constructor, property, setter
 	 - Xây dựng được một thư viện có thể tự động tạo ra các đối tượng, các dependency tiêm vào object đó, thường là áp dụng kỹ thuật Reflection ([Type](Type.md)) của C#

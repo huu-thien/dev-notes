@@ -12,7 +12,7 @@
 - `Partition`: Đây là nơi dữ liệu cho một `topic` được lưu trữ. Một `topic` có thể có một hay nhiều `partition`. Trên mỗi `partition` thì dữ liệu lưu trữ cố định và được gán cho một ID gọi là `offset`. Trong một `Kafka cluster` thì một `partition` có thể replicate (sao chép) ra nhiều bản. Trong đó có một bản `leader` chịu trách nhiệm đọc ghi dữ liệu và các bản còn lại gọi là `follower`. Khi bản `leader` bị lỗi thì sẽ có một bản `follower` lên làm `leader` thay thế. Nếu muốn dùng nhiều `consumer` đọc song song dữ liệu của một `topic` thì `topic` đó cần phải có nhiều `partition`.
 - `ZOOKEEPER`: được dùng để quản lý và bố trí các broker.
 
-  ![alt text](./attachment/kafka.png)
+  ![alt text](kafka.png)
 
 1. **Producer gửi dữ liệu**:
 
@@ -104,7 +104,7 @@
 - `Topic`: Nơi mà các `events` được tổ chức. Mỗi `topic` có thể có nhiều `partition` để xử lý đồng thời.
 - `Consumer`: Nhận các `events` từ `topic`. `Consumer` có thể tham gia vào một nhóm (consumer group) để phân phối tải.
 
-![alt text](./attachment/image.png)
+![alt text](image.png)
 
 ##### Event Processing
 

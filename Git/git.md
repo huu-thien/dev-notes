@@ -306,7 +306,7 @@ stash@{1}: WIP on Register: 812sd81 Tạo file a.md
 
 # 14. Git Flow
 
-![img](./attachments/images.png)
+![img](images.png)
 
 - Git flow là quy trình làm việc với Git, cách thiết kế các nhánh khác nhau để merge lại sao cho hạn chế những lỗi hay conflict không đáng có.
 

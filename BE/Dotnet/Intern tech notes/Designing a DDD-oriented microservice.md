@@ -7,7 +7,7 @@ tags: architecture
 - Domain entities must implement behavior in addition to implementing data attributes
 - The entity’s methods take care of the invariants and rules instead of having those rules spread across the application layer
 
-![](attachments/Designing%20a%20DDD-oriented%20microservice-160820232225.png)
+![](Designing%20a%20DDD-oriented%20microservice-160820232225.png)
 
 - If microservice or Bounded Context is very simple, the anemic domain model with just data properties might be good enough, and it might not be worth implementing more complex DDD patterns
 
@@ -98,7 +98,7 @@ orderConfiguration.OwnsOne(p => p.Address)
 - Is to ensure the consistency of the aggregate. We should make changes to entities within the aggregate only via the aggregate root
 - Having an aggregate root means that most of the code related to consistency and business rules of the aggregate’s entities should be implemented as methods in the aggregate root class
 
-![](attachments/Designing%20a%20DDD-oriented%20microservice-160820232233.png)
+![](Designing%20a%20DDD-oriented%20microservice-160820232233.png)
 
 - it is a good practice in a DDD domain model to disallow direct navigation between aggregates and only having the foreign key (FK) field
 
@@ -123,7 +123,7 @@ public class Order : Entity, IAggregateRoot
 ## Domain events
 - If executing a command related to one aggregate instance requires additional domain rules to be run on one or more additional aggregates, you should design and implement those side effects to be triggered by domain events
 
-![](attachments/Designing%20a%20DDD-oriented%20microservice-160820232330.png)
+![](Designing%20a%20DDD-oriented%20microservice-160820232330.png)
 
 - The domain events and their side effects should occur almost immediately, usually in-process, and within the same domain. Thus, domain events could be synchronous or asynchronous
 - Just like a database transaction, either all the operations related to a
@@ -132,7 +132,7 @@ domain event finish successfully or none of them do
 - A command should be processed only once. A domain event could be processed zero or n times
 - There can be several handlers for the same domain event in the Application Layer 
 
-![](attachments/Designing%20a%20DDD-oriented%20microservice-160820232335.png)
+![](Designing%20a%20DDD-oriented%20microservice-160820232335.png)
 
 ### Domain events versus integration events
 - Domain and integration events are the same thing: notifications about something that just happened
@@ -215,7 +215,7 @@ public class OrderingContext : DbContext, IUnitOfWork
 - A way to allow compensatory actions would be to store the domain events in additional database tables. Then have a batch process that detects inconsistencies and runs compensatory actions by comparing the list of events with the current state of the aggregates
 
 ### The domain event dispatcher: mapping from events to event handlers
-![](attachments/Designing%20a%20DDD-oriented%20microservice-160820232354.png)
+![](Designing%20a%20DDD-oriented%20microservice-160820232354.png)
 
 - Uses MediatR to propagate domain events synchronously across aggregates
 - We could also use some AMQP implementation like RabbitMQ or Azure Service Bus to propagate domain events asynchronously, using eventual consistency -> have to consider the need for compensatory actions in case of failures
@@ -223,18 +223,18 @@ public class OrderingContext : DbContext, IUnitOfWork
 ## Command and Query Responsibility Segregation (CQRS)
 - Is an architectural pattern that separates the models for reading and writing data
 
-![](attachments/Designing%20a%20DDD-oriented%20microservice-170820230004.png)
+![](Designing%20a%20DDD-oriented%20microservice-170820230004.png)
 
 - This approach keeps the queries independent from restrictions/constraints coming from DDD patterns that only make sense for transactions and updates
 - **Do not try to apply the same architectural patterns as CQRS or DDD everywhere**
 
 #### Implement reads/queries in a CQRS microservice
-![](attachments/Designing%20a%20DDD-oriented%20microservice-170820230008.png)
+![](Designing%20a%20DDD-oriented%20microservice-170820230008.png)
 
 - The returned type can be specifically made for the clients, based on the data returned by the queries -> ViewModels
 
 #### Implement the Command and Command Handler patterns
-![](attachments/Designing%20a%20DDD-oriented%20microservice-170820231611.png)
+![](Designing%20a%20DDD-oriented%20microservice-170820231611.png)
 
 ##### The command class
 - A command is a request for the system to perform an action that changes the state of the system
@@ -255,13 +255,13 @@ public class OrderingContext : DbContext, IUnitOfWork
 	- With an asynchronous message queue, in between controllers and handlers
 
 #### Use the Mediator pattern (in-memory) in the command pipeline
-![](attachments/Designing%20a%20DDD-oriented%20microservice-170820231628.png)
+![](Designing%20a%20DDD-oriented%20microservice-170820231628.png)
 
 - Mediator pattern makes sense in enterprise applications, when the processing requests can get complicated
 - Easier to add an open number of cross-cutting concerns like logging, validations, audit, and security using mediator pipeline
 
 #### Use message queues (out-of-proc) in the command’s pipeline
-![](attachments/Designing%20a%20DDD-oriented%20microservice-170820231632.png)
+![](Designing%20a%20DDD-oriented%20microservice-170820231632.png)
 
 - Should be used if you need to have improved scalability and performance based on asynchronous messaging
 - Asynchronous commands greatly increase the complexity of a system, because there is no simple way to indicate failures

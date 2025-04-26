@@ -154,7 +154,7 @@ Một số lợi ích:
 
 ## Các quy tắc khác
 
-- [String](../Basic%20concepts/String.md) data type
+- [String](String.md) data type
     
     - Sử dụng string interpolation để nối chuỗi thay vì dấu +
         
@@ -180,7 +180,7 @@ Một số lợi ích:
         }
         ```
         
-- Sử dụng [var](../Basic%20concepts/Var%20v%C3%A0%20Dynamic.md):
+- Sử dụng [var](Var%20và%20Dynamic.md):
     
     - khi kiểu ở vế phải đã rõ ràng
         
@@ -218,7 +218,7 @@ Một số lợi ích:
         }
         ```
         
-- Sử dụng [](../Basic%20concepts/Conditional.md#Conditional%20logical%20operators%7Cconditional%20logical%20operations)
+- Sử dụng [](Conditional.md#Conditional%20logical%20operators|conditional%20logical%20operations)
     
     - để tránh các lỗi và tăng hiệu năng bởi việc bỏ qua các câu so sánh không cần thiết
         

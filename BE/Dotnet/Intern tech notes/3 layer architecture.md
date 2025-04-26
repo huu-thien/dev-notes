@@ -7,7 +7,7 @@ tags: architecture, aspnet
 	- Business logic layer: apply business logic and transform the input data to entity, transport the response from the database to the presentation layer
 	- Data access layer: manipulating and managing data 
  
- ![Pasted image 20230801145412](attachments/Pasted%20image%2020230801145412.png)
+ ![Pasted image 20230801145412](Pasted%20image%2020230801145412.png)
  
 ### Benefits
 - **Separate responsibilities**: Each layer has a specific responsibility
@@ -32,7 +32,7 @@ tags: architecture, aspnet
 
 ### 3 layer architecture in ASP.Net
 
-![Pasted image 20230801155516](attachments/Pasted%20image%2020230801155516.png)
+![Pasted image 20230801155516](Pasted%20image%2020230801155516.png)
 
 - To reduce complexity, we create an optional layer - Domain/Entity layer - contains classes and common helper functions used for all layer
 - We also rename layers to fit our application better        

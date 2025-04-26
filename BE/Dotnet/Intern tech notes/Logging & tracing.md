@@ -25,7 +25,7 @@ tags: aspnet
 - Activity đầu tiên được tạo là gốc của cây, có thể track thời gian thực thi và kết quả của request
     
 - Các activity con có thể được tạo để chia công việc thành nhiều bước và có thể được track một cách độc lập
-    ![Pasted image 20230729223432](attachments/Pasted%20image%2020230729223432.png)
+    ![Pasted image 20230729223432](Pasted%20image%2020230729223432.png)
     
 - Mỗi trace có 1 traceId và mỗi activity lưu traceId, spanId và parentSpanId
     
@@ -41,7 +41,7 @@ tags: aspnet
 - Auto instrumentation
     
     - OpenTelemetry hỗ trợ tự động thu thập tất cả các Activity được tạo ra bởi [ASP.NET](http://ASP.NET) server.
-        ![Pasted image 20230729223501](attachments/Pasted%20image%2020230729223501.png)
+        ![Pasted image 20230729223501](Pasted%20image%2020230729223501.png)
         
 - Cấu hình:
     
@@ -53,12 +53,12 @@ tags: aspnet
                 .AddConsoleExporter();
     });
     ```
-    ![Pasted image 20230729223555](attachments/Pasted%20image%2020230729223555.png)
+    ![Pasted image 20230729223555](Pasted%20image%2020230729223555.png)
     
 - Manual instrumentation
     
     - Ta cũng có thể tự tạo các activity để theo dõi, như ở đây ta ngoài activity được tạo bởi server, ta tạo thêm 1 activity con. Khi truy cập đến endpoint TracingTest, nó sẽ gọi hàm Test và tạo ra activity con này
-        ![Pasted image 20230729223618](attachments/Pasted%20image%2020230729223618.png)
+        ![Pasted image 20230729223618](Pasted%20image%2020230729223618.png)
         
         ```csharp
         builder.Services.AddOpenTelemetry()
@@ -71,7 +71,7 @@ tags: aspnet
         ```
         
 	- Activity cha
-        ![Pasted image 20230729223634](attachments/Pasted%20image%2020230729223634.png)
+        ![Pasted image 20230729223634](Pasted%20image%2020230729223634.png)
         
 	- Activity con
-        ![Pasted image 20230729223644](attachments/Pasted%20image%2020230729223644.png)
+        ![Pasted image 20230729223644](Pasted%20image%2020230729223644.png)

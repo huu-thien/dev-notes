@@ -7,7 +7,7 @@ tags: architecture
 		- Application tier: Process information, apply business logic and rules; access or modify data in the data layer 
 		- Data tier: stores and manages data using SQL Server, MySQL, MongoDB...
   
- ![](attachments/Pasted%20image%2020230802092808.png)
+ ![](Pasted%20image%2020230802092808.png)
  
 ### Tiers and layers
 
@@ -26,8 +26,8 @@ tags: architecture
 		- Data access layer: providing simplified access to data in database 
 	- Data tier: MSSQL Server
   
-![](attachments/3%20tier%20architecture-020820231018.png)
+![](3%20tier%20architecture-020820231018.png)
 
-![](attachments/3%20tier%20architecture-220820232016.png)
+![](3%20tier%20architecture-220820232016.png)
 
 

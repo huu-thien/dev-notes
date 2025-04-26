@@ -9,14 +9,14 @@ tags: aspnet, efcore, arch
     - Easier to test business logic part
 - Generic repository: contains common operations (CRUD) of all the entities, avoid duplicate code
 - Specific repository: inherit  from generic repository, contains entity-specific operations
-![Pasted image 20230729224639](attachments/Pasted%20image%2020230729224639.png)
+![Pasted image 20230729224639](Pasted%20image%2020230729224639.png)
 
 - Problem: lack of transaction mechanic. Each repository hold a dbcontext on its own, if a repository SaveChanges successfully but another repository doesn’t → _inconsistent_
 
 ## Unit of work
 
-- Ensure all the repositories uses a common DbContext, all the changes will be commited only once per unit-of-work → if any operations failed → cancel the [transaction](../Entity%20Framework%20Core/Transaction.md).
-![Pasted image 20230729224654](attachments/Pasted%20image%2020230729224654.png)
+- Ensure all the repositories uses a common DbContext, all the changes will be commited only once per unit-of-work → if any operations failed → cancel the [transaction](Transaction.md).
+![Pasted image 20230729224654](Pasted%20image%2020230729224654.png)
 
 Note: EFCore already implement Repository pattern and Unit of work (with DbSet and DbContext)
 

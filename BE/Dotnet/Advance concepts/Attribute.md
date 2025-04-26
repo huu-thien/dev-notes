@@ -23,7 +23,7 @@ void MethodC([In, Out] ref double x) { }
 ### Attribute target
 - By default, an attribute applies to the element that follows it. But you can also explicitly identify, for example, whether an attribute is applied to a method, or to its parameter, or to its return value
 
-![](attachments/Attribute-211220231144.png)
+![](Attribute-211220231144.png)
 
 ```csharp
 [target : attribute-list]

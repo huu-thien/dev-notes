@@ -10,4 +10,4 @@ tags: dotnet
 	- khi task hoàn thành thì các công việc còn lại trong hàm vẫn được thực thi như bình thường
 - await có giá trị trả về là kết quả trả về của task
 
-- Xem thêm về xử lí lỗi, và các ví dụ dùng `await` với Task: [](../Intern%20tech%20notes/Asynchronous%20programming.md#Async%20&%20await%7CAsync%20&%20await)
+- Xem thêm về xử lí lỗi, và các ví dụ dùng `await` với Task: [](Asynchronous%20programming.md#Async%20&%20await|Async%20&%20await)

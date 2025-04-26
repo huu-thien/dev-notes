@@ -104,4 +104,4 @@
         app.Run();
         ```
     
-- Sau khi đã cấu hình và cài đặt các service, ta sẽ cấu hình cho request pipeline: [](Middleware.md#Configure%20request%20pipeline%7Clink) 
+- Sau khi đã cấu hình và cài đặt các service, ta sẽ cấu hình cho request pipeline: [](be/asp.net/5.%20ASP.NET/Middleware.md#Configure%20request%20pipeline|link) 

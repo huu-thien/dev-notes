@@ -106,5 +106,5 @@ tags: aspnet
         app.MapGet("/", () => "Hello JSON console!");
         app.Run();
         ```
-        i![Pasted image 20230729222511](attachments/Pasted%20image%2020230729222511.png)
-- Sau khi đã cấu hình và cài đặt các service, ta sẽ cấu hình cho request pipeline: [](Middleware.md#Configure%20request%20pipeline%7Clink) 
+        i![Pasted image 20230729222511](Pasted%20image%2020230729222511.png)
+- Sau khi đã cấu hình và cài đặt các service, ta sẽ cấu hình cho request pipeline: [](be/dotnet/Intern%20tech%20notes/Middleware.md#Configure%20request%20pipeline|link) 

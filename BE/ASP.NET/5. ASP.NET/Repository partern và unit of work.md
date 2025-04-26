@@ -1,4 +1,4 @@
-![REPOSITORY PATERN VÀ UNIT OF WORK](./attachments/42213219384_ec3b0b1b3e_o.png)
+![REPOSITORY PATERN VÀ UNIT OF WORK](42213219384_ec3b0b1b3e_o.png)
 
 [Tham khảo blog](https://coding4food.net/2018/07/10/repository-va-unit-of-work-pattern/)
 [Viblo](https://viblo.asia/p/repository-pattern-va-unit-of-work-voi-entity-framework-trong-aspnet-mvc-PjxMe6VDG4YL)

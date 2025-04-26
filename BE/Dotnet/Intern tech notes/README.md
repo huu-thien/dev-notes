@@ -1,15 +1,15 @@
 ## Lab 1
-[App startup](App%20startup.md)
+[App startup](be/dotnet/Intern%20tech%20notes/App%20startup.md)
 [Coding conventions](Coding%20conventions.md)
 [Collection & LINQ](Collection%20&%20LINQ.md)
-[OOP](BE/Dotnet/Intern%20tech%20notes/OOP.md)
+[OOP](be/dotnet/Intern%20tech%20notes/OOP.md)
 [Top-down programming](Top-down%20programming.md)
 [Asynchronous programming](Asynchronous%20programming.md)
 [Parallel programming](Parallel%20programming.md)
 
 ## Lab 2
 [Host](Host.md)
-[Middleware](Middleware.md)
+[Middleware](be/dotnet/Intern%20tech%20notes/Middleware.md)
 [Logging](Logging.md)
 [Logging & tracing](Logging%20&%20tracing.md)
 [RESTful API](RESTful%20API.md)
@@ -17,7 +17,7 @@
 [Repository pattern & Unit of work](Repository%20pattern%20&%20Unit%20of%20work.md)
 
 ## Lab 3
-[Authentication](BE/Dotnet/Intern%20tech%20notes/Authentication.md)
+[Authentication](be/dotnet/Intern%20tech%20notes/Authentication.md)
 [Authorization](Authorization.md)
 [Hosting on Windows with IIS](Hosting%20on%20Windows%20with%20IIS.md)
 [How IIS process HTTP request](How%20IIS%20process%20HTTP%20request.md)

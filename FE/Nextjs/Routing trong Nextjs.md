@@ -6,7 +6,7 @@
 Ví dụ: Tạo folder `login` bên trong `app` và chứa file` page.tsx` thì ta có route ` /login`
 
 
-   ![](attachments/route-segments-to-path-segments.avif)
+   ![](route-segments-to-path-segments.avif)
 #### Nhóm các route
 - Sử dụng dấu ngoặc tròn để nhóm các route cùng phân khu, không ảnh hưởng về mặt routing, giúp dễ quản lý
 - Ví dụ:  `(auth)`  bên trong chứa `login` và `register` thì routing vẫn là `/login` và `/register`
@@ -14,7 +14,7 @@ Ví dụ: Tạo folder `login` bên trong `app` và chứa file` page.tsx` thì 
 #### Thêm layout cho các Page
 - Các route vẫn bị ảnh hưởng bới RootLayout
 - Có thể thêm layout cho các page bằng cách tạo thư mục `layout.tsx` 
-   ![](attachments/strucure_folder.png)
+   ![](strucure_folder.png)
 - Vẫn có thế thêm layout cho (auth) trong ví dụ trên
 - Thứ tự apply các layout như sau
 

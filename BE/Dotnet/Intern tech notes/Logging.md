@@ -153,7 +153,7 @@ tags: aspnet
 ## Sử dụng 3rd-party logging provider (Serilog)
 
 - Cài Serilog.AspNetCore từ Nuget
-    ![Pasted image 20230729223321](attachments/Pasted%20image%2020230729223321.png)
+    ![Pasted image 20230729223321](Pasted%20image%2020230729223321.png)
     
 - Config serilog trong appsettings.json
     
@@ -179,4 +179,4 @@ tags: aspnet
     ```
     
 - Kết quả trong file AppLogs.txt
-    ![Pasted image 20230729223337](attachments/Pasted%20image%2020230729223337.png)
+    ![Pasted image 20230729223337](Pasted%20image%2020230729223337.png)

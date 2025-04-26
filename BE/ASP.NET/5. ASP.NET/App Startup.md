@@ -71,4 +71,4 @@ public static class ServiceExtension
 builder.Services.AddServices();
 ```
 
-## Tạo [](Middleware.md#Request%20pipeline%20&%20middlewares%7CRequest%20pipeline)
+## Tạo [](be/asp.net/5.%20ASP.NET/Middleware.md#Request%20pipeline%20&%20middlewares|Request%20pipeline)

@@ -54,7 +54,7 @@ tags: aspnet, efcore
 
 - EF Core uses a metadata _model_ to describe how the application's entity types are mapped to the underlying database.
     
-- This model is built using a set of _conventions_ and can be customized using Data annotations or [Fluent API](../Entity%20Framework%20Core/Fluent%20API.md) (Fluent API > Data annotations > Conventions)
+- This model is built using a set of _conventions_ and can be customized using Data annotations or [Fluent API](be/dotnet/Entity%20Framework%20Core/Fluent%20API.md) (Fluent API > Data annotations > Conventions)
     
 - Some conventions:
     
@@ -66,8 +66,8 @@ tags: aspnet, efcore
         - `<navigation property name>Id`
 - To use Fluent API, override the `OnModelCreating` method and use a parameter `modelBuilder` of type `ModelBuilder`
     
-- `IEntityTypeConfiguration<T>` allows [configuration](../Entity%20Framework%20Core/Move%20configuration.md) for an entity type to be factored into a separate class
-    ![Pasted image 20230729224123](attachments/Pasted%20image%2020230729224123.png)
+- `IEntityTypeConfiguration<T>` allows [configuration](Move%20configuration.md) for an entity type to be factored into a separate class
+    ![Pasted image 20230729224123](Pasted%20image%2020230729224123.png)
     
     - added to `OnModelCreating`
     
@@ -160,7 +160,7 @@ tags: aspnet, efcore
     - The change tracker is cleared or the DbContext is disposed
     - The entities are explicitly detached
 - Every entity is associated with a EntityState:
-    ![Pasted image 20230729224146](attachments/Pasted%20image%2020230729224146.png)
+    ![Pasted image 20230729224146](Pasted%20image%2020230729224146.png)
     
 - Difference between `Add` and `Attach`
     

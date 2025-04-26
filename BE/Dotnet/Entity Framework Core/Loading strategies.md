@@ -17,4 +17,4 @@ tags: efcore
 
 dbcontext.Table.Include(c => c.Ref)
 
-- Các ví dụ: [Eager loading, lazy loading & explicit loading](../Intern%20tech%20notes/Data%20access.md#Eager%20loading,%20lazy%20loading%20&%20explicit%20loading)
+- Các ví dụ: [Eager loading, lazy loading & explicit loading](Data%20access.md#Eager%20loading,%20lazy%20loading%20&%20explicit%20loading)

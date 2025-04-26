@@ -14,7 +14,7 @@ tags: architecture
 - **Development costs**: deal with isolation and encapsulation within the domain model -> more extended development and duration 
 
 ## Layers in DDD
-![](attachments/Domain%20driven%20design-160820232157.png)
+![](Domain%20driven%20design-160820232157.png)
 
 - Each layer is a project: Application layer is Ordering.API, Domain layer is Ordering.Domain and the Infrastructure layer is Ordering.Infrastructure
 
@@ -25,8 +25,8 @@ tags: architecture
 	- *Aggregate*: The rules, computation, logic of domains and related objects when updating the domain.
 	 >"an aggregate is a cluster of domain objects that can be treated as a single unit" - Martin Fowler
 		- An aggregate root is responsible for ensuring the integrity of the aggregate as a whole. Any references from outside the aggregate should only go to the aggregate root
-		  ![](attachments/Domain%20driven%20development-090820231540.png)
-		  ![](attachments/Domain%20driven%20development-090820231634.png)
+		  ![](Domain%20driven%20development-090820231540.png)
+		  ![](Domain%20driven%20development-090820231634.png)
 	- *Interfaces*: Define business behaviors 
 	- *Repository interfaces/Service base*: of generic repositories, domain repositories and services
 	- *ILogger/Dtos/Exceptions*: Notifications and transformation are transferred to other services
@@ -40,12 +40,12 @@ tags: architecture
 		- Data seeding
 	- *Others*: Logging, Cryptography
  
-![](attachments/Domain%20driven%20design-160820232210.png)
+![](Domain%20driven%20design-160820232210.png)
 
 ### Other concepts
 - **Ubiquitous language**: a shared language spoken by all parties of the project: developers, stakeholders, managers, and business analysts
-![](attachments/Domain%20driven%20development-090820231533.png)
+![](Domain%20driven%20development-090820231533.png)
 
 - **Bounded context**: the boundary within a domain where a particular domain model applies 
- ![](attachments/Domain%20driven%20development-090820231531.png)
+ ![](Domain%20driven%20development-090820231531.png)
 

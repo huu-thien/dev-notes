@@ -84,7 +84,7 @@ console.log(obj.prop); // TypeError: Cannot read property 'prop' of null
 
 ###### 2. Life Circle trong react
 
-![Redux Data Flow](./attachments/life-circle.webp)
+![Redux Data Flow](life-circle.webp)
 
 ###### Lifecycle là 1 vòng đời đời của 1 component, gồm 3 giai đoạn:
 

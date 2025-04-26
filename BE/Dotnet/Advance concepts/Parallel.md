@@ -9,4 +9,4 @@ tags: dotnet
 - Parallel.ForEach(source, Runtask): source là 1 collection, action có tham số có kiểu giống phần tử của source
 - Parallel.Invoke: chạy song song nhiều action
 
-- Xem các ví dụ: [Parallel programming](../Intern%20tech%20notes/Parallel%20programming.md)
+- Xem các ví dụ: [Parallel programming](Parallel%20programming.md)

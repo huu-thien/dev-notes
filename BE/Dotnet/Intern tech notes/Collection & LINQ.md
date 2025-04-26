@@ -20,19 +20,19 @@ tags: dotnet
 - System.Collections.Immutable: Những collection không thể bị chỉnh sửa sau khi khởi tạo
 
 ## System.Collections.Generic
-![Pasted image 20230729215312](attachments/Pasted%20image%2020230729215312.png)
+![Pasted image 20230729215312](Pasted%20image%2020230729215312.png)
 
 - Mối quan hệ giữa IEnumerable, ICollection, IList và IQueryable
-    ![Pasted image 20230729215328](attachments/Pasted%20image%2020230729215328.png)
+    ![Pasted image 20230729215328](Pasted%20image%2020230729215328.png)
     
     - IEnumerable: hỗ trợ thao tác duyệt qua các phần tử (vd: foreach)
     - ICollection: tạo một collection có size động, hỗ trợ các thao tác như thêm, xóa, đếm
     - IList: hỗ trợ thêm các thao tác với các phần tử bằng index
     - IQueryable: hỗ trợ tương tác với dữ liệu từ Provider out-memory như database
 - Các Collections
-    ![Pasted image 20230729215359](attachments/Pasted%20image%2020230729215359.png)
-    ![Pasted image 20230729215418](attachments/Pasted%20image%2020230729215418.png)
-    ![Pasted image 20230729215431](attachments/Pasted%20image%2020230729215431.png)
+    ![Pasted image 20230729215359](Pasted%20image%2020230729215359.png)
+    ![Pasted image 20230729215418](Pasted%20image%2020230729215418.png)
+    ![Pasted image 20230729215431](Pasted%20image%2020230729215431.png)
 - So sánh SortedList vs SortedDictionary
     
     - SortedList
@@ -49,7 +49,7 @@ tags: dotnet
         - = 0: bằng
         - > 0: lớn hơn
 
-## Tạo collection từ `IEnumerable<T>` ([code](attachments/Program.cs))
+## Tạo collection từ `IEnumerable<T>` ([code](Program.cs))
 
 - Kế thừa từ `IEnumerable<T>` → cho phép duyệt qua các phần tử
 - Có một method GetEnumerator trả về 1 object IEnumerator
@@ -57,7 +57,7 @@ tags: dotnet
     - Current: trả về phần tử hiện tại của collection
     - MoveNext(): di chuyển đến phần tử tiếp theo, trả về false nếu đã di chuyển đến phần tử cuối
     - Reset(): set enumerator trỏ về vị trí ban đầu của collection (vị trí trước phần tử đầu tiên)
-## Tạo collection từ `ICollection<T>` ([code](attachments/Program%201.cs))
+## Tạo collection từ `ICollection<T>` ([code](Program%201.cs))
 
 - Kế thừa từ `ICollection<T>` → cho phép thêm, xóa…
 - Ngoài phần code như của `IEnumerable<T>` thì cần implement thêm các method như Add, Remove, Clear… và 2 properties là Count và IsReadOnly
@@ -80,7 +80,7 @@ tags: dotnet
 
 - Có 2 dạng syntax là:
     - Query syntax
-        ![Pasted image 20230729215534](attachments/Pasted%20image%2020230729215534.png)
+        ![Pasted image 20230729215534](Pasted%20image%2020230729215534.png)
         
         ```csharp
         var query1 = 
@@ -100,12 +100,12 @@ tags: dotnet
         ```
         
         - References
-            ![Pasted image 20230729215550](attachments/Pasted%20image%2020230729215550.png)
-            ![Pasted image 20230729215614](attachments/Pasted%20image%2020230729215614.png)
-            ![Pasted image 20230729215639](attachments/Pasted%20image%2020230729215639.png)
-			  ![Pasted image 20230729215651](attachments/Pasted%20image%2020230729215651.png)
+            ![Pasted image 20230729215550](Pasted%20image%2020230729215550.png)
+            ![Pasted image 20230729215614](Pasted%20image%2020230729215614.png)
+            ![Pasted image 20230729215639](Pasted%20image%2020230729215639.png)
+			  ![Pasted image 20230729215651](Pasted%20image%2020230729215651.png)
 ### Execute query
-- Linq sử dụng [deferred execution](attachments/Program%202.cs). Nghĩa là câu query sẽ chưa được thực thi mà sẽ bị hoãn lại đến khi ta duyệt qua biến query, để thực thi và lấy kết quả trả về, ta dùng:
+- Linq sử dụng [deferred execution](Program%202.cs). Nghĩa là câu query sẽ chưa được thực thi mà sẽ bị hoãn lại đến khi ta duyệt qua biến query, để thực thi và lấy kết quả trả về, ta dùng:
     - `foreach`
         
         ```csharp
