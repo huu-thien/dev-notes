@@ -2,7 +2,7 @@
 
 ### 1. Cấu trúc file html
 
-- Một tập tin HTML cơ bản thường có cấu trúc như sau: thien
+- Một tập tin HTML cơ bản thường có cấu trúc như sau
 
 ```html
 <!DOCTYPE html>

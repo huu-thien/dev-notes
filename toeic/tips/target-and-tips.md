@@ -1,5 +1,4 @@
 ### Mục tiêu 
-- Ngày thi: 26/4/2025
 - Điểm đạt được: > 700
 - Tương lai: luyện tập để có thể giao tiếp bằng tiếng anh
 
