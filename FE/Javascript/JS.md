@@ -42,6 +42,9 @@ console.log(++b + ++b); // 9 + 10 = 19
 ```
 
 # 5. TOÁN TỬ GÁN
+```html
+div
+```
 
 ```javascript
 // Toán tử            Ví dụ            Tương đương
