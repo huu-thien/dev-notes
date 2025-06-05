@@ -1,6 +1,7 @@
 ### Mục tiêu 
 - Điểm đạt được: > 700
 - Tương lai: luyện tập để có thể giao tiếp bằng tiếng anh
+- Ngafy thi 26/7/2025
 
 ### Cách học toeic hiệu quả
 - Từ vựng:  
