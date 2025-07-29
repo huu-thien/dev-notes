@@ -1,5 +1,5 @@
 
-# Hướng dẫn PlantUML (Tập trung Sơ đồ Tuần tự)
+# PlantUML 
 
 ## 🔰 PlantUML là gì?
 PlantUML là công cụ hỗ trợ vẽ sơ đồ UML bằng cách viết code đơn giản. Không cần kéo thả, bạn chỉ cần dùng cú pháp mô tả để sinh sơ đồ. PlantUML hỗ trợ nhiều loại sơ đồ như:
