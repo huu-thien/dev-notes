@@ -110,13 +110,13 @@
 
 # 🧾 So sánh tổng quát
 
-| Trường hợp sử dụng | Read Cache           | Write Cache         |
-|--------------------|-----------------------|----------------------|
-| Đọc nhiều, ghi ít   | Cache Aside / Read Through | Write Through         |
-| Ghi nhiều, đọc ít   | Không cần Read Cache  | Write Around         |
-| Ghi rất nhiều, cần tốc độ | -                  | Write Back (cẩn thận mất dữ liệu) |
-| Cần dữ liệu mới & chính xác | Read Through       | Write Through         |
-| Muốn kiểm soát cache logic | Cache Aside         | Write Around         |
+| Trường hợp sử dụng          | Read Cache                 | Write Cache                       |
+| --------------------------- | -------------------------- | --------------------------------- |
+| Đọc nhiều, ghi ít           | Cache Aside / Read Through | Write Through                     |
+| Ghi nhiều, đọc ít           | Không cần Read Cache       | Write Around                      |
+| Ghi rất nhiều, cần tốc độ   | -                          | Write Back (cẩn thận mất dữ liệu) |
+| Cần dữ liệu mới & chính xác | Read Through               | Write Through                     |
+| Muốn kiểm soát cache logic  | Cache Aside                | Write Around                      |
 
 ---
 
