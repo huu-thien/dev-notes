@@ -189,9 +189,9 @@ What time **is** the news on TV?
 - Lượng từ có quy tắc riêng khi đi kèm với danh từ số ít, số nhiều và không đếm được
 
 
-![Lượng từ](./attachments/luongtu.png)![[luongtu2.png]]
+![Lượng từ](./attachments/luongtu.png)![Lượng từ](./attachments/luongtu2.png)
 
-![[luongtu3.png]]
+![Lượng từ](./attachments/luongtu3.png)
 
 ### 3. Cụm danh từ
 
@@ -204,9 +204,9 @@ What time **is** the news on TV?
 - Phụ từ đứng sau có thể là cụm giới từ, mệnh đề quan hệ/ mệnh đề quan hệ rút gọn hoặc cụm trạng từ
 - Phụ từ đứng sau có thứ tự như sau
 
-![[phutu.png]]
+![Lượng từ](./attachments/phutu.png)
 
 #### 3.2. Chức năng
 - Trong câu, cụm danh từ có vị trí và vai trò giống như một danh từ. Động từ được chia theo danh từ chính
 
-![[phutu2.png]]
+![Lượng từ](./attachments/phutu2.png)
