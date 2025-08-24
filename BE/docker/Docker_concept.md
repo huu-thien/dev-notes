@@ -24,7 +24,7 @@
 
 ### 5. Docker Compose:
 
-- Công cụ để định nghĩa và chạy nhiều `container` như một ứng dụng.
+- Công cụ để định nghĩa và chạy nhiều `container` như một ứng  dụng.
 - Sử dụng tệp `docker-compose.yml` để cấu hình các dịch vụ, mạng và volume.
 
 ## Các Lệnh Cơ Bản
