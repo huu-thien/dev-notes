@@ -9,7 +9,7 @@
 ## Phân loại
 
 - Điều kiện loại 0:  **If + S + V (s/es), S + V(s/es)**
-- Điều kiện loại 1: **If + S + V(s/es), S + will/can + V0
+- Điều kiện loại 1: **If + S + V(s/es), S + will/can + V0**
 - Điều kiện loại 2: **If + S + V(ed/2), S + would/could + V0**
 - Điều kiện loại 3: **If + S + had V3, S + would/could/should + have + V3**
 
