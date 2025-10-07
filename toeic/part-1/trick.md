@@ -1,0 +1,5 @@
+- Xác định dạng câu hỏi: tranh tả người, vật, hay cả người và vật
+- Quan sát và phán đoán: nhìn tranh và tự trả lời các câu hỏi
+	- Nhân vật đang làm gì?
+	- Sự vật đang ở đâu?
+	- ... Phán đoán về từ vựng
