@@ -1,0 +1,102 @@
+-  meditaion class : lớp thiền 
+- affect: ảnh hưởng
+-  board meeting:  họp hội đồng
+- scratch: bị trầy xướt
+- stain: thuốc nhuộm
+- purchase: mua
+- fountain: đài phun nước
+- across: dọc
+- food court: khu ẩm thực
+- regular: thường
+- portrait: chân dung
+- hallway: hành lang
+- sale figure: số liệu bán hàng
+- supply: cung cấp
+- unusual: bất thường
+- presence: sự hiện diện
+- incharge: phụ trách
+- exhibit: cuộc triển lãm
+- broadcast: chương trình phát sóng
+- consider: cân nhắc, xem xét
+- journalist: nhà báo
+- overseas: nước ngoài
+- hotel van: xe khách sạn
+- domestic terminal: ga nội địa
+- local flight: chuyến bay nội địa
+- clipboard : bìa kẹp hồ sơ
+- clinic: phòng khám
+- ankle: mắt cá nhân
+- treadmill: máy chạy bộ
+- frying pan: chảo rán
+- lecture theater / lecture hall: giảng đường
+- blueprint: bản thiết kế
+- helmet: mũ bảo hiểm
+- recipe: công thức nấu ăn
+- snow blower: máy thổi tuyết
+- broom: chổi
+- truck: xe tải
+- reflection: hình ảnh phản chiếu
+- occupied: có người, bị chiếm giữ
+- unoccupied: không có người, không bị chiếm giữ
+- the wall: bức tường
+- pot: nồi
+- perper: hạt tiêu
+- shaking hand: bắt tay
+- business card: danh thiếp
+- garment: bộ quần áo
+- coat hanger: móc áo
+- safety glasses: kính bảo hộ
+- safety gloves: ganawnt tay bảo hộ
+- bacteria: vi khuẩn
+- microscope: kính hiển vi
+- sock: tất
+- sea shore: bờ biển
+- sea shell: vỏ sò
+- looking away: quay mặt đi 
+- sewing machine: máy khâu
+- scissor: cái kéo
+- conductor: người soát vé
+- sandcastle
+- train track: đường ray xe lửa
+- climbing the ladder: trèo thang
+- carriage ride: xe ngựa
+- lifting up: nâng
+- gathered around the table: tụ tập quanh bàn
+- boat: cái thuyền
+- globe: quả địa cầu
+- vase: cái bình
+- shovel: xẻng
+- the fence: hàng rào
+- merchandise: hàng hóa
+- check-in counter: quầy làm thủ tục
+- gestuting: ra hiệu
+- rug: cái thảm
+- pitcher: cái bình
+- podium: bục phát hiểu
+- plenty: nhiều
+- round-trip ticket: vé khứ  hồi
+- appreciate: cảm kích, đánh giá cao
+- proposal: đề xuất
+- bankrupt: phá sản
+- revise: sửa đổi
+- compensation: sự đền bù
+- professor: giáo sư
+- an athlete: 1 vận động viên
+- nutrition: dinh dưỡng
+- investment: sự đầu tư
+- receipt: biên lai
+- pamphlet: tờ rơi
+- recall: thu hồi
+- injured: bị thương
+- conduct: tiến hành
+- fundraiser: gây quỹ
+- realtor: mô giới bất động sản
+- peeling: bong tróc
+- diet : ăn kiêng
+- plumber: thợ sửa ống nước
+- carpet: thảm
+- arrange: sắp xếp
+- favor: sự ưu ái
+- bedding store: cửa hàng chăn ga gối đệm
+- striking: đình công
+- triathlon: 3 môn phối hợp
