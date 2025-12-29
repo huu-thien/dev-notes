@@ -100,3 +100,5 @@
 - bedding store: cửa hàng chăn ga gối đệm
 - striking: đình công
 - triathlon: 3 môn phối hợp
+- interpret: giải thích
+- the renowned literary critic: nhà phê bình văn học 

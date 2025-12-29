@@ -1,0 +1,59 @@
+- formmula: công thức
+- incentive: động lực
+- significant: đáng kể
+- promotion: chương trình khuyến mãi
+- contractor: nhà thầu
+- treatment: sự điều trị, sự đối đãi
+- clinic: phòng khám
+- various: nhiều loại, đa dạng
+- piece: tác phẩm
+- among: ở giữa (nhiều hơn 2 cái)
+- relevant: phù hợp, có liên quan
+- honestly: một cách trung thực
+- rarely (adv): hiếm khi
+- tiredly (adv): một cách mệt mỏi
+- openly (adv): một cách cởi mở
+- highly (adv): ở mức độ cao
+- frankly: thẳng thắn
+- directly: trực tiếp
+- pick season: mùa cao điểm
+- enery-effecient: miêu tả thứ gì đó sử dụng ít năng lượng để thực hiện
+- insulation
+- expressive: biểu cảm
+- reliable: đáng tin cậy
+- partial: không đầy đủ, thien vị
+- extreme: mức độ lớn, cực đoan
+- obstruct (v) : cản trở, làm tắc nghẽn
+- throughout: khắp
+- cooperative: hợp tác
+- visible: dễ nhìn thấy
+- essential: thiết yếu
+- alternative: thay thế
+- ventilation: sự thông gió
+- well-being: trạng thái khỏe mạnh
+- as long as: miễn là
+- the fact that: sự thật là
+- steadily: đều đặn
+- indicate that: cho thấy
+- junk food: đồ văn vặt
+- sprinkler: vòi phun nước
+- mechanically: một cách cơ học
+- courteously (adv): một cách lịch sự
+- legal (adj): hợp pháp
+- quote (n): trích dẫn
+- graduation (n): lễ tốt nghiệp
+- dispure (n): tranh chấp
+- towel: khăn tắm
+- soap: xà phòng
+- upscale: cao cấp, đắt tiền
+- accessories: phụ kiện
+- perspective: quan điểm
+- totally: hoàn toàn
+- subsequently: sau đó, về sau
+- hurricane: cơn bão
+- as well as: cũng như, ngoài ra
+- cooperated: hợp tác
+- entertained: giải trí, tiếp đãi
+- loosened: nới lỏng
+- comply (v): tuân theo
+- reinforce: củng cố
