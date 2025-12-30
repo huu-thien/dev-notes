@@ -1,0 +1,7 @@
+- dramatic (adj): đáng kể ấn tượng
+- piece (n): phần mảnh
+- engage (v): thu hút gắn kết
+- concern (n): mối quan ngại
+- patience (n): sự kiên nhẫn
+-  Regardless of: bất kể
+- arange (v): sắp xếp
