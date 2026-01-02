@@ -7,4 +7,4 @@
  - is essential for + N/V-ing: diễn đạt điều gì đó rất quan trọng hoặc cần thiết cho mục đích cụ thể
 - plan on + V-ing
 - comply with sth: tuân thủ điều gì
-- 
+- Câu mệnh lệnh : V0 đứng đầu

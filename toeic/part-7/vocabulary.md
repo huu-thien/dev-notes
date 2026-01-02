@@ -1,0 +1,4 @@
+- demand : nhu cầu
+- complimentary: miễn phí
+- introductory: cơ bản
+- defective : lỗi

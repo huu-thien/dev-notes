@@ -1,0 +1,3 @@
+- Dịch từ trên xuống, không cần dịch chi tiết phần liệt kê, có thể luốt, chủ yếu là nắm được ý chính
+- Làm tới đâu quất đáp án chỗ đó
+- Dạng câu điền cả câu: để ý mấy từ "LẶP LẠI THÔNG TIN": this,  that, these, those, here, there => Xem thông tin lặp lại là gì -> tìm câu về ý đó

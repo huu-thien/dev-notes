@@ -1,7 +1,7 @@
 Với cụm từ " this month" => Sử dụng thì hiện tại tiếp diễn để nói về hành động xảy ra trong tương lai
 
 
-- dramatic (adj): đáng kể ấn tượng
+- dramatic = great = considerable = significant = substantial = remarkable (adj): đáng kể, ấn tượng
 - piece (n): phần mảnh
 - engage (v): thu hút gắn kết
 - concern (n): mối quan ngại
@@ -14,3 +14,25 @@ Với cụm từ " this month" => Sử dụng thì hiện tại tiếp diễn đ
 - locate (v): định vị
 - evaluate (v): đannhs giá
 - produce (v): sản xuất
+- placement (n): sắp đặt
+- inquiry (n): yêu cầu (thông tin)
+- over + khoảng thời gian: hơn (bao lâu)
+- through: qua (bao lâu)
+- potential (adj): tiềm năng
+- futhermore (conj): liên từ
+- certain: chắc chắn
+- acknowledge: thừa nhận
+- fraction: rẻ hơn, phần nhỏ
+- emergency (adj): khẩn cấp
+- orient (v): định hướng
+- customer-orient: hướng tới khách hàng
+- moreover (prep): hơn thế nữa
+- on the other hand: mặt khác
+- commercial and residential: thương mại và cư dân
+- tìm kiếm (v): look for / find out / navigate / locate / seek / search for / discover / figure out / explore
+- ứng viên (n): candidate / applicant
+- tactic : chiến lước, cách, chiến thuật
+- boost (v): đẩy mạnh
+- organic: nguyên thủy, cơ bản, không mất phí
+- whether ... or ... : liệu có cái đó hay không
+- Either ... or ... : cái này hoặc cái kia
