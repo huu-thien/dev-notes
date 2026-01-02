@@ -29,10 +29,8 @@ Với cụm từ " this month" => Sử dụng thì hiện tại tiếp diễn đ
 - moreover (prep): hơn thế nữa
 - on the other hand: mặt khác
 - commercial and residential: thương mại và cư dân
-- tìm kiếm (v): look for / find out / navigate / locate / seek / search for / discover / figure out / explore
-- ứng viên (n): candidate / applicant
 - tactic : chiến lước, cách, chiến thuật
 - boost (v): đẩy mạnh
 - organic: nguyên thủy, cơ bản, không mất phí
 - whether ... or ... : liệu có cái đó hay không
-- Either ... or ... : cái này hoặc cái kia
+- Either ... or ... : hoặc A hoặc B
