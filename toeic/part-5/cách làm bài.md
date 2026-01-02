@@ -1,0 +1,6 @@
+- Là phần dễ
+- Từ câu 101 đến 130
+- Thời gian làm : 10 đến 15 phút
+- Nhìn đáp án trước -> phân loại câu hỏi: từ vững - ngữ pháp
+	- Từ vựng: phải dịch, dịch càng ít càng tốt
+	- Ngữ pháp: không phải dịch => thường là câu cho điểm

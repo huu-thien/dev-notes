@@ -8,3 +8,6 @@
 - plan on + V-ing
 - comply with sth: tuân thủ điều gì
 - Câu mệnh lệnh : V0 đứng đầu
+- Nếu trong đáp án có so sánh -> thì câu trả lời đúng thường là so sánh (tính từ)
+- among thường là đáp án đúng nếu phía sau có Ns
+- so adj that / such N that : quá đến nỗi mà (nhấn mạnh)

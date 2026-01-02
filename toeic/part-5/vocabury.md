@@ -57,3 +57,33 @@
 - loosened: nới lỏng
 - comply (v): tuân theo
 - reinforce: củng cố
+- ever: bao giờ
+- convenience store: cửa hàng tiện lợi
+- patience (n): sự kiên nhẫn
+- patient (adj): sự kiên nhẫn
+- leave (v): rời di, rời khỏi // để lại, bỏ lại
+- board (v): lên tàu , lên xe (không phải lên máy bay)
+- adjust (v): điều chỉnh
+- prefer (v): thích hơn (preferable (adj) : thích hơn)
+- dedicate (v): cống hơn
+- frequent (adj): thường xuyên, thường lệ
+- effective (adj) = eficient (adj): hiệu quả
+- variety () of : đa dạng 
+- Nhiều cái gì: Many + Ns / a variety of Ns / a range of Ns / a number of / a selection of
+- metropolitan area : khu vực trung tâm
+- surrounding: lân cận
+- grow in : phát triển về
+- prior to: trước khi mà
+- issued (v): ban hành
+- issue (n): vấn đề / ấn phẩm (báo chí)
+- career (n): sự nghiệp
+- (n) địa điểm: venue / location / site / spot / region / area / place
+- occasionally (ajv): thỉnh thoảng
+- local = regional : địa phương
+- beside (prep): bên cạnh
+- similar (prep): tương tự
+- now that: bởi vì
+- eventually (adv) = finally (adv) = ultimately (adv) = at last: cuối cùng
+- respectively (adv): tương ứng
+- greatly (adv): một cách đáng kể / rất nhiều
+- get rid of: bỏ đi, loại di
