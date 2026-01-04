@@ -111,8 +111,8 @@
 
 👉 **Rule xương sống**:  
 **Giới từ = đi với danh từ / V-ing / cụm danh từ**
-despite + danh từ / V-ing / cụm danh từ
-`despite` = **mặc dù / bất chấp**
+- despite + danh từ / V-ing / cụm danh từ
+-  `despite` = **mặc dù / bất chấp**
 
 ---
 
