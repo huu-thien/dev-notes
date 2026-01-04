@@ -1,13 +1,14 @@
+
 # 🔗 I. LIÊN TỪ (CONJUNCTIONS) – NỐI MỆNH ĐỀ
 
-👉 **Rule sống còn**:  
-**Liên từ = nối 2 mệnh đề (S + V)**
+👉 **Rule sống còn (khắc vào não)**  
+**Liên từ = theo sau là MỆNH ĐỀ (S + V)**
 
 ---
 
-## 1️⃣ Liên từ chỉ NGUYÊN NHÂN – KẾT QUẢ (siêu hay ra)
+## 1️⃣ Liên từ chỉ NGUYÊN NHÂN – KẾT QUẢ (ra cực nhiều)
 
-### ✅ đúng chuẩn TOEIC
+### ✅ Chuẩn TOEIC
 
 - `because` – bởi vì
     
@@ -16,87 +17,129 @@
 - `as` – bởi vì (formal)
     
 
-📌 **Cấu trúc**
-
-> because / since / as + **S + V**
-
-✔️ _The meeting was postponed **because the manager was absent**._
+✔️ _The flight was delayed **because the weather was bad**._
 
 ---
 
-### ❌ hay bị nhầm với giới từ
+### ➕ BỔ SUNG: KẾT QUẢ
 
-- ❌ because of ❌ due to → **KHÔNG phải liên từ**
+- `so` – vì vậy
+    
+- `therefore` – do đó (formal, hay Part 6)
+    
+- `thus` – vì thế (siêu formal, hay gài)
+    
+
+✔️ _The system crashed, **so the data was lost**._
+
+📌 **Note nhanh**
+
+- `so` → đứng **giữa 2 mệnh đề**
+    
+- `therefore / thus` → thường đứng đầu câu, có dấu phẩy
     
 
 ---
 
-## 2️⃣ Liên từ chỉ ĐỐI LẬP
+## 2️⃣ Liên từ chỉ ĐỐI LẬP (siêu dễ nhầm)
 
-- `although` – mặc dù
+### ✅ Chuẩn TOEIC
+
+- `although`
     
-- `though` – mặc dù
+- `though`
     
-- `even though` – mặc dù (nhấn mạnh)
+- `even though`
     
-- `whereas` – trong khi đó
+- `whereas`
+    
+- `while` (trong khi đó – mang nghĩa đối lập)
     
 
-✔️ _Although the product is expensive, it sells well._
+✔️ _While sales increased, expenses remained high._
 
 ---
 
-## 3️⃣ Liên từ chỉ ĐIỀU KIỆN
+### ⚠️ BỔ SUNG CỰC HAY GÀI
 
-- `if` – nếu
+- `however` – tuy nhiên (**KHÔNG phải liên từ nối 2 mệnh đề trực tiếp**)  
+    → thực chất là **transition word**
+    
+
+✔️ _The product is expensive. **However**, it sells well._
+
+---
+
+## 3️⃣ Liên từ chỉ ĐIỀU KIỆN (Part 5 khoái)
+
+- `if`
     
 - `unless` – trừ khi
     
-- `provided (that)` – miễn là
+- `provided (that)`
+    
+- `as long as` – miễn là
     
 
-✔️ _You will receive a refund **if you submit the form**._
+✔️ _You may attend the training **as long as you register in advance**._
 
 ---
 
-## 4️⃣ Liên từ chỉ THỜI GIAN (TOEIC khoái)
+## 4️⃣ Liên từ chỉ THỜI GIAN (bẫy ngọt)
 
-- `when` – khi
+- `when`
     
-- `while` – trong khi
+- `while`
     
-- `after` – sau khi
+- `after`
     
-- `before` – trước khi
+- `before`
     
-- `until` – cho đến khi
+- `until / till`
     
-- `once` – một khi
+- `once`
+    
+- `whenever` – bất cứ khi nào
     
 
-✔️ _Please notify us **when the shipment arrives**._
+✔️ _Once the contract is signed, payment will be processed._
 
 ---
 
 ## 5️⃣ Liên từ chỉ MỤC ĐÍCH
 
-- `so that` – để mà
+- `so that`
     
-- `in order that` – để mà (formal)
+- `in order that`
     
 
-✔️ _The company hired more staff **so that production could increase**._
+✔️ _The notice was posted **so that employees could be informed**._
 
 ---
 
-# 🧲 II. GIỚI TỪ (PREPOSITIONS) – THE TRAP GOD 💀
+## 6️⃣ Liên từ chỉ LỰA CHỌN / BỔ SUNG (ít nhưng vẫn ra)
 
-👉 **Rule xương sống**:  
-**Giới từ = đi với danh từ / V-ing / cụm danh từ**
+- `and`
+    
+- `or`
+    
+- `nor`
+    
+- `but`
+    
+
+✔️ _You can submit the form online **or** in person._
 
 ---
 
-## 1️⃣ Giới từ chỉ NGUYÊN NHÂN
+# 🧲 II. GIỚI TỪ (PREPOSITIONS) – TRÙM GÀI ĐIỂM 💀
+
+👉 **Rule xương sống**  
+**Giới từ = theo sau là N / V-ing / cụm danh từ**
+
+---
+
+## 1️⃣ Giới từ chỉ NGUYÊN NHÂN (TOEIC mê)
 
 - `because of`
     
@@ -104,34 +147,42 @@
     
 - `owing to`
     
+- `as a result of`
+    
 
-✔️ _The delay was caused **due to heavy traffic**._
+✔️ _The event was canceled **because of the storm**._
 
-❌ _due to it was raining_ → sai ❌
+❌ _because of it was raining_ → bay màu ❌
 
 ---
 
-## 2️⃣ Giới từ chỉ THỜI GIAN (ra liên tục)
+## 2️⃣ Giới từ chỉ THỜI GIAN (ra như cơm bữa)
 
-- `at` – thời điểm cụ thể
+### ⏰ Cơ bản
+
+- `at` – thời điểm
     
 - `on` – ngày
     
 - `in` – tháng / năm / buổi
     
 
-🧠 TOEIC mẹo:
+### ➕ NÂNG CAO (hay gài)
 
-- `at 9 a.m.`
+- `during` – trong suốt (→ **theo sau là N**)
     
-- `on Monday`
+- `by` – trước hạn chót
     
-- `in July`
+- `within` – trong vòng
     
+- `from … to …`
+    
+
+✔️ _Please submit the report **by Friday**._
 
 ---
 
-## 3️⃣ Giới từ chỉ VỊ TRÍ
+## 3️⃣ Giới từ chỉ VỊ TRÍ / ĐỊA ĐIỂM
 
 - `at` – điểm
     
@@ -139,66 +190,104 @@
     
 - `on` – trên
     
-
-✔️ _The meeting will be held **in** the conference room._
-
----
-
-## 4️⃣ Giới từ chỉ MỤC ĐÍCH / LIÊN QUAN
-
-- `for` – cho / vì
+- `among` – giữa nhiều
     
-- `to` – hướng tới
+- `between` – giữa hai
     
-- `regarding` – về việc
-    
-- `concerning` – liên quan đến
-    
+
+✔️ _The printer is located **between** the two offices._
 
 ---
 
-## 5️⃣ CỤM GIỚI TỪ CỐ ĐỊNH – TOEIC RA MIỆT MÀI
+## 4️⃣ Giới từ chỉ MỤC ĐÍCH / LIÊN QUAN (Part 5 thích gài)
 
-### 🔥 must-know
+- `for`
+    
+- `to`
+    
+- `about`
+    
+- `regarding`
+    
+- `concerning`
+    
+- `related to`
+    
 
-- `in charge of` – phụ trách
-    
-- `responsible for` – chịu trách nhiệm
-    
-- `in accordance with` – phù hợp với
-    
-- `in addition to` – ngoài ra
-    
-- `in response to` – để phản hồi
-    
-- `with regard to` – liên quan đến
-    
-- `on time` – đúng giờ
-    
-- `ahead of schedule` – sớm hơn kế hoạch
-    
+✔️ _Please contact HR **regarding your benefits**._
 
 ---
 
-# ⚔️ III. CẶP LIÊN TỪ vs GIỚI TỪ – TOEIC HAY GÀI
+## 5️⃣ Giới từ chỉ PHƯƠNG TIỆN / CÁCH THỨC
 
-|Liên từ|Giới từ|
+- `by` – bằng (phương tiện)
+    
+- `via` – thông qua
+    
+- `with` – bằng (công cụ)
+    
+
+✔️ _The document was sent **via email**._
+
+---
+
+## 6️⃣ CỤM GIỚI TỪ CỐ ĐỊNH – TOEIC AUTO RA
+
+### 🔥 MUST-REMEMBER
+
+- `in charge of`
+    
+- `responsible for`
+    
+- `in accordance with`
+    
+- `in addition to`
+    
+- `in response to`
+    
+- `with regard to`
+    
+- `on behalf of`
+    
+- `on time`
+    
+- `ahead of schedule`
+    
+- `out of stock`
+    
+- `in terms of`
+    
+- `at no cost`
+    
+
+✔️ _The samples are provided **at no cost**._
+
+---
+
+# ⚔️ III. CẶP LIÊN TỪ vs GIỚI TỪ – TOEIC GÀI LIÊN HOÀN
+
+|Liên từ (S + V)|Giới từ (N / V-ing)|
 |---|---|
-|because + S + V|because of + N|
-|although + S + V|despite / in spite of + N|
-|when + S + V|during + N|
-|if + S + V|in case of + N|
+|because|because of|
+|although|despite / in spite of|
+|when|during|
+|while|during|
+|if|in case of|
+|after|after + N|
+|before|before + N|
 
 ---
 
-## 🧠 CÁCH LÀM NHANH PART 5 (ĂN ĐIỂM)
+# 🧠 CÁCH ĂN ĐIỂM PART 5 (CHÂN LÝ)
+
+🔥 **Không dịch – soi cấu trúc trước**
 
 1️⃣ Nhìn **sau chỗ trống**
 
-- thấy **S + V** → liên từ
+- có **S + V** → liên từ
     
-- thấy **N / V-ing** → giới từ
+- có **N / V-ing** → giới từ
     
 
-2️⃣ Gạch bớt đáp án sai trước  
-3️⃣ Đừng dịch vội – **soi cấu trúc trước**
+2️⃣ Gạch đáp án sai trước (đỡ loạn não)  
+3️⃣ Dịch sau cho chắc – **đừng ngược thứ tự**
