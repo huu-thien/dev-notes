@@ -11,3 +11,5 @@
 - Nếu trong đáp án có so sánh -> thì câu trả lời đúng thường là so sánh (tính từ)
 - among thường là đáp án đúng nếu phía sau có Ns
 - so adj that / such N that : quá đến nỗi mà (nhấn mạnh)
+- `Interesting` mô tả một thứ gì đó thú vị, hấp dẫn (tính chất của vật/sự việc) 
+- `interested` mô tả cảm xúc của một người, rằng họ quan tâm/hứng thú với điều gì đó (chủ ngữ là người)

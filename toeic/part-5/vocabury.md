@@ -87,3 +87,14 @@
 - respectively (adv): tương ứng
 - greatly (adv): một cách đáng kể / rất nhiều
 - get rid of: bỏ đi, loại di
+- refrain (v): kiềm chế
+- forrbid (v): cấm
+- retreat (v): rút lui'
+- hesitate (v): ngần ngại
+- accordance (n): sự phù hợp
+- recognition (n): sự ghi nhận
+- dedication (n): sự cống hiến
+- exclisive (adj): đọc quyền
+- throughout (prep): xuyên suốt
+- fortunately : may mắn thay
+- likewise : tương tự
