@@ -98,3 +98,15 @@
 - throughout (prep): xuyên suốt
 - fortunately : may mắn thay
 - likewise : tương tự
+- form (v): thành lập
+- routinely (adj): thường xuyên
+- commitee (n): ủy ban
+- none of = không có ai, không có cái gì đó
+- shape (n): hình dạng
+- sight (n): thắng cảnh
+- alolcate (v): phân bổ
+- economize (v): tiết kiệm
+- rationalize (v): hợp lý hóa
+- upon : lúc => upon checkout : lúc thanh toán
+- acknowledge (v): thừa nhận
+- rates of pay: mức lương
