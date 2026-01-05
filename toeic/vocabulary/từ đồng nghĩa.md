@@ -544,27 +544,25 @@
 
 ## 🎯 8. TRẠNG TỪ SIÊU HAY RA PART 5 (HỌC THUỘC LÒNG)
 
-- `recently`
+- **recently** → gần đây
     
-- `currently`
+- **currently** → hiện tại, hiện nay
     
-- `previously`
+- **previously** → trước đây
     
-- `normally`
+- **normally** → thông thường, bình thường
     
-- `especially`
+- **especially** → đặc biệt là
     
-- `primarily`
+- **primarily** → chủ yếu, trước hết
     
-- `approximately`
+- **approximately** → xấp xỉ, khoảng chừng
     
-- `initially`
+- **initially** → ban đầu, lúc đầu
     
-- `ultimately`
+- **ultimately** → cuối cùng, rốt cuộc
     
-- `successfully`
-    
-
+- **successfully** → một cách thành công
 ---
 
 ## 🧠 CÁCH LÀM NHANH TRONG PHÒNG THI
