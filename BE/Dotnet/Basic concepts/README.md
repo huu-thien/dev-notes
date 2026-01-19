@@ -36,7 +36,7 @@
 
 [Record](Record.md)
 
-[Index](Index.md)
+[Index](be/dotnet/Basic%20concepts/Index.md)
 
 [Range](Range.md)
 
