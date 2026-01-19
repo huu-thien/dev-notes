@@ -233,3 +233,85 @@ FROM users
 ```
 
 => cao hơn thì cột đó nằm bên trái
+
+
+### Vì sao index làm chậm CUD (Create / Update / Delete)?
+
+Index là **cấu trúc dữ liệu phụ** được duy trì song song với bảng.  
+Mỗi thao tác ghi dữ liệu không chỉ cập nhật bảng mà còn phải **cập nhật tất cả index liên quan**.
+
+- **INSERT**:  
+    Mỗi index yêu cầu thêm một entry mới → tăng số lần ghi (I/O + WAL).
+    
+- **UPDATE**:  
+    Nếu cập nhật cột có index, PostgreSQL phải:
+    
+    - Xóa entry cũ khỏi index
+        
+    - Thêm entry mới  
+        → UPDATE index ≈ DELETE + INSERT.
+        
+- **DELETE**:  
+    Row bị đánh dấu là dead tuple và entry tương ứng phải được loại khỏi index, sau đó cần VACUUM để dọn dẹp.
+    
+
+Ngoài ra, việc cập nhật index còn phát sinh:
+
+- Ghi **WAL (Write-Ahead Log)**
+    
+- Lock index pages
+    
+- Rebalance cấu trúc index (BTREE, GIN, GiST)
+    
+
+**Kết luận:**  
+Index cải thiện hiệu năng đọc (SELECT) nhưng làm giảm hiệu năng ghi (CUD).  
+Càng nhiều index hoặc index càng phức tạp (GIN, GiST) thì chi phí CUD càng cao.
+
+
+### VACUUM là gì?
+
+**VACUUM** là cơ chế của PostgreSQL dùng để **dọn dẹp dead tuples** (dòng dữ liệu đã bị UPDATE hoặc DELETE nhưng chưa bị xóa vật lý).
+
+Do PostgreSQL sử dụng **MVCC**, mỗi lần:
+
+- `UPDATE` → tạo row mới, row cũ thành _dead_
+    
+- `DELETE` → row chỉ bị đánh dấu là _dead_
+    
+
+VACUUM có nhiệm vụ:
+
+- Giải phóng không gian lưu trữ của dead tuples
+    
+- Làm cho không gian đó có thể tái sử dụng
+    
+- Cập nhật statistics để planner tối ưu query
+    
+- Ngăn chặn table/index bị phình to (bloat)
+    
+
+---
+
+### Các loại VACUUM
+
+- **VACUUM (auto hoặc manual)**
+    
+    - Không khóa bảng
+        
+    - Chạy nền, an toàn cho production
+        
+- **VACUUM FULL**
+    
+    - Rebuild lại toàn bộ bảng
+        
+    - Khóa bảng (blocking)
+        
+    - Chỉ dùng khi cần reclaim disk triệt để
+        
+
+---
+
+### Kết luận
+
+VACUUM là thành phần **bắt buộc** để PostgreSQL duy trì hiệu năng ghi và đọc ổn định trong dài hạn, đặc biệt với workload có nhiều UPDATE/DELETE.
