@@ -211,7 +211,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE username = 'a' AND email = 'thien'
 
 📌 Nguyên tắc vàng (VERY IMPORTANT 🔥):  
 **Index hoạt động theo thứ tự từ trái sang phải  (left-most rule)**
-- Trường mà xuất hiện nhiều trong DB thì nên để đằng sau
+- Trường mà xuất hiện nhiều duplicate trong DB thì nên để đằng sau
 - Trường nào ít xuất hiện trùng lặp trong DB thì nên để trước
 
 |Query|Có dùng index không|
