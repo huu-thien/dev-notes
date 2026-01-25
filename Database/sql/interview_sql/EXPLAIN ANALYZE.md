@@ -318,6 +318,7 @@ JOIN là nơi **EXPLAIN ANALYZE thể hiện trình độ Backend Engineer rõ n
 Cách hiểu đơn giản:
 
 > Với **mỗi row của bảng A**, PostgreSQL sẽ **scan bảng B** để tìm row match.
+
 👉 Bảng outer và bảng inner là gì?
 
 Outer table và Inner table là khái niệm ở mức thực thi (executor),
