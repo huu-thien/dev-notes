@@ -254,7 +254,7 @@ WHERE NOT blocked_locks.granted;
 
 ---
 
-## 10. Tóm tắt kiểu Senior
+## 10. Tóm tắt 
 
 > PostgreSQL sử dụng MVCC kết hợp với table-level và row-level lock để tối ưu concurrency. Deadlock phát sinh khi các transaction giữ lock theo thứ tự khác nhau. PostgreSQL tự động phát hiện deadlock và rollback một transaction, do đó ứng dụng cần thiết kế transaction ngắn, lock theo thứ tự cố định và có cơ chế retry.
 
