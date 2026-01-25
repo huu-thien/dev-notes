@@ -178,7 +178,8 @@ Index Only Scan using idx_users_email on users
 
 - Query chỉ SELECT các cột **nằm trong index**
     
-- Heap tuple đã được vacuum (visibility map clean)
+- Heap tuple đã được vacuum (visibility map clean): PostgreSQL đã xác nhận rằng toàn bộ tuple trong page đều visible với mọi transaction,
+nên Index Only Scan có thể bỏ qua việc đọc heap.
     
 
 ➡️ **Nhanh nhất** vì:
