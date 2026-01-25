@@ -211,7 +211,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE username = 'a' AND email = 'thien'
 
 📌 Nguyên tắc vàng (VERY IMPORTANT 🔥):  
 **Index hoạt động theo thứ tự từ trái sang phải  (left-most rule)**
-- Trường mà xuất hiện nhiều trong DB thì nên để đằng sau
+- Trường mà xuất hiện nhiều duplicate trong DB thì nên để đằng sau
 - Trường nào ít xuất hiện trùng lặp trong DB thì nên để trước
 
 |Query|Có dùng index không|
@@ -272,6 +272,20 @@ Càng nhiều index hoặc index càng phức tạp (GIN, GiST) thì chi phí CU
 ### VACUUM là gì?
 
 **VACUUM** là cơ chế của PostgreSQL dùng để **dọn dẹp dead tuples** (dòng dữ liệu đã bị UPDATE hoặc DELETE nhưng chưa bị xóa vật lý).
+
+“Chưa bị xóa vật lý” là gì?
+
+Trong PostgreSQL, khi bạn UPDATE hoặc DELETE một row:
+
+👉 Postgres KHÔNG xóa row đó khỏi file trên disk ngay lập tức.
+Thay vào đó, nó chỉ:
+
+đánh dấu row cũ là “dead tuple” (không còn visible với query mới)
+
+nếu là UPDATE → tạo ra 1 row mới ở chỗ khác
+
+📌 Row cũ vẫn nằm nguyên trên ổ đĩa
+→ đó gọi là chưa bị xóa vật lý
 
 Do PostgreSQL sử dụng **MVCC**, mỗi lần:
 
