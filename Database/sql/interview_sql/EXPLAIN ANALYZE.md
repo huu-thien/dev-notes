@@ -318,6 +318,23 @@ JOIN là nơi **EXPLAIN ANALYZE thể hiện trình độ Backend Engineer rõ n
 Cách hiểu đơn giản:
 
 > Với **mỗi row của bảng A**, PostgreSQL sẽ **scan bảng B** để tìm row match.
+👉 Bảng outer và bảng inner là gì?
+
+Outer table và Inner table là khái niệm ở mức thực thi (executor),
+không phải cú pháp SQL.
+
+Outer = bảng được duyệt trước
+Inner = bảng được dùng để lookup / match cho từng row của outer
+
+1️⃣ Hiểu bằng 1 câu đơn giản
+
+PostgreSQL sẽ:
+
+Lấy 1 row từ bảng outer
+
+Dùng row đó để tìm row phù hợp trong bảng inner
+
+➡️ Cách làm này đặc biệt quan trọng với Nested Loop Join
 
 Pseudo code:
 
