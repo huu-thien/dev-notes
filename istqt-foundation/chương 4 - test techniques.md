@@ -7,7 +7,7 @@ Dùng để thiết kế test case dựa trên tài liệu đặc tả mà khôn
 - **Phân vùng tương đương (Equivalence Partitioning - EP):**
     - **Nguyên lý:** Chia dữ liệu đầu vào thành các nhóm (vùng) mà hệ thống sẽ xử lý giống hệt nhau. Bạn chỉ cần chọn 1 giá trị đại diện trong mỗi vùng để test.
     - **Mục tiêu:** Giảm số lượng test case mà vẫn đảm bảo độ bao phủ.
-    - **Ví dụ:** Một ô nhập tuổi từ 18 đến 60. • Vùng hợp lệ: [18, 60] (Chọn 25 để test). • Vùng không hợp lệ 1: < 18$ (Chọn 10 để test). • Vùng không hợp lệ 2: > 60$ (Chọn 70 để test).
+    - **Ví dụ:** Một ô nhập tuổi từ 18 đến 60. • Vùng hợp lệ: [18, 60] (Chọn 25 để test). • Vùng không hợp lệ 1: < 18 (Chọn 10 để test). • Vùng không hợp lệ 2: > 60 (Chọn 70 để test).
 - **Phân tích giá trị biên (Boundary Value Analysis - BVA):**
     - **Nguyên lý:** Lỗi thường tập trung ở "biên" của các vùng tương đương.
     - **Cách làm:** Test tại các giá trị: **Biên, ngay dưới biên, và ngay trên biên.**
