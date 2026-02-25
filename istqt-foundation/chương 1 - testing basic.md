@@ -45,8 +45,18 @@ Kiểm thử giúp giảm rủi ro phần mềm hoạt động sai trong môi tr
 3. **Kiểm thử sớm (Early Testing):** Nên bắt đầu càng sớm càng tốt để tiết kiệm thời gian và chi phí.
 4. **Sự tập trung của lỗi (Defect Clustering):** Lỗi thường tập trung ở một số module trọng yếu hoặc phức tạp (nguyên lý 80/20).
 5. **Nghịch lý thuốc trừ sâu (Pesticide Paradox):** Nếu lặp lại cùng một bộ test case nhiều lần, chúng sẽ không tìm thêm được lỗi mới. Cần cập nhật test case thường xuyên.
-6. **Kiểm thử phụ thuộc vào ngữ cảnh:** Test một app ngân hàng sẽ khác hoàn toàn với test một trò chơi điện tử.
-7. **Sự vắng mặt của lỗi là một sai lầm:** Nếu phần mềm không có lỗi nhưng lại không đáp ứng được nhu cầu người dùng thì nó vẫn là một sản phẩm thất bại.
+6. **Kiểm thử phụ thuộc vào ngữ cảnh  (Testing is context dependent):** Test một app ngân hàng sẽ khác hoàn toàn với test một trò chơi điện tử.
+7. **Sự vắng mặt của lỗi là một sai lầm (Absence-of-errors fallacy):** Nếu phần mềm không có lỗi nhưng lại không đáp ứng được nhu cầu người dùng thì nó vẫn là một sản phẩm thất bại.
+
+| **STT** | **Tên Tiếng Việt**                     | **Tên Tiếng Anh**                                            | **Giải thích từ khóa (Keywords)**                                           |
+| ------- | -------------------------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| 1       | Kiểm thử cho thấy sự hiện diện của lỗi | **Testing shows the presence of defects, not their absence** | Testing nói "có lỗi", không bao giờ nói "hết lỗi".                          |
+| 2       | Kiểm thử kiệt xuất là không thể        | **Exhaustive testing is impossible**                         | Không thể test mọi thứ. Cần dùng **Risk Analysis** (Phân tích rủi ro).      |
+| 3       | Kiểm thử sớm                           | **Early testing**                                            | Tiết kiệm tiền. Liên quan đến khái niệm **Shift-left**.                     |
+| 4       | Sự tập trung của lỗi                   | **Defect clustering**                                        | Nguyên lý **Pareto (80/20)**: 80% lỗi nằm ở 20% module.                     |
+| 5       | Nghịch lý thuốc trừ sâu                | **Pesticide paradox**                                        | Test case cũ không tìm thấy lỗi mới. Phải **Review & Update**.              |
+| 6       | Kiểm thử phụ thuộc ngữ cảnh            | **Testing is context dependent**                             | Mỗi loại app có cách test khác nhau (Safety-critical vs E-commerce).        |
+| 7       | Sự vắng mặt của lỗi là sai lầm         | **Absence-of-errors fallacy**                                | "No bugs" $\neq$ "Useful system". Hệ thống phải chạy được và phải hữu dụng. |
 
 ---
 
