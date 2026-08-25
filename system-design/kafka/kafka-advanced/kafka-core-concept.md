@@ -6,7 +6,7 @@
 		- Lưu trữ commit offset
 		- Chọn ra consumer leader
 		- ...
-- Zookeeper"
+- Zookeeper:
 	-  Là 1 phần mềm open source dùng để quản lý các broker và quản lý trạng thái chung của cụm cluster 
 	- Zookeeper chia sẻ thông tin trạng thái của broker, khi 1 broker chết hoặc đc thêm vào thì nó sẽ noti đến các broker khác, hoặc 1 topic được thêm vào thì nó cũng gửi noti đến các broker khác
 
